@@ -134,6 +134,7 @@ public class SocialMediaMain {
 
 
         	response.type("application/json");
+        	
         	Collection<User> users =  userDAO.searchUser(params);
         	System.out.println(users);
             return new Gson().toJson(users);
@@ -143,6 +144,61 @@ public class SocialMediaMain {
         	response.type("application/json");
             return new Gson().toJson(userDAO.findById(request.params(":id")));
         });
+        /*
+         * SORT USERS
+         * */
+        get("/users-sort", (request, response) -> {
+
+        	String name = request.queryParams("name");
+        	String lastName = request.queryParams("lastName");
+        	String startDate = request.queryParams("startDate");
+        	String endDate = request.queryParams("endDate");
+        	String sortParams = request.queryParams("sortBy");
+        	String orderParam = request.queryParams("orderBy");
+        	if(name == null || lastName == null || startDate == null || endDate == null 
+        			|| sortParams == null || orderParam == null || 
+        			(orderParam.toLowerCase().equals("desc") && orderParam.toLowerCase().equals("asc"))) {
+        		response.status(400);
+        		return response;
+        	}
+        	System.out.println(sortParams);
+        	SearchUserParam params = new  SearchUserParam();
+        	try {
+        		long startBirthDate = Long.parseLong(startDate);
+        		params.setStartBirthDate(startBirthDate);
+        	}catch(Exception e) {
+        		
+        	}
+        	
+        	try {
+        		long endBirthDate = Long.parseLong(endDate);
+        		params.setEndBirthDate(endBirthDate);
+        	}catch(Exception e) {
+        		
+        	}
+        	
+        	
+        	if(!name.equals(""))
+        		params.setName(name.toLowerCase().trim());
+        	if(!lastName.equals(""))
+        		params.setLastName(lastName.toLowerCase().trim());
+
+        	List<String> sortParamss = new ArrayList<String>();
+        	for(String s: sortParams.split(",")) {
+        		if(s.trim().equals("name") || s.trim().equals("lastName") || s.trim().equals("birthDate")) {
+        			sortParamss.add(s.trim());
+        		}
+        	}
+        	
+        	response.type("application/json");
+        	List<User> users =  userDAO.searchUser(params);
+        	System.out.println(users);
+        	userDAO.sortUser(users, sortParamss, orderParam);
+        	System.out.println(users);
+            return new Gson().toJson(users);
+        	
+        });
+        
         
         put("/users", (request, response) -> {
         	User user = new Gson().fromJson(request.body(), User.class);

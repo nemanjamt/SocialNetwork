@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,12 @@ import beans.Gender;
 import beans.Role;
 import beans.SearchUserParam;
 import beans.User;
+import sorter.SortUserByBirthDateAscending;
+import sorter.SortUserByBirthDateDescending;
+import sorter.SortUserByLastNameAscending;
+import sorter.SortUserByLastNameDescending;
+import sorter.SortUserByNameAscending;
+import sorter.SortUserByNameDescending;
 
 public class UserDAO {
 	
@@ -66,6 +73,40 @@ private Map<String, User> users = new HashMap<>();
 		
 		
 		return result;
+	}
+	
+	public List<User> sortUser(List<User> users, List<String> sortParams, String orderBy){
+		for(String param: sortParams) {
+			switch(param) {
+			case "name":{
+				if(orderBy.equals("asc")){
+					Collections.sort(users, new SortUserByNameAscending());
+				}else {
+					Collections.sort(users, new SortUserByNameDescending());
+				}
+				break;
+			}
+			case "lastName":{
+				if(orderBy.equals("asc")){
+					Collections.sort(users, new SortUserByLastNameAscending());
+				}else {
+					Collections.sort(users, new SortUserByLastNameDescending());
+				}
+				break;
+			}
+			case "birthDate":{
+				if(orderBy.equals("asc")){
+					Collections.sort(users, new SortUserByBirthDateAscending());
+				}else {
+					Collections.sort(users, new SortUserByBirthDateDescending());
+				}
+				break;
+			}
+			default:
+				break;
+			}
+		}
+		return users;
 	}
 	
 	

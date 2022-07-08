@@ -6,7 +6,8 @@ Vue.component("search-user", {
 		    return {
 		      users: null,
 			  searchParams:{name:"", lastName:"", startDate:"", endDate:""},
-			  sortParams:{byName:false,byLastName:false,byBirthDate:false}
+			  sortParams:{byName:false,byLastName:false,byBirthDate:false},
+			  orderBy:{asc:true}
 		    }
 	},
 	template: ` 
@@ -50,6 +51,11 @@ Vue.component("search-user", {
 	<div>
 	<label>birth date</label>
 	<input type="checkbox" id="sort3" name="sortBirthDate" value="birth date" v-model="sortParams.byBirthDate" >
+	</div>
+
+	<div>
+	<label>asceding</label>
+	<input type="checkbox" id="sort4" name="sortAsceding" value="asceding" v-model="orderBy.asc" >
 	</div>
 	<input type="button" value="sort" v-on:click="sortUser()"/>
 	</div>
@@ -97,7 +103,7 @@ Vue.component("search-user", {
 			console.log(startDate);
 			console.log(this.searchParams.startDate);
 			axios
-          .get('/search-users?name='+this.searchParams.name+'&lastName='+this.searchParams.lastName+'&startDate='+startDate+'&endDate='+endDate)
+          .get('/search-users?name='+this.searchParams.name+'&lastName='+this.searchParams.lastName+'&startDate='+this.searchParams.startDate+'&endDate='+this.searchParams.endDate)
           .then(response => {
 				console.log("USER??");
         	  this.users = response.data;
@@ -108,11 +114,53 @@ Vue.component("search-user", {
 		  });
 		},
 		sortUser: function(){
-	
+			
 			console.log(this.sortParams.byName);
 			console.log(this.sortParams.byLastName);
 			console.log(this.sortParams.byBirthDate);
+			console.log(this.orderBy.asc);
+			let params= '';
+			if(this.sortParams.byName){
+				if(params === ''){
+					params += "name";
+				}else{
+					params += ",name";
+				}
+					
+			}
 			
+			if(this.sortParams.byLastName){
+				if(params === ''){
+					params += "lastName";
+				}else{
+					params += ",lastName";
+				}
+
+			}
+			
+			if(this.sortParams.byBirthDate){
+				if(params === ''){
+					params += "birthDate";
+				}else{
+					params += ",birthDate";
+				}
+			}
+			let order = '';
+			if(this.orderBy.asc){
+				order += 'asc';
+			}else{
+				order += 'desc';
+			}
+		axios
+          .get('/users-sort?name='+this.searchParams.name+'&lastName='+this.searchParams.lastName+'&startDate='+this.searchParams.startDate+'&endDate='+this.searchParams.endDate+'&sortBy='+params+'&orderBy='+order)
+          .then(response => {
+				console.log("USER??");
+        	  this.users = response.data;
+			  console.log(response.data);
+        	  
+          }).catch(function(error){
+			console.log("ERROR?");
+		  });
 		}
 	},
 	mounted () {
@@ -123,19 +171,14 @@ Vue.component("search-user", {
 			
         	  this.users = response.data;
 
-			  for(d of this.users){
-				console.log(d.birthDate);
-				var now = new Date(d.birthDate);
-				d.birthDate = now;
-			}
-			console.log(this.users[0].birthDate)
         	  
           });
         
     },
 	filters: {
     	dateFormat: function (value, format) {
-    		var parsed = moment(value);
+			convertedValue = new Date(value);
+    		var parsed = moment(convertedValue);
     		return parsed.format(format);
     	}
    	}

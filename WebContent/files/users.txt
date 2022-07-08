@@ -1,4 +1,6 @@
 jovana;jovana123;jole333@gmail.com;Jovana;Jovanovic;default;835747200000;ORDINARY;FEMALE;false;false
+jovana2;jovana123;jole333@gmail.com;Jovana;Jankovic;default;835747200000;ORDINARY;FEMALE;false;false
+jovana3;jovana123;jole333@gmail.com;Jovana;Jovanovic;default;963014400000;ORDINARY;FEMALE;false;false
 petar;petar123;pero333@gmail.com;Petar;Peric;petar-1;947289600000;ORDINARY;MALE;true;false
 nikola;nikola123;nikola99@gmail.com;Nikola;Markovic;nikola-1;946339200000;ORDINARY;MALE;false;true
 marko;marko123;marko2020@gmail.com;Marko;Bojanic;default;335232000000;ADMIN;MALE;false;false
