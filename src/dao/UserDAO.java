@@ -6,13 +6,16 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
 import beans.Gender;
 import beans.Role;
+import beans.SearchUserParam;
 import beans.User;
 
 public class UserDAO {
@@ -22,7 +25,7 @@ private Map<String, User> users = new HashMap<>();
 	
 	
 	public UserDAO() {
-		this("./WebContent/");
+		this("./WebContent/files");
 	}
 	
 	public UserDAO(String contextPath) {
@@ -49,6 +52,23 @@ private Map<String, User> users = new HashMap<>();
 	public User findById(String id) {
 		return users.get(id);
 	}
+	
+	public List<User> searchUser(SearchUserParam params){
+		
+		List<User> result = new ArrayList<User>();
+		
+		for(User u: users.values()) {
+			if(u.getName().toLowerCase().contains(params.getName()) && u.getLastName().toLowerCase().contains(params.getLastName()) && u.getBirthDate() >= params.getStartBirthDate() && u.getBirthDate() <= params.getEndBirthDate()) {
+				result.add(u);
+			}
+				
+		}
+		
+		
+		return result;
+	}
+	
+	
 	
 	public Collection<User> findAll() {
 		return users.values();
@@ -137,7 +157,7 @@ private Map<String, User> users = new HashMap<>();
 					String name = st.nextToken().trim();
 					String lastName = st.nextToken().trim();
 					String profilePicture = st.nextToken().trim();
-					LocalDate date = LocalDate.parse(st.nextToken().trim());
+					long date = Long.parseLong(st.nextToken().trim());
 					Role role = Role.valueOf(st.nextToken().trim());
 					Gender gender = Gender.valueOf(st.nextToken().trim());
 					boolean isBlocked = Boolean.parseBoolean(st.nextToken().trim());

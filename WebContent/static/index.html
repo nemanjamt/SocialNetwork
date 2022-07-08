@@ -1,7 +1,28 @@
 <html>
 <head>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-Welcome to Social Media
+<div id="social-media">
+    <h2>Social Media</h2>
+    <a href="">Search users[ovde ce da stoji link ka komponenti za pretrazivanje korisnika]</a><br>
+    <a href="/#/login">Sign in</a><br>
+    <a href="/#/search-result">prikazi sve korisnike</a>
+    <router-view></router-view>
+</div>
+
+
+<script src="js/vue.js"></script>
+<script src="js/vue-router.js"></script>
+<script src="js/axios.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/moment.min.js"></script>
+<script src="js/toast.js"></script>
+<script src="app/view/searchUser.js"></script>
+<script src="app/view/homepage.js"></script>
+<script src="app/view/login.js"></script>
+<script src="app/view/app.js"></script>
+
+
 </body>
 </html>

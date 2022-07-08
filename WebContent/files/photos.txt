@@ -1,0 +1,9 @@
+0;nikola;neka putanja;false
+1;petar;neka putanja;false
+2;petar;neka putanja;true
+6;nikola;neka putanja;false
+7;petar;neka putanja;false
+8;petar;neka putanja;true
+12;nikola;neka putanja;false
+13;petar;neka putanja;false
+14;petar;neka putanja;true

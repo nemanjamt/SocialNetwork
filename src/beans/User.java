@@ -11,7 +11,7 @@ public class User {
 	private String email;
 	private String name;
 	private String lastName;
-	private LocalDate birthDate;
+	private long birthDate;
 	private Gender gender;
 	private Role role;
 	private String profilePicture;
@@ -29,7 +29,7 @@ public class User {
 		friends = new ArrayList<String>();
 	}
 	
-	public User(String username, String password, String email, String name, String lastName, LocalDate birthDate,
+	public User(String username, String password, String email, String name, String lastName, long birthDate,
 			Gender gender, Role role, String profilePicture, boolean privateAccount, boolean blocked) {
 		this();
 		this.username = username;
@@ -96,12 +96,15 @@ public class User {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public LocalDate getBirthDate() {
+	
+	public long getBirthDate() {
 		return birthDate;
 	}
-	public void setBirthDate(LocalDate birthDate) {
+
+	public void setBirthDate(long birthDate) {
 		this.birthDate = birthDate;
 	}
+
 	public Gender getGender() {
 		return gender;
 	}
