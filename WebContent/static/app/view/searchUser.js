@@ -100,14 +100,13 @@ Vue.component("search-user", {
 		searchUser:function(){
 			let startDate = (new Date(this.searchParams.startDate)).getTime();
 			let endDate = (new Date(this.searchParams.endDate)).getTime();
-			console.log(startDate);
-			console.log(this.searchParams.startDate);
+			
 			axios
-          .get('/search-users?name='+this.searchParams.name+'&lastName='+this.searchParams.lastName+'&startDate='+this.searchParams.startDate+'&endDate='+this.searchParams.endDate)
+          .get('/search-users?name='+this.searchParams.name+'&lastName='+this.searchParams.lastName+'&startDate='+startDate+'&endDate='+endDate)
           .then(response => {
-				console.log("USER??");
+				
         	  this.users = response.data;
-			  console.log(response.data);
+			  
         	  
           }).catch(function(error){
 			console.log("ERROR?");
@@ -151,10 +150,12 @@ Vue.component("search-user", {
 			}else{
 				order += 'desc';
 			}
+			let startDate = (new Date(this.searchParams.startDate)).getTime();
+			let endDate = (new Date(this.searchParams.endDate)).getTime();
 		axios
-          .get('/users-sort?name='+this.searchParams.name+'&lastName='+this.searchParams.lastName+'&startDate='+this.searchParams.startDate+'&endDate='+this.searchParams.endDate+'&sortBy='+params+'&orderBy='+order)
+          .get('/users-sort?name='+this.searchParams.name+'&lastName='+this.searchParams.lastName+'&startDate='+startDate+'&endDate='+endDate+'&sortBy='+params+'&orderBy='+order)
           .then(response => {
-				console.log("USER??");
+				
         	  this.users = response.data;
 			  console.log(response.data);
         	  

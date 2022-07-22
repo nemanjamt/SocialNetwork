@@ -113,15 +113,21 @@ public class SocialMediaMain {
         	System.out.println(lastName);
         	SearchUserParam params = new  SearchUserParam();
         	try {
+        		System.out.println("DADA?");
+        		System.out.println(startDate);
         		long startBirthDate = Long.parseLong(startDate);
         		params.setStartBirthDate(startBirthDate);
+        		System.out.println(startBirthDate);
         	}catch(Exception e) {
         		
         	}
         	
         	try {
+        		System.out.println("DA?");
+        		System.out.println(endDate);
         		long endBirthDate = Long.parseLong(endDate);
         		params.setEndBirthDate(endBirthDate);
+        		System.out.println(endBirthDate);
         	}catch(Exception e) {
         		
         	}

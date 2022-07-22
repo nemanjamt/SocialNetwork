@@ -67,6 +67,10 @@ private Map<String, User> users = new HashMap<>();
 		for(User u: users.values()) {
 			if(u.getName().toLowerCase().contains(params.getName()) && u.getLastName().toLowerCase().contains(params.getLastName()) && u.getBirthDate() >= params.getStartBirthDate() && u.getBirthDate() <= params.getEndBirthDate()) {
 				result.add(u);
+				System.out.println("======");
+				System.out.println(u.getBirthDate() );
+				System.out.println( params.getStartBirthDate());
+				System.out.println( params.getEndBirthDate());
 			}
 				
 		}
