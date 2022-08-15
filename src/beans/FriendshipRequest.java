@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class FriendshipRequest {
 	
 	private FriendshipRequestState state;
-	private LocalDate date;
+	private Long date;
 	private String sender;
 	private String receiver;
 	private Long id;
@@ -14,7 +14,7 @@ public class FriendshipRequest {
 	public FriendshipRequest() {
 		super();
 	}
-	public FriendshipRequest(FriendshipRequestState state, LocalDate date, String sender, String receiver) {
+	public FriendshipRequest(FriendshipRequestState state, Long date, String sender, String receiver) {
 		super();
 		this.state = state;
 		this.date = date;
@@ -28,10 +28,10 @@ public class FriendshipRequest {
 	public void setState(FriendshipRequestState state) {
 		this.state = state;
 	}
-	public LocalDate getDate() {
+	public Long getDate() {
 		return date;
 	}
-	public void setDate(LocalDate date) {
+	public void setDate(Long date) {
 		this.date = date;
 	}
 	public String getSender() {

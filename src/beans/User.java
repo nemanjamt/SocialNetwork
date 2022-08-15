@@ -11,7 +11,7 @@ public class User {
 	private String email;
 	private String name;
 	private String lastName;
-	private long birthDate;
+	private Long birthDate;
 	private Gender gender;
 	private Role role;
 	private String profilePicture;
@@ -97,7 +97,7 @@ public class User {
 		this.lastName = lastName;
 	}
 	
-	public long getBirthDate() {
+	public Long getBirthDate() {
 		return birthDate;
 	}
 

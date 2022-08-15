@@ -1,0 +1,5 @@
+1;1665180000000;petar;czv.jpg;ja navijam za crvenu zvezdu;false
+2;1660082400000;petar;null;Danas sam odlucio da smrsam. Trenutna kilaza mi je 84kg.;false
+3;1660082400000;petar;null;Ipak sam se predomislio. Gdje ima najbbolja poslasticarnica?IZBRISAN POST;true
+4;1660082400000;petar;null;Mijenjam text laganoo;true
+5;1660082400000;petar;null;Ipak sam se predomislio, ne zelim da smrsam. Gdje ima najbolja poslasticarnica?;false

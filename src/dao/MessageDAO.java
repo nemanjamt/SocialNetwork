@@ -61,7 +61,7 @@ public class MessageDAO {
 					String receiver = st.nextToken().trim();
 					String sender = st.nextToken().trim();
 					String context = st.nextToken().trim();
-					LocalDateTime date = LocalDateTime.parse(st.nextToken().trim());
+					Long date = Long.valueOf(st.nextToken().trim());
 					Message m = new Message(receiver,sender,context,date);
 					m.setId(id);
 					messages.put(id, m);

@@ -57,6 +57,7 @@ private Map<String, User> users = new HashMap<>();
 	}
 	
 	public User findById(String id) {
+		System.out.println(id);
 		return users.get(id);
 	}
 	
@@ -119,20 +120,29 @@ private Map<String, User> users = new HashMap<>();
 		return users.values();
 	}
 	
-	public void add(User u) {
+	public boolean add(User u) {
+		if(u.getUsername() == null || u.getEmail() == null || u.getBirthDate() == null || u.getLastName() == null || u.getPassword() == null || u.getName() == null || u.getRole() == null) {
+			return false;
+		}
+		
+		if(u.getUsername().isBlank() || u.getEmail().isBlank() || u.getLastName().isBlank() || u.getPassword().isBlank() ) {
+			return false;
+		}
+		
 		users.put(u.getUsername(), u);
+		return true;
 	}
 	
-	public void addFriendship(String user, String user2) {
-		User u = users.get(user);
-		User u2 = users.get(user2);
-		if( u == null || u2 == null)
-			return;
-		if(isFriend(user, user2))
-			return;
-		u.getFriends().add(user2);
-		u2.getFriends().add(user);
-	}
+//	public void addFriendship(String user, String user2) {
+//		User u = users.get(user);
+//		User u2 = users.get(user2);
+//		if( u == null || u2 == null)
+//			return;
+//		if(isFriend(user, user2))
+//			return;
+//		u.getFriends().add(user2);
+//		u2.getFriends().add(user);
+//	}
 	
 	public void removeFriendship(String user, String user2) {
 		if(!isFriend(user, user2))

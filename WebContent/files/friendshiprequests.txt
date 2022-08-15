@@ -1,2 +1,0 @@
-0;nikola;petar;2022-01-20;DENIED
-1;nikola;marko;2022-01-20;WAITING

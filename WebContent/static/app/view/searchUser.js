@@ -67,13 +67,13 @@ Vue.component("search-user", {
 	style="margin-left:5px;
 		
 ">
-	<img :src="'/userImages/'+u.profilePicture +'.jpg'" alt="profile picture" width="60" height="60" style="border-radius:50%">
+	<img :src="'/userImages/'+u.profilePicture " alt="profile picture" width="60" height="60" style="border-radius:50%">
 	</div>
 	<div style="
 	margin-left:20px;
 	">
 		<div>
-		<b><a href=""> {{u.name}} {{u.lastName}} </a></b>
+		<b><a :href="'#/view-profile?user='+u.username"> {{u.name}} {{u.lastName}} </a></b>
 		</div>
 
 		<div>

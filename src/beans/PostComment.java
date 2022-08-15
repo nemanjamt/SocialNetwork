@@ -1,72 +1,44 @@
 package beans;
 
-import java.time.LocalDateTime;
 
-public class Comment {
+
+public class PostComment {
 	private String content;
-	private LocalDateTime editDate;
+	private Long editDate;
 	private boolean edited;
-	private LocalDateTime publishedDate;
+	private Long publishedDate;
 	private Long id;
 	private String usernameCreator;
 	private boolean deleted;
 	private Long postId;
-	public Comment() {
+	
+	
+	
+	public PostComment() {
 		super();
 	}
-	
-	
-	
-	public Comment(String content, LocalDateTime editDate, boolean edited, LocalDateTime publishedDate, 
+	public PostComment(String content, Long editDate, boolean edited, Long publishedDate, Long id,
 			String usernameCreator, boolean deleted, Long postId) {
 		super();
 		this.content = content;
 		this.editDate = editDate;
 		this.edited = edited;
 		this.publishedDate = publishedDate;
-	
+		this.id = id;
 		this.usernameCreator = usernameCreator;
 		this.deleted = deleted;
 		this.postId = postId;
 	}
-
-
-
-	
-	
-	
-	public boolean isDeleted() {
-		return deleted;
-	}
-
-	
-	
-
-	public Long getPostId() {
-		return postId;
-	}
-
-
-	public void setPostId(Long postId) {
-		this.postId = postId;
-	}
-
-
-	public void setDeleted(boolean deleted) {
-		this.deleted = deleted;
-	}
-
-
 	public String getContent() {
 		return content;
 	}
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public LocalDateTime getEditDate() {
+	public Long getEditDate() {
 		return editDate;
 	}
-	public void setEditDate(LocalDateTime editDate) {
+	public void setEditDate(Long editDate) {
 		this.editDate = editDate;
 	}
 	public boolean isEdited() {
@@ -75,10 +47,10 @@ public class Comment {
 	public void setEdited(boolean edited) {
 		this.edited = edited;
 	}
-	public LocalDateTime getPublishedDate() {
+	public Long getPublishedDate() {
 		return publishedDate;
 	}
-	public void setPublishedDate(LocalDateTime publishedDate) {
+	public void setPublishedDate(Long publishedDate) {
 		this.publishedDate = publishedDate;
 	}
 	public Long getId() {
@@ -93,14 +65,27 @@ public class Comment {
 	public void setUsernameCreator(String usernameCreator) {
 		this.usernameCreator = usernameCreator;
 	}
-
-
+	public boolean isDeleted() {
+		return deleted;
+	}
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
+	public Long getPostId() {
+		return postId;
+	}
+	public void setPostId(Long postId) {
+		this.postId = postId;
+	}
 	@Override
 	public String toString() {
-		return "Comment [content=" + content + ", editDate=" + editDate + ", edited=" + edited + ", publishedDate="
+		return "PostComment [content=" + content + ", editDate=" + editDate + ", edited=" + edited + ", publishedDate="
 				+ publishedDate + ", id=" + id + ", usernameCreator=" + usernameCreator + ", deleted=" + deleted
 				+ ", postId=" + postId + "]";
 	}
+	
+	
+	
 	
 	
 	

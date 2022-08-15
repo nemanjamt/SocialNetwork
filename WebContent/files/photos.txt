@@ -1,9 +1,2 @@
-0;nikola;neka putanja;false
-1;petar;neka putanja;false
-2;petar;neka putanja;true
-6;nikola;neka putanja;false
-7;petar;neka putanja;false
-8;petar;neka putanja;true
-12;nikola;neka putanja;false
-13;petar;neka putanja;false
-14;petar;neka putanja;true
+1;1.png;jovana;da se doda neki text;true;1660409191980
+2;2.png;jovana;null;false;1660410994770

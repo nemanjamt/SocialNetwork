@@ -21,25 +21,48 @@ import beans.User;
 public class FriendshipRequestDAO {
 	
 	private Map<Long, FriendshipRequest> friendshipsRequests;
-	private UserDAO userDAO;
+	private FriendshipDAO friendshipDAO;
+	private String contextPath;
 	public FriendshipRequestDAO() {
 		
 		friendshipsRequests = new HashMap<Long, FriendshipRequest>();
 	}
 	
-	public FriendshipRequestDAO(String contextPath, UserDAO userDAO) {
+	public FriendshipRequestDAO(String contextPath, FriendshipDAO dao) {
 		this();
 		loadRequests(contextPath);
-		this.userDAO = userDAO;
+		this.friendshipDAO = dao;
+		this.contextPath = contextPath;
+	
 	}
 	
 	public FriendshipRequest findOne(Long id) {
 		return friendshipsRequests.get(id);
 	}
 	
-	public void addOne(FriendshipRequest f) {
-		f.setId((long) friendshipsRequests.size());
-		friendshipsRequests.put((long) friendshipsRequests.size(), f);
+	public FriendshipRequest addOne(FriendshipRequest f) {
+		if(checkFriendRequestExists(f.getSender(), f.getReceiver())) 
+			return null;
+		if(friendshipDAO.checkFriendship(f.getReceiver(), f.getSender()))
+			return null;
+		FriendshipRequest req = new FriendshipRequest();
+		req.setDate(System.currentTimeMillis());
+		req.setId((long)friendshipsRequests.size()+1);
+		req.setReceiver(f.getReceiver());
+		req.setSender(f.getSender());
+		req.setState(FriendshipRequestState.WAITING);
+		friendshipsRequests.put(req.getId(), req);
+		saveRequests(this.contextPath);
+		return f;
+	}
+	
+	public boolean checkFriendRequestExists(String firstUser, String secondUser) {
+		for(FriendshipRequest f : friendshipsRequests.values()){
+			if((f.getReceiver().equals(firstUser) && f.getSender().equals(secondUser)) || (f.getReceiver().equals(secondUser) && f.getSender().equals(firstUser))) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public void loadRequests(String contextPath) {
@@ -62,11 +85,12 @@ public class FriendshipRequestDAO {
 					Long id = Long.parseLong(st.nextToken().trim());
 					String sender = st.nextToken().trim();
 					String receiver = st.nextToken().trim();
-					LocalDate date = LocalDate.parse(st.nextToken().trim());
+					Long date = Long.valueOf(st.nextToken().trim());
 					FriendshipRequestState state = FriendshipRequestState.valueOf(st.nextToken().trim());
 					FriendshipRequest req = new FriendshipRequest(state, date, sender, receiver);
 					req.setId(id);
 					friendshipsRequests.put(id, req);
+					System.out.println(req);
 				}
 				
 			}
@@ -85,19 +109,17 @@ public class FriendshipRequestDAO {
 		FriendshipRequest req = friendshipsRequests.get(id);
 		if(req == null)
 			return;
-		if(state.equals(FriendshipRequestState.WAITING))
-			return;
+		req.setState(state);
 		
 		if(state.equals(FriendshipRequestState.ACCEPTED)) {
-			String user = req.getReceiver();
-			String user2 = req.getSender();
-			userDAO.addFriendship(user, user2);
+			friendshipDAO.addOne(req);
 		}
 		
-		
-		
-		friendshipsRequests.remove(id);//u svakom slucaju zahtjev se brise
-		//samo je pitanje da li ce se stvoriti prijateljtstvo ili nece
+		//brise se iz liste zahtjeva
+		if(req.getState() != FriendshipRequestState.WAITING)
+			friendshipsRequests.remove(id);
+		System.out.println("PA POSTOJI LI?? " + friendshipsRequests.get(id));
+		saveRequests(this.contextPath);
 		
 		
 	}
@@ -130,10 +152,8 @@ public class FriendshipRequestDAO {
 	
 	public List<FriendshipRequest> findByUser(String username){
 		List<FriendshipRequest> req = new ArrayList<FriendshipRequest>();
-		for(FriendshipRequest f: friendshipsRequests.values()) {
-			if(f.getReceiver().equals(username))
-				req.add(f);
-		}
+		
+		friendshipsRequests.values().stream().filter(f -> f.getReceiver().equals(username)).forEach(f -> req.add(f));
 		return req;
 	}
 	

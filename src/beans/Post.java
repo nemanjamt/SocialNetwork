@@ -3,41 +3,43 @@ package beans;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Post {
+public  class Post {
 
-	private List<Comment> comments;
+	private List<PostComment> comments;
 	private String usernameCreator;
 	private Long id;
 	private boolean deleted;
-	
+	private String pictureName;
+	private String postText;
+	private Long date;//publishedDate
 	public Post() {
-		comments = new ArrayList<Comment>();
+		comments = new ArrayList<PostComment>();
 		
 	}
-	public Post(String usernameCreator, boolean deleted) {
-		this();
-		this.deleted = deleted;
-		this.usernameCreator = usernameCreator;
-	}
-	
-	public Post(List<Comment> comments, String usernameCreator, boolean deleted) {
-		this();
+	public Post(List<PostComment> comments, String usernameCreator, Long id, boolean deleted, String name,
+			String postText, Long date) {
+		super();
 		this.comments = comments;
 		this.usernameCreator = usernameCreator;
+		this.id = id;
 		this.deleted = deleted;
+		this.pictureName = name;
+		this.postText = postText;
+		this.date = date;
 	}
-	
-	
-	public boolean isDeleted() {
-		return deleted;
-	}
-	public void setDeleted(boolean deleted) {
+	public Post(String usernameCreator, Long id, boolean deleted, String name, String postText, Long date) {
+		super();
+		this.usernameCreator = usernameCreator;
+		this.id = id;
 		this.deleted = deleted;
+		this.pictureName = name;
+		this.postText = postText;
+		this.date = date;
 	}
-	public List<Comment> getComments() {
+	public List<PostComment> getComments() {
 		return comments;
 	}
-	public void setComments(List<Comment> comments) {
+	public void setComments(List<PostComment> comments) {
 		this.comments = comments;
 	}
 	public String getUsernameCreator() {
@@ -52,11 +54,38 @@ public abstract class Post {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	public boolean isDeleted() {
+		return deleted;
+	}
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
+	public String getPictureName() {
+		return pictureName;
+	}
+	public void setPictureName(String name) {
+		this.pictureName = name;
+	}
+	public String getPostText() {
+		return postText;
+	}
+	
+	public Long getDate() {
+		return date;
+	}
+	public void setDate(Long date) {
+		this.date = date;
+	}
+	public void setPostText(String postText) {
+		this.postText = postText;
+	}
 	@Override
 	public String toString() {
 		return "Post [comments=" + comments + ", usernameCreator=" + usernameCreator + ", id=" + id + ", deleted="
-				+ deleted + "]";
+				+ deleted + ", pictureName=" + pictureName + ", postText=" + postText + ", date=" + date + "]";
 	}
+	
+	
 	
 	
 	

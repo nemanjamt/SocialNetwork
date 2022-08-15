@@ -8,14 +8,14 @@ public class Message {
 	private String receiverUsername;
 	private String senderUsername;
 	private String context;
-	private LocalDateTime date;
+	private Long date;
 	private Long id;
 	
 	public Message() {
 		super();
 	}
 	
-	public Message(String receiverUsername, String senderUsername, String context, LocalDateTime date) {
+	public Message(String receiverUsername, String senderUsername, String context, Long date) {
 		super();
 		this.receiverUsername = receiverUsername;
 		this.senderUsername = senderUsername;
@@ -54,11 +54,11 @@ public class Message {
 	}
 	
 
-	public LocalDateTime getDate() {
+	public Long getDate() {
 		return date;
 	}
 
-	public void setDate(LocalDateTime date) {
+	public void setDate(Long date) {
 		this.date = date;
 	}
 

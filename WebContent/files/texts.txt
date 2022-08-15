@@ -1,9 +1,0 @@
-16;nikola;Neki sadrzaj ;true
-17;petar;Neki sadrzaj ;false
-3;nikola;Neki sadrzaj;false
-4;nikola;Neki sadrzaj;true
-5;petar;Neki sadrzaj;false
-9;nikola;Neki sadrzaj;false
-10;nikola;Neki sadrzaj;true
-11;petar;Neki sadrzaj;false
-15;nikola;Neki sadrzaj ;false

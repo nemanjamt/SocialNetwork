@@ -1,12 +1,16 @@
 const HomePage = { template: '<home-page></home-page>' }
 const Login = { template: '<login></login>' }
 const SearchUser = { template: '<search-user></search-user>' }
+const ViewProfile = {template: '<view-profile></view-profile>'}
+const UploadPhoto = {template: '<upload-photo></upload-photo>'}
 const router = new VueRouter({
 	  mode: 'hash',
 	  routes: [
 	    { path: '/', component: HomePage},
 	    { path: '/login', component: Login },
-	    {path: '/search-users', component: SearchUser}
+	    {path: '/search-users', component: SearchUser},
+		{path: '/view-profile', component: ViewProfile},
+		{path: '/upload-photo', component: UploadPhoto}
 	  ]
 });
 
