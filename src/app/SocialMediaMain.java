@@ -127,7 +127,7 @@ public class SocialMediaMain {
         });
         
         get("/search-users", (request, response) -> {
-        	System.out.println("SEARCUJE");
+        	
         	String name = request.queryParams("name");
         	String lastName = request.queryParams("lastName");
         	String startDate = request.queryParams("startDate");
@@ -136,8 +136,7 @@ public class SocialMediaMain {
         		response.status(400);
         		return "Bad arguments";
         	}
-        	System.out.println(name);
-        	System.out.println(lastName);
+        	
         	SearchUserParam params = new  SearchUserParam();
         	try {
         		
@@ -167,7 +166,7 @@ public class SocialMediaMain {
         	response.type("application/json");
         	
         	Collection<User> users =  userDAO.searchUser(params);
-        	System.out.println(users);
+        	
             return new Gson().toJson(users);
         });
         
@@ -193,7 +192,7 @@ public class SocialMediaMain {
         		response.status(400);
         		return "Bad arguments";
         	}
-        	System.out.println(sortParams);
+        	
         	SearchUserParam params = new  SearchUserParam();
         	try {
         		long startBirthDate = Long.parseLong(startDate);
@@ -224,9 +223,9 @@ public class SocialMediaMain {
         	
         	response.type("application/json");
         	List<User> users =  userDAO.searchUser(params);
-        	System.out.println(users);
+        	
         	userDAO.sortUser(users, sortParamss, orderParam);
-        	System.out.println(users);
+        	
             return new Gson().toJson(users);
         	
         });
@@ -246,7 +245,7 @@ public class SocialMediaMain {
 		 */
         get("/posts", (request, response) ->{
      	   String id = request.queryParams("user");
-     	   if(id == null) {response.status(404); return response;}
+     	   if(id == null) {response.status(400); return "Bad request";}
      	   List<Post> posts = postDAO.findAllActivePostByUser(id);
      	   
      	   return new Gson().toJson(posts);
@@ -270,7 +269,7 @@ public class SocialMediaMain {
      		   return "Bad arguments";
      	   }
      	   
-     	   System.out.println(p);
+     	   
 
      	   boolean res = postDAO.addPost(p);
      	   if(!res) {
@@ -295,7 +294,7 @@ public class SocialMediaMain {
 		   PostRequest p = new Gson().fromJson(request.body(), PostRequest.class);
 		   if(p == null) {
 			   response.status(400);
-			   return response;
+			   return "Bad request";
 		   }
 		   
 		   
@@ -316,7 +315,7 @@ public class SocialMediaMain {
         		id = Long.parseLong(request.params(":id"));
         	}catch(Exception e) {
         		response.status(400);
-        		return response;
+        		return "Bad request";
         	}
        	   boolean success = postDAO.deletePost(id);
        	   if(success)
@@ -482,7 +481,7 @@ public class SocialMediaMain {
     		   response.status(400);
     		   return "Bad arguments";
     	   }
-    	   System.out.println(userDAO.findById(req.getUsername()));
+    	   
     	   if(userDAO.findById(req.getUsername()) == null || photoDAO.getPhotoById(req.getPhotoId()) == null) {
     		   response.status(404);
     		   return "Entity with specified id does not exist";
@@ -582,7 +581,7 @@ public class SocialMediaMain {
        
        post("/request", (request, response) -> {
     	   FriendshipRequest frequest = new  Gson().fromJson(request.body(), FriendshipRequest.class);
-    	   if(frequest == null) { response.status(404); return "";}
+    	   if(frequest == null) { response.status(400); return "Bad request";}
     	   if(frequest.getReceiver() == null || frequest.getSender() == null) {
     		   response.status(400);
     		   return "Bad request";
@@ -632,7 +631,7 @@ public class SocialMediaMain {
     	   Friendship f = friendshipDAO.getById(id);
     	   if(f == null) {
     		   response.status(404);
-    		   return response;
+    		   return "Bad request";
     	   }
     	   return f;
        });
@@ -653,7 +652,7 @@ public class SocialMediaMain {
     	   
     	   if(userDAO.findById(user) == null) {
     		   response.status(404);
-    		   return response;
+    		   return "user with specified id does not exist";
     	   }
     	   List<Friendship> f = friendshipDAO.getAllByUser(user);
     	   
@@ -710,8 +709,7 @@ public class SocialMediaMain {
        
        
        post("/photo",(request,response) ->{
-    	   System.out.println("POGODIO");
-    	   System.out.println(System.currentTimeMillis());
+    	   
     	   PhotoRequest p = new Gson().fromJson(request.body(), PhotoRequest.class);
     	   if(p == null) {
     		   response.status(400);
@@ -738,7 +736,7 @@ public class SocialMediaMain {
     		   response.status(400);
     		   return null;
     	   }
-    	   if(id == null) {response.status(400); return "";}
+    	   if(id == null) {response.status(400); return "Bad request";}
     	  
     	   Photo p = photoDAO.getPhotoById(id);
     	   if(p == null)
@@ -750,7 +748,7 @@ public class SocialMediaMain {
     	   String username = request.queryParams("username");
     	   if(username == null) {
     		   response.status(400);
-    		   return "";
+    		   return "Bad request";
     	   }
     	   List<Photo> photos = photoDAO.getAllPhotoByUser(username);
     	   return new Gson().toJson(photos);
@@ -760,29 +758,29 @@ public class SocialMediaMain {
         * */
        
        put("/photo/:id", (request, response) ->{
-    	   System.out.println("USLO");
+    	   
     	   response.type("application/json");
     	   Long id ;
     	   try {
     		   id = Long.parseLong( request.params(":id"));
     	   }catch(Exception e) {
     		   response.status(400);
-    		   return null;
+    		   return "Bad request";
     	   }
     	   if(photoDAO.getPhotoById(id) == null) {
     		  
     		   response.status(404);
-    		   return null;
+    		   return "Bad request";
     	   }
     	   PhotoRequest req = new  Gson().fromJson(request.body(), PhotoRequest.class);
     	   if(req == null) {
     		   response.status(400);
-    		   return null;
+    		   return "Bad request";
     	   }
     	   if(req.getText() == null) {
-    		   System.out.println("OVDE JE");
+    		   
     		   response.status(400);
-    		   return null;
+    		   return "Bad request";
     	   }
     	   return photoDAO.changePhoto(id, req);
        });
@@ -794,12 +792,12 @@ public class SocialMediaMain {
     		   id = Long.parseLong( request.params(":id"));
     	   }catch(Exception e) {
     		   response.status(400);
-    		   return null;
+    		   return "Bad request";
     	   }
     	   if(photoDAO.getPhotoById(id) == null) {
     		  
     		   response.status(404);
-    		   return null;
+    		   return "photo with specified id does not exist";
     	   }
     	   photoDAO.deletePhoto(id);
     	  return "photo successful deleted"; 
@@ -811,66 +809,5 @@ public class SocialMediaMain {
 	
 	
 
-//	private static void mockData() {
-//		User u = new User("nikola","nikola123","nikola99@gmail.com","Nikola","Markovic",LocalDate.of(1999, 12, 28), Gender.MALE, Role.ORDINARY,
-//				"putanja neke slike", true, false);
-//		userDAO.add(u);
-//		User u2 = new User("marko","marko123","marko2020@gmail.com","Marko","Bojanic",LocalDate.of(1980, 8, 16), Gender.MALE, Role.ADMIN,
-//				"putanja neke slike", false, false);
-//		
-//		User u3 = new User("petar","petar123","pero333@gmail.com","Petar","Peric",LocalDate.of(2000, 1, 8), Gender.MALE, Role.ORDINARY,
-//				"putanja neke slike", false, true);
-//		
-//		User u4 = new User("jovana","jovana123","jole333@gmail.com","Jovana","Jovanovic",LocalDate.of(1999, 6, 26), Gender.FEMALE, Role.ORDINARY,
-//				"putanja neke slike", false, false);
-//		userDAO.add(u);
-//		userDAO.add(u2);
-//		userDAO.add(u3);
-//		userDAO.add(u4);
-//		
-//		
-//		
-//		Photo p = new Photo("neka putanja","nikola", false);
-//		Photo p2 = new Photo("neka putanja","petar", false);
-//		Photo p3 = new Photo("neka putanja","petar", true);
-//		postDAO.addOnePhoto(p);
-//		postDAO.addOnePhoto(p2);
-//		postDAO.addOnePhoto(p3);
-//		
-//		
-//		Text t = new Text("Neki sadrzaj ", "nikola", false);
-//		Text t2 = new Text("Neki sadrzaj ", "nikola", true);
-//		Text t3 = new Text("Neki sadrzaj ", "petar", false);
-//		postDAO.addOneText(t);
-//		postDAO.addOneText(t2);
-//		postDAO.addOneText(t3);
-//		
-//		
-//		Message m = new Message("nikola","marko","cao",LocalDateTime.now());
-//		Message m2 = new Message("marko","nikola","cao",LocalDateTime.now());
-//		Message m3 = new Message("marko","nikola","sta radis?",LocalDateTime.now());
-//		messDAO.add(m);
-//		messDAO.add(m2);
-//		messDAO.add(m3);
-//		
-//		
-//		FriendshipRequest f = new FriendshipRequest(FriendshipRequestState.WAITING, LocalDate.now(), "nikola", "marko");
-//		FriendshipRequest f2 = new FriendshipRequest(FriendshipRequestState.DENIED, LocalDate.now(), "nikola", "petar");
-//		frequestDAO.addOne(f2);
-//		frequestDAO.addOne(f);
-//		
-//		
-//		Comment c = new Comment("Odlican tekst", null,false,  LocalDateTime.now(), "nikola", false, t.getId());
-//		commDAO.addOne(c);
-//		postDAO.findOnePost(c.getPostId()).getComments().add(c);
-//		
-//		userDAO.addFriendship(u.getUsername(), u3.getUsername());
-//		userDAO.addFriendship(u.getUsername(), u4.getUsername());
-//		userDAO.saveUsers(contextPath);
-//		postDAO.savePosts(contextPath);
-//		messDAO.saveMessages(contextPath);
-//		frequestDAO.saveRequests("./WebContent");
-//		commDAO.saveComments("./WebContent");
-//		
-//	}
+
 }
