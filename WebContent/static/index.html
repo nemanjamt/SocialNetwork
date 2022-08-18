@@ -1,14 +1,42 @@
 <html>
 <head>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body id="gradBody">
+
 <div id="social-media">
-    <h2>Social Media</h2>
-    <a href="">Search users[ovde ce da stoji link ka komponenti za pretrazivanje korisnika]</a><br>
-    <a href="/#/login">Sign in</a><br>
-    <a href="/#/search-users">pretrazi korisnike</a>
-    <a href="/#/upload-photo">upload-photo</a>
+
+    <header>
+        <ul>
+
+        <!--  [ovde ce da stoji link ka komponenti za pretrazivanje korisnika]   -->
+            <li>
+                <a href="">
+                    Homepage
+                </a>
+            </li>
+
+            <li>
+                <a href="/#/search-users">
+                    Search users
+                </a>
+            </li>
+
+            <li>
+                <a href="/#/upload-photo">
+                    Upload photo
+                </a>
+            </li>
+
+
+            <li>
+                <a href="/#/login">
+                    Sign in
+                </a>
+            </li>
+
+        </ul>
+    </header>
     <router-view></router-view>
 </div>
 

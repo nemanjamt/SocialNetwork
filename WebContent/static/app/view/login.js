@@ -8,46 +8,29 @@ Vue.component("login", {
 		    }
 	},
 	template: ` 
-	<div class="container">
-	<div class="d-flex justify-content-center ">
-		<div class="card">
-			<div class="card-header">
-				<h3>Sign In</h3>
-			</div>
-			<div class="card-body">
-				<form>
-					<div class="input-group form-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-user"></i></span>
-						</div>
-						<input type="text" class="form-control" placeholder="username">
-						
-					</div>
-					<div class="input-group form-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-key"></i></span>
-						</div>
-						<input type="password" class="form-control" placeholder="password">
-					</div>
-					<div class="form-group">
-						<input type="submit" value="Login" class="btn float-right login_btn">
-					</div>
-				</form>
-			</div>
-			<div class="card-footer">
-				<div class="d-flex justify-content-center links">
-					Don't have an account?<a href="#">Sign Up</a>
-				</div>
-			</div>
+	<div class="searchUsersBlock">
+		<div class="loginBox">
+			<form>
+				<input type="text" class="userInput" placeholder="username">
+				<br>
+				<input class="userInput" type="password" placeholder="password">
+				<br>
+				<input type="submit" value="Login" class="btn">
+			</form>
+			
+			<p>
+				Don't have an account? <a href="#">Sign Up</a>
+			</p>
+			
+			
 		</div>
+	
+		<div class="splitRight">
+			<img style=" height: 60%; margin-left: 20%; margin-top: 15%" src="https://cdn-icons-png.flaticon.com/512/3039/3039635.png">
+		</div>
+		
 	</div>
-</div>
-
-
 	
-	
-	
-		  
 `
 	, 
 	methods : {

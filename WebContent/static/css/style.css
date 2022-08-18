@@ -1,4 +1,257 @@
-.body{
-    background-color: aqua;
+
+/*#gradBody {*/
+/*  height: 200px;*/
+/*  background-image: linear-gradient(to bottom right, #003690, #001841);*/
+/*}*/
+
+body{
+  background-color: #E4E4E4;
 }
 
+/* basic header btn*/
+
+header{
+  position: absolute;
+  top: 0;
+  left: 0;
+  /*padding: 2% 0 0 60%;*/
+  /*display: flex;*/
+  padding-top: 2%;
+  width: 40%;
+  padding-left: 60%;
+  justify-content: space-between;
+  align-items: center;
+
+  /*border-style: solid;*/
+  background-color: white;
+
+}
+
+header ul{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+header ul, li{
+  list-style: none;
+  margin-left: 20px;
+}
+
+header ul li a{
+  text-decoration: none;
+  padding: 6px 15px;
+  color: black;
+  font-size: 18px;
+  border-radius: 20px;
+}
+
+header ul li a:hover
+{
+  background-color: white;
+  color: black;
+}
+
+
+/* main block*/
+
+.loginBox{
+  position: fixed;
+  top: 12%;
+  left: 14%;
+  float: left;
+  text-align: center;
+  padding-top: 12%;
+
+  border-radius: 5%;
+
+}
+
+.loginBox input{
+  margin-bottom: 5%;
+}
+
+.searchUsersBlock{
+  position: fixed;
+  top: 12%;
+  margin-left: 8%;
+  width: 80%;
+  height: 83%;
+
+  /*background-color: white;*/
+}
+
+.splitLeft {
+  width: calc(42% - (.5em + 6px));
+  height: 100%;
+  float: left;
+
+  /*background-color: white;*/
+  /*border-radius: 17px;*/
+
+  /*border-style: solid;*/
+
+}
+
+.splitLeft table, tr, td{
+  margin-top: 16%;
+  margin-left: auto;
+  margin-right: auto;
+
+  padding-bottom: 5%;
+
+  /*border-style: solid;*/
+}
+
+
+.splitRight {
+  width: calc(60% - (.5em + 6px));
+  height: 100%;
+  float: right;
+
+  /*background-color: lightslategray;*/
+}
+
+.searchedUserBlock{
+  display: flex;
+
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2%;
+  padding-left: 3%;
+
+  /*border-style: solid;*/
+  /*border-color: red;*/
+
+  border-radius: 17px;
+  background-color: white;
+
+}
+
+.searchedUserPic{
+  /*border-style: solid;*/
+  /*color: blue*/
+  padding-top: 1.2%;
+}
+
+.searchUsersInfo{
+  /*border-style: solid;*/
+  /*color: yellow*/
+  padding-left: 3%;
+  padding-top: 1%;
+}
+
+.userInput{
+  color: #76785E;
+  padding-left: 2%;
+  border-radius: 35px;
+
+  width: 300px;
+  height: 54px;
+}
+
+.btn{
+  color: white;
+  background-color: #0095F6;
+  font-size: 16px;
+  border-radius: 45px;
+  box-shadow: 5px 5px 10px #003690;
+
+  width: 128px;
+  height: 48px;
+  outline: none;
+}
+
+
+/* user profil */
+
+.userProfilBlock{
+  position: absolute;
+  top:12%;
+  width: 60%;
+  margin-left: 20%;
+
+  /*border-style: solid;*/
+  /*background-color: white;*/
+  /*border-radius: 30px;*/
+
+}
+
+.userProfilInfo{
+  height: 220px;
+  width: 90%;
+
+  margin-top: 5%;
+  margin-left: 5%;
+
+  /*border-style: solid;*/
+  /*border-color: red;*/
+}
+
+.userInfo{
+  float: right; width: 78%;
+  margin-top: 2%;
+
+  /*border-style: solid;*/
+  /*border-color: green;*/
+
+}
+
+.userInfo a{
+  text-decoration: none;
+  color: black;
+}
+
+.postsPhotosLine{
+  /*border-style: solid;*/
+  /*border-color: purple;*/
+
+  height: 80px;
+  text-align: center;
+}
+
+
+.postsPhotosLine hr{
+  width: 60%;
+}
+
+.userPostsBlock{
+  width: 80%;
+  margin-left: 8%;
+
+   /*border-style: solid;*/
+   /*border-color: blue;*/
+
+}
+
+.userPost{
+  margin-bottom: 5%;
+  background-color: white;
+  border-radius: 15px;
+
+  padding: 2% 5% 2% 5%;
+
+  /*border-style: solid;*/
+  /*border-color: deeppink;*/
+
+  text-align: center;
+}
+
+.postTxt{
+
+  margin-top: 1%;
+
+  border-style: solid;
+  border-color: blue;
+}
+
+.postPic{
+  border-style: solid;
+  border-color: green;
+}
+
+.postComment{
+  border-style: solid;
+  border-color: yellow;
+}

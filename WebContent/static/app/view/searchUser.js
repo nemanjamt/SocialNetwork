@@ -11,84 +11,93 @@ Vue.component("search-user", {
 		    }
 	},
 	template: ` 
-	<div>
+	<div class="searchUsersBlock">
 		
-	<table>
-	<tr>
-		<td align="left">First Name</td>
-		<td align="left"><input type="text" name="firstName" v-model="searchParams.name" /></td>
-	</tr>
-	<tr>
-	<td align="left">Last Name</td>
-	<td align="left"><input type="text" name="lastName" v-model="searchParams.lastName" /></td>
-	</tr>
-	<tr>
-	<td align="left">Start date</td>
-	<td align="left"><input type="date" name="startDate" v-model="searchParams.startDate"/></td>
-	</tr>
-	<tr>
-	<td align="left">End date</td>
-	<td align="left"><input type="date" name="endDate" v-model="searchParams.endDate"/></td>
-	</tr>
-	<tr>
-		<td colspan="2" align="left">
-			<input type="button" name="search" value="search" v-on:click="searchUser()" />
-		</td>
-	</tr>
-	</table>
-	<div style="margin-bottom:20px;">
-	<label>Sort by</label>
-	<div>
-	<label>name</label>
-	<input type="checkbox" id="sort1" name="sortName" value="Name" v-model="sortParams.byName" >
-	</div>
-	
-	<div>
-	<label>last name</label>
-	<input type="checkbox" id="sort2" name="sortLastName" value="Last name" v-model="sortParams.byLastName" >
-	</div>
-	
-	<div>
-	<label>birth date</label>
-	<input type="checkbox" id="sort3" name="sortBirthDate" value="birth date" v-model="sortParams.byBirthDate" >
-	</div>
-
-	<div>
-	<label>asceding</label>
-	<input type="checkbox" id="sort4" name="sortAsceding" value="asceding" v-model="orderBy.asc" >
-	</div>
-	<input type="button" value="sort" v-on:click="sortUser()"/>
-	</div>
-	
-
-<div >
-	<div v-for="u in users" style="display: flex; margin-bottom:20px" >
-	<div 
-	style="margin-left:5px;
-		
-">
-	<img :src="'/userImages/'+u.profilePicture " alt="profile picture" width="60" height="60" style="border-radius:50%">
-	</div>
-	<div style="
-	margin-left:20px;
-	">
-		<div>
-		<b><a :href="'#/view-profile?user='+u.username"> {{u.name}} {{u.lastName}} </a></b>
-		</div>
-
-		<div>
-			<font size="2">
-				Birth date {{u.birthDate | dateFormat('DD.MM.YYYY')}}
+		<div class="splitLeft">
+<!--		input name and last name -->
+			<table>
+				<tr>
+					<td>
+						<input type="text" name="firstName" v-model="searchParams.name" placeholder="First Name" class="userInput" />
+					</td>
+				</tr>
 				
-			</font>
+				<tr>
+					<td>
+						<input type="text" name="lastName" v-model="searchParams.lastName" placeholder="Last Name" class="userInput" />
+					</td>
+				</tr>
+				
+				<tr>
+				<td>
+					<input type="date" name="startDate" v-model="searchParams.startDate"/>
+				
+					<input style="margin-left: 8%" type="date" name="endDate" v-model="searchParams.endDate"/>
+				</td>
+				</tr>
+				
+				<tr>
+				<td>
+					<span> Start date </span>
+					<span style="margin-left: 32%"> End date </span>
+				</td>
+				</tr>
+				
+				<tr>
+					<td>
+						<input type="button" name="search" value="Search" v-on:click="searchUser()" class="btn" style="margin-left: 29%" />
+					</td>
+				</tr>
+	
+			</table>
+	
+<!--	sort by -->
+			<p style="margin-left: 18%">Sort by</p>
+			
+			<div style="margin-left: 20%">
+				<label>name</label>
+				<input type="checkbox" id="sort1" name="sortName" value="Name" v-model="sortParams.byName" >
+
+				<label>last name</label>
+				<input type="checkbox" id="sort2" name="sortLastName" value="Last name" v-model="sortParams.byLastName" >
+
+				<label>birth date</label>
+				<input type="checkbox" id="sort3" name="sortBirthDate" value="birth date" v-model="sortParams.byBirthDate" >
+
+				<label>asceding</label>
+				<input type="checkbox" id="sort4" name="sortAsceding" value="asceding" v-model="orderBy.asc" >
+			</div>
+			
+			<input type="button" value="Sort" v-on:click="sortUser()" class="btn" style="margin-top: 3%; margin-left: 36%"/>
+	
+	</div>
+	
+<!--show users -->
+	<div class="splitRight">
+	
+		<!-- user block -->
+		<div v-for="u in users" class="searchedUserBlock">
+		
+			<!-- pic block -->
+			<div class="searchedUserPic">
+				<img :src="'/userImages/'+u.profilePicture " alt="profile picture" width="60" height="60" style="border-radius:50%">
+			</div>
+			
+			<!-- info block -->
+			<div  class="searchUsersInfo">
+				<b>
+					<a :href="'#/view-profile?user='+u.username"> 
+						{{u.name}} {{u.lastName}} 
+					</a>
+				</b>
+		
+				<p> Birth date {{u.birthDate | dateFormat('DD.MM.YYYY')}} </p>
+				
+			</div>
 		</div>
-		
-		
-	</div>
-	 
-	</div>
-</div>		  
+	</div>		  
 </div>
+	
 </div>
 `
 	, 

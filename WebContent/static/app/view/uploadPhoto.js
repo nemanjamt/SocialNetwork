@@ -11,7 +11,7 @@ Vue.component("upload-photo", {
 	template: ` 
 
 
-	<div>
+	<div style="margin-top: 12%">
 	<table>
 			
 			<tr>
