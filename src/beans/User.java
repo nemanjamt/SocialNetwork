@@ -17,16 +17,12 @@ public class User {
 	private String profilePicture;
 	private boolean privateAccount;
 	private boolean blocked;
-	List<String> friends;
-//	private List<FriendshipRequest> friendshipRequests;
-//	private List<User> friends;
-//	private List<Post> posts;
-//	private List<Message> messages;
+
 	
 	
 	public User() {
 		super();
-		friends = new ArrayList<String>();
+
 	}
 	
 	public User(String username, String password, String email, String name, String lastName, long birthDate,
@@ -46,18 +42,6 @@ public class User {
 	}
 	
 	
-	
-	
-	
-
-	public List<String> getFriends() {
-		return friends;
-	}
-
-	public void setFriends(List<String> friends) {
-		this.friends = friends;
-	}
-
 	public boolean isBlocked() {
 		return blocked;
 	}

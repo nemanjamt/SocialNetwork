@@ -24,6 +24,7 @@ import sorter.SortUserByLastNameAscending;
 import sorter.SortUserByLastNameDescending;
 import sorter.SortUserByNameAscending;
 import sorter.SortUserByNameDescending;
+import spark.Response;
 
 public class UserDAO {
 	
@@ -133,25 +134,8 @@ private Map<String, User> users = new HashMap<>();
 		return true;
 	}
 	
-//	public void addFriendship(String user, String user2) {
-//		User u = users.get(user);
-//		User u2 = users.get(user2);
-//		if( u == null || u2 == null)
-//			return;
-//		if(isFriend(user, user2))
-//			return;
-//		u.getFriends().add(user2);
-//		u2.getFriends().add(user);
-//	}
+
 	
-	public void removeFriendship(String user, String user2) {
-		if(!isFriend(user, user2))
-			return;
-		User u = users.get(user);
-		User u2 = users.get(user2);
-		u.getFriends().remove(user2);
-		u2.getFriends().remove(user);
-	}
 	
 	public boolean updateUser(User u) {
 		User user = users.get(u.getUsername());
@@ -171,17 +155,7 @@ private Map<String, User> users = new HashMap<>();
 	}
 	
 	
-	public boolean isFriend(String first, String second) {
-		User u = users.get(first);
-		User u2 = users.get(second);
-		if( u == null || u2 == null)
-			return false;
-		for(String s : u.getFriends()) {
-			if(s.equals(second))
-				return true;
-		}
-		return false;
-	}
+	
 	
 
 	
@@ -221,44 +195,7 @@ private Map<String, User> users = new HashMap<>();
 					
 					users.put(username, u);
 				}
-				loadFriendship(contextPath);
-				
-			}
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		} finally {
-			if (in != null) {
-				try {
-					in.close();
-				}
-				catch (Exception e) { }
-			}
-		}
-	}
-	
-	private void loadFriendship(String contextPath) {
-		BufferedReader in = null;
-		try {
-			File file = new File(contextPath + "/friendships.txt");
-			in = new BufferedReader(new FileReader(file));
-			String line;
-			StringTokenizer st;
-			while ((line = in.readLine()) != null) {
-				line = line.trim();
-				if (line.equals("") || line.indexOf('#') == 0)
-					continue;
-				st = new StringTokenizer(line, ";");
-				while (st.hasMoreTokens()) {
-					String first = st.nextToken().trim();
-					String second = st.nextToken().trim();
-					User u = users.get(first);
-					User u2 = users.get(second);
-					if(u == null || u2 == null)
-						continue;
-					u.getFriends().add(second);
-//					u2.getFriends().add(first);
-				}
-				
+
 				
 			}
 		} catch (Exception ex) {
@@ -275,32 +212,8 @@ private Map<String, User> users = new HashMap<>();
 	
 	
 	
-	public void saveFriendships(String contextPath) {
-
-		BufferedWriter out = null;
-		try {
-			File file = new File(contextPath + "/friendships.txt");
-			out = new BufferedWriter(new FileWriter(file));
-
-			
-			for(User u: users.values()) {
-				for(String s : u.getFriends()) {
-					out.write(createLineFriendship(u, s));
-					out.newLine();
-				}
-				
-			}
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		} finally {
-			if (out != null) {
-				try {
-					out.close();
-				}
-				catch (Exception e) { }
-			}
-		}
-	}
+	
+	
 	
 	
 	
@@ -317,7 +230,7 @@ private Map<String, User> users = new HashMap<>();
 				out.write(createLine(u));
 				out.newLine();
 			}
-			saveFriendships(contextPath);
+		
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
