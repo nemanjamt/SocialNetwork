@@ -30,13 +30,14 @@ public class UserDAO {
 	
 	
 private Map<String, User> users = new HashMap<>();
-	
+	private String contextPath;
 	
 	public UserDAO() {
 		this("./WebContent/files");
 	}
 	
 	public UserDAO(String contextPath) {
+		this.contextPath = contextPath;
 		loadUsers(contextPath);
 	}
 	
@@ -131,6 +132,7 @@ private Map<String, User> users = new HashMap<>();
 		}
 		
 		users.put(u.getUsername(), u);
+		saveUsers(this.contextPath);
 		return true;
 	}
 	

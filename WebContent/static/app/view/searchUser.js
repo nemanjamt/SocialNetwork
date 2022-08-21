@@ -30,7 +30,7 @@ Vue.component("search-user", {
 				
 				<tr>
 				<td>
-					<input type="date" name="startDate" v-model="searchParams.startDate"/>
+					<input type="date"  name="startDate" v-model="searchParams.startDate"/>
 				
 					<input style="margin-left: 8%" type="date" name="endDate" v-model="searchParams.endDate"/>
 				</td>
@@ -180,7 +180,9 @@ Vue.component("search-user", {
           .then(response => {
 			
         	  this.users = response.data;
-
+			console.log(location.hostname);
+			console.log(location.port);
+			console.log("DA??");
         	  
           });
         
