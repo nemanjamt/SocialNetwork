@@ -35,9 +35,7 @@ Vue.component("view-profile", {
 						
 						<br>
 						
-						<p>
-							Friends: {{this.user.friends.length}}
-						</p>
+						
 				</div>
 		
 	</div>
@@ -61,10 +59,12 @@ Vue.component("view-profile", {
 						<div class="postTxt">
 							{{post.postText}}
 						</div>
+						<div v-if="post.pictureName != 'null'">
+							<div class="postPic">						 
+								<img :src="'/userImages/'+post.pictureName" alt="post picture" >
+							</div>
+						</div>
 						
-						<div class="postPic">						 
-						 	<img :src="'/userImages/'+post.pictureName" alt="post picture" >
-					 	</div>
 					 	
 					 	<div class="postComment">
 						 	<a>
@@ -106,7 +106,7 @@ Vue.component("view-profile", {
           .then(response => {
 			
         	  this.user = response.data;
-			  
+			  console.log(this.user);
 			  
         	  
           });
@@ -115,7 +115,7 @@ Vue.component("view-profile", {
           .then(response => {
 			
         	  this.posts = response.data;
-			
+				console.log(this.posts);
           });
         
     },
