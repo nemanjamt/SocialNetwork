@@ -16,23 +16,20 @@ header{
   position: absolute;
   top: 0;
   left: 0;
-  /*padding: 2% 0 0 60%;*/
-  /*display: flex;*/
-  padding-top: 2%;
-  width: 40%;
-  padding-left: 60%;
+  width: 100%;
   justify-content: space-between;
   align-items: center;
 
-  /*border-style: solid;*/
   background-color: white;
-
 }
 
 header ul{
   display: flex;
   justify-content: center;
-  align-items: center;
+  float: right;
+  text-align: center;
+  padding-right: 16px;
+  text-decoration: none;
 }
 
 header ul, li{
@@ -42,7 +39,7 @@ header ul, li{
 
 header ul li a{
   text-decoration: none;
-  padding: 6px 15px;
+  padding: 8px 15px 8px 15px;
   color: black;
   font-size: 18px;
   border-radius: 20px;
@@ -50,37 +47,116 @@ header ul li a{
 
 header ul li a:hover
 {
-  background-color: white;
-  color: black;
+  background-color: gray;
+  color: white;
 }
-
 
 /* main block*/
-
 .loginBox{
-  position: fixed;
-  top: 12%;
-  left: 14%;
+  position: relative;
+  top: 24px;
   float: left;
-  text-align: center;
-  padding-top: 12%;
 
   border-radius: 5%;
+  text-align: center;
+  background-color: white;
+
+  margin-left: 140px;
+  margin-top: 60px;
+
+  /*border-style: solid;*/
+}
+
+.loginBox table, tr, td{
+  /*border-style: solid;*/
+  /*border-color: blue;*/
+  width: 220px;
 
 }
 
-.loginBox input{
-  margin-bottom: 5%;
+.registrationTable{
+  /*border-style: solid;*/
+  /*border-color: red;*/
+
+  margin-left: 122px;
+  text-align: center;
 }
 
-.searchUsersBlock{
-  position: fixed;
-  top: 12%;
-  margin-left: 8%;
+.searchAllUsersBlock{
+  position: relative;
+  top: 90px;
   width: 80%;
   height: 83%;
+  margin: auto;
 
   /*background-color: white;*/
+}
+
+
+.split {
+  position: absolute;
+  height: 100%;
+  width: 50%;
+  z-index: 1;
+  overflow-x: hidden;
+}
+
+.left {
+  left: 0;
+  /*background-color: lightpink;*/
+}
+
+.right {
+  right: 0;
+  /*background-color: white;*/
+}
+
+.userSortInput{
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 180px;
+}
+
+.userSortInput tr, td{
+    padding: 15px 12px 10px 12px;
+    text-align: center;
+}
+
+
+.sortUsersBlock{
+  position: relative;
+  margin: auto;
+
+  height: 10%;
+  width: 95%;
+}
+
+.sortUsersBlock form{
+  float: right;
+  margin-top: 12px;
+}
+
+.sortUsersBlock select{
+  width: 160px;
+  height: 32px;
+  border-radius: 35px;
+  margin-right: 22px;
+}
+
+.sortUsersBlock img{
+  width: 42px;
+  height: 42px;
+  float: right;
+  margin-top: 18px;
+  margin-right: 22px;
+
+}
+
+
+.showUsersBlock{
+  position: relative;
+  width: 95%;
+  margin: auto;
 }
 
 .errMessage{
@@ -88,74 +164,38 @@ header ul li a:hover
   color: red;
 }
 
-.splitLeft {
-  width: calc(42% - (.5em + 6px));
-  height: 100%;
-  float: left;
-
-  /*background-color: white;*/
-  /*border-radius: 17px;*/
-
-  /*border-style: solid;*/
-
-}
-
-/* .splitLeft table, tr, td{
-  margin-top: 16%;
-  margin-left: auto;
-  margin-right: auto;
-
-  padding-bottom: 5%;
-
-  border-style: solid;
-} */
-
-
-.splitRight {
-  width: calc(60% - (.5em + 6px));
-  height: 100%;
-  float: right;
-
-  /*background-color: lightslategray;*/
-}
-
 .searchedUserBlock{
   display: flex;
 
-  width: 70%;
-  margin-left: auto;
-  margin-right: auto;
+  width: 75%;
   margin-top: 2%;
-  padding-left: 3%;
+  padding-left: 20px;
 
   /*border-style: solid;*/
   /*border-color: red;*/
 
   border-radius: 17px;
   background-color: white;
-
 }
 
 .searchedUserPic{
   /*border-style: solid;*/
-  /*color: blue*/
+  /*color: blue;*/
   padding-top: 1.2%;
 }
 
 .searchUsersInfo{
-  /*border-style: solid;*/
-  /*color: yellow*/
   padding-left: 3%;
   padding-top: 1%;
 }
 
 .userInput{
   color: #76785E;
-  padding-left: 2%;
   border-radius: 35px;
 
-  width: 300px;
-  height: 54px;
+  width: 250px;
+  height: 44px;
+  padding-left: 8px;
 }
 
 .btn{

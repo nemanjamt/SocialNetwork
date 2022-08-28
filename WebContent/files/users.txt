@@ -2,5 +2,4 @@ jovana2;jovana123;jole333@gmail.com;Jovana;Jankovic;default.jpg;835747200000;ORD
 jovana;jovana123;jole333@gmail.com;Jovana;Jovanovic;default.jpg;835747200000;ORDINARY;FEMALE;false;false
 petar;petar123;pero333@gmail.com;Petar;Peric;petar-1.jpg;947289600000;ORDINARY;MALE;true;false
 jovana3;jovana123;jole333@gmail.com;Jovana;Jovanovic;default.jpg;963014400000;ORDINARY;FEMALE;false;false
-nikola;nikolica;nikola@gmail.com;nikola;nikolic;null;902188800000;ORDINARY;null;false;false
-marko;marko123;marko2020@gmail.com;Marko;Bojanic;default.jpg;335232000000;ADMIN;MALE;false;false
+nina_nina;sadsad;trivunic97@gmail.com;Nikolina;Trivunić;null;1661558400000;ORDINARY;null;false;false

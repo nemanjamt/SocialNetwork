@@ -11,94 +11,116 @@ Vue.component("search-user", {
 		    }
 	},
 	template: ` 
-	<div class="searchUsersBlock">
+ 
+		<div class="searchAllUsersBlock">
 		
-		<div class="splitLeft">
-<!--		input name and last name -->
-			<table>
+			<div class="split left">
+				<!--		input name and last name -->
+			<table class="userSortInput">
 				<tr>
 					<td>
 						<input type="text" name="firstName" v-model="searchParams.name" placeholder="First Name" class="userInput" />
 					</td>
-				</tr>
-				
-				<tr>
+					
 					<td>
 						<input type="text" name="lastName" v-model="searchParams.lastName" placeholder="Last Name" class="userInput" />
 					</td>
 				</tr>
 				
 				<tr>
-				<td>
-					<input type="date"  name="startDate" v-model="searchParams.startDate"/>
-				
-					<input style="margin-left: 8%" type="date" name="endDate" v-model="searchParams.endDate"/>
-				</td>
-				</tr>
-				
-				<tr>
-				<td>
-					<span> Start date </span>
-					<span style="margin-left: 32%"> End date </span>
-				</td>
-				</tr>
-				
-				<tr>
 					<td>
-						<input type="button" name="search" value="Search" v-on:click="searchUser()" class="btn" style="margin-left: 29%" />
+						<input type="date"  name="startDate" v-model="searchParams.startDate"/>
+					</td>
+	
+					<td>
+						<input type="date" name="endDate" v-model="searchParams.endDate"/>
 					</td>
 				</tr>
-	
+
+				<tr>
+					<td>
+						<span> Start date </span>
+					</td>
+					<td>
+						<span> End date </span>
+					</td>
+				</tr>
 			</table>
-	
-<!--	sort by -->
-			<p style="margin-left: 18%">Sort by</p>
 			
-			<div style="margin-left: 20%">
-				<label>name</label>
-				<input type="checkbox" id="sort1" name="sortName" value="Name" v-model="sortParams.byName" >
-
-				<label>last name</label>
-				<input type="checkbox" id="sort2" name="sortLastName" value="Last name" v-model="sortParams.byLastName" >
-
-				<label>birth date</label>
-				<input type="checkbox" id="sort3" name="sortBirthDate" value="birth date" v-model="sortParams.byBirthDate" >
-
-				<label>asceding</label>
-				<input type="checkbox" id="sort4" name="sortAsceding" value="asceding" v-model="orderBy.asc" >
+			<div style="text-align: center">
+				<input type="button" name="search" value="Search" v-on:click="searchUser()" class="btn"/>
 			</div>
+	
+		</div>
 			
-			<input type="button" value="Sort" v-on:click="sortUser()" class="btn" style="margin-top: 3%; margin-left: 36%"/>
-	
-	</div>
-	
-<!--show users -->
-	<div class="splitRight">
-	
-		<!-- user block -->
-		<div v-for="u in users" class="searchedUserBlock">
-		
-			<!-- pic block -->
-			<div class="searchedUserPic">
-				<img :src="'/userImages/'+u.profilePicture " alt="profile picture" width="60" height="60" style="border-radius:50%">
-			</div>
+			<div class="split right">
 			
-			<!-- info block -->
-			<div  class="searchUsersInfo">
-				<b>
-					<a :href="'#/view-profile?user='+u.username"> 
-						{{u.name}} {{u.lastName}} 
-					</a>
-				</b>
+<!-- sort part -->
+				<div class="sortUsersBlock">
+					<!--	sort by -->
+					<form>
+						<select> 
+							<option disabled selected value> -- select an option -- </option>
+							<option id="sort1" name="sortName" v-model="sortParams.byName" > Name </option>
+							<option id="sort2" name="sortLastName" v-model="sortParams.byLastName"  > Last Name </option>
+							<option id="sort3" name="sortBirthDate" v-model="sortParams.byBirthDate" > Birth Date </option>
+						</select>
+						
+						<input type="button" value="Sort" v-on:click="sortUser()" class="btn"/>
+					</form>
+					
+					<!-- sort ikonica-->
+					<img src="https://cdn-icons-png.flaticon.com/512/1484/1484654.png">
+					
+				</div>
+					
+<!--						
+						<label>name</label>
+						<input type="checkbox" id="sort1" name="sortName" value="Name" v-model="sortParams.byName" >
 		
-				<p> Birth date {{u.birthDate | dateFormat('DD.MM.YYYY')}} </p>
+						<label>last name</label>
+						<input type="checkbox" id="sort2" name="sortLastName" value="Last name" v-model="sortParams.byLastName" >
+		
+						<label>birth date</label>
+						<input type="checkbox" id="sort3" name="sortBirthDate" value="birth date" v-model="sortParams.byBirthDate" >
+		
+						<label>asceding</label>
+						<input type="checkbox" id="sort4" name="sortAsceding" value="asceding" v-model="orderBy.asc" >
+					
+						<input type="button" value="Sort" v-on:click="sortUser()" class="btn"/>
+-->
+				
+				<!-- users info -->
+				<div class="showUsersBlock">
+					<div v-for="u in users" class="searchedUserBlock">
+			
+						<!-- pic block -->
+						<div class="searchedUserPic">
+							<img :src="'/userImages/'+u.profilePicture " alt="profile picture" width="60" height="60" style="border-radius:50%">
+						</div>
+				
+						<!-- info block -->
+						<div  class="searchUsersInfo">
+							<b>
+								<a :href="'#/view-profile?user='+u.username"> 
+									{{u.name}} {{u.lastName}} 
+								</a>
+							</b>
+					
+							<p> Birth date {{u.birthDate | dateFormat('DD.MM.YYYY')}} </p>
+							
+						</div>
+					</div>
+				</div>		  
+				</div>
 				
 			</div>
+			
 		</div>
-	</div>		  
-</div>
-	
-</div>
+		
+		
+	</div>
+
 `
 	, 
 	methods : {
