@@ -130,7 +130,7 @@ private Map<String, User> users = new HashMap<>();
 		if(u.getUsername().isBlank() || u.getEmail().isBlank() || u.getLastName().isBlank() || u.getPassword().isBlank() ) {
 			return false;
 		}
-		
+		u.setProfilePicture("default.jpg");
 		users.put(u.getUsername(), u);
 		saveUsers(this.contextPath);
 		return true;

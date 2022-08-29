@@ -109,26 +109,7 @@ public class SocialMediaMain {
 			return "logout successfully";
 		});
 
-//		post("/login", (request, response) ->{
-//			UserPayload checkUser;
-//			try {
-//				checkUser = new Gson().fromJson(request.body(), UserPayload.class);
-//			}catch(Exception e) {
-//				return "losi parametri poslati";
-//			}
-//		
-//			
-//			User u = userDAO.find(checkUser.getUsername(), checkUser.getPassword());
-//			if(u == null) {
-//				System.out.println("nije pronasao");
-//				response.status(400);
-//				return "korisnik nije pronadjen";
-//			}
-//			String jws = Jwts.builder().setSubject(u.getUsername()).setExpiration(new Date(new Date().getTime() + 1000*60L)).setIssuedAt(new Date()).signWith(key).compact();
-//			checkUser.setJwt(jws);
-//			
-//			return  new Gson().toJson(checkUser);
-//		});
+
 
 		/*
 		 * USERS
@@ -158,20 +139,21 @@ public class SocialMediaMain {
 				response.status(400);
 				return "Bad arguments";
 			}
+			response.status(201);
 			return "success";
 
 		});
 
 		get("/users", (request, response) -> {
-			User u = request.session().attribute("currentUser");
-			;
-			if (u == null) {
-				response.status(401);
-				return "access is denied";
-			} else if (u.getRole() != Role.ADMIN) {
-				response.status(401);
-				return "access is denied";
-			}
+//			User u = request.session().attribute("currentUser");
+//			;
+//			if (u == null) {
+//				response.status(401);
+//				return "access is denied";
+//			} else if (u.getRole() != Role.ADMIN) {
+//				response.status(401);
+//				return "access is denied";
+//			}
 			response.type("application/json");
 			Collection<User> users = userDAO.findAll();
 			return new Gson().toJson(users);
@@ -304,11 +286,8 @@ public class SocialMediaMain {
 		 */
 		get("/posts", (request, response) -> {
 			User u = request.session().attribute("currentUser");
-			;
-			if (u == null) {
-				response.status(401);
-				return "access is denied";
-			}
+			
+			
 			String id = request.queryParams("user");
 			System.out.println(id);
 			List<Post> posts = postDAO.findAllActivePostByUser(id);

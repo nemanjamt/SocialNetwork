@@ -75,7 +75,7 @@ Vue.component("registration", {
 			console.log("DA?");
 		}, 
         checkValidation: function(){
-            
+            console.log(this.fields);
             if(this.fields.name == ""){
                 document.getElementById("nameErrMessage").innerHTML = "name must not be empty";
                 return false;
@@ -152,6 +152,7 @@ Vue.component("registration", {
             return true;
         },
 		registration: function(){
+            console.log("USLO U REGISTRACIJU");
             console.log(this.fields.gender);
 			let ok = this.checkValidation()
             if(!ok){

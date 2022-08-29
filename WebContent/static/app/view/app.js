@@ -3,6 +3,7 @@ const Login = { template: '<login></login>' }
 const SearchUser = { template: '<search-user></search-user>' }
 const ViewProfile = {template: '<view-profile></view-profile>'}
 const UploadPhoto = {template: '<upload-photo></upload-photo>'}
+const Navbar = {template: '<navbar></navbar>'}
 const Registration = {template: '<registration></registration>'}
 const router = new VueRouter({
 	  mode: 'hash',

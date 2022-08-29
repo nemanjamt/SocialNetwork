@@ -6,7 +6,7 @@ Vue.component("search-user", {
 		    return {
 		      users: null,
 			  searchParams:{name:"", lastName:"", startDate:"", endDate:""},
-			  sortParams:{byName:false,byLastName:false,byBirthDate:false},
+			  sortParam:"",
 			  orderBy:{asc:true}
 		    }
 	},
@@ -59,18 +59,23 @@ Vue.component("search-user", {
 				<div class="sortUsersBlock">
 					<!--	sort by -->
 					<form>
-						<select> 
+						<select v-model="sortParam"> 
 							<option disabled selected value> -- select an option -- </option>
-							<option id="sort1" name="sortName" v-model="sortParams.byName" > Name </option>
-							<option id="sort2" name="sortLastName" v-model="sortParams.byLastName"  > Last Name </option>
-							<option id="sort3" name="sortBirthDate" v-model="sortParams.byBirthDate" > Birth Date </option>
+							<option id="sort1" name="sortName" value="name" > Name </option>
+							<option id="sort2" name="sortLastName" value="lastName"  > Last Name </option>
+							<option id="sort3" name="sortBirthDate" value="birthDate" > Birth Date </option>
 						</select>
 						
 						<input type="button" value="Sort" v-on:click="sortUser()" class="btn"/>
 					</form>
 					
 					<!-- sort ikonica-->
-					<img src="https://cdn-icons-png.flaticon.com/512/1484/1484654.png">
+					
+					<div class="order">
+						<label>asceding</label>
+						<input type="checkbox" id="sort4" name="sortAsceding" value="asceding" v-model="orderBy.asc" >
+					</div>
+					
 					
 				</div>
 					
@@ -145,36 +150,9 @@ Vue.component("search-user", {
 		},
 		sortUser: function(){
 			
-			console.log(this.sortParams.byName);
-			console.log(this.sortParams.byLastName);
-			console.log(this.sortParams.byBirthDate);
+			
 			console.log(this.orderBy.asc);
-			let params= '';
-			if(this.sortParams.byName){
-				if(params === ''){
-					params += "name";
-				}else{
-					params += ",name";
-				}
-					
-			}
-			
-			if(this.sortParams.byLastName){
-				if(params === ''){
-					params += "lastName";
-				}else{
-					params += ",lastName";
-				}
-
-			}
-			
-			if(this.sortParams.byBirthDate){
-				if(params === ''){
-					params += "birthDate";
-				}else{
-					params += ",birthDate";
-				}
-			}
+			console.log(this.sortParam + " mhmmm");
 			let order = '';
 			if(this.orderBy.asc){
 				order += 'asc';
@@ -184,7 +162,7 @@ Vue.component("search-user", {
 			let startDate = (new Date(this.searchParams.startDate)).getTime();
 			let endDate = (new Date(this.searchParams.endDate)).getTime();
 		axios
-          .get('/users-sort?name='+this.searchParams.name+'&lastName='+this.searchParams.lastName+'&startDate='+startDate+'&endDate='+endDate+'&sortBy='+params+'&orderBy='+order)
+          .get('/users-sort?name='+this.searchParams.name+'&lastName='+this.searchParams.lastName+'&startDate='+startDate+'&endDate='+endDate+'&sortBy='+this.sortParam+'&orderBy='+order)
           .then(response => {
 				
         	  this.users = response.data;

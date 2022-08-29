@@ -152,6 +152,15 @@ header ul li a:hover
 
 }
 
+.order{
+  width: 42px;
+  height: 42px;
+  float: right;
+  margin-top: 18px;
+  margin-right: 22px;
+
+}
+
 
 .showUsersBlock{
   position: relative;
@@ -162,6 +171,11 @@ header ul li a:hover
 .errMessage{
   visibility: hidden;
   color: red;
+}
+
+.successMessage{
+  visibility: hidden;
+  color: green;
 }
 
 .searchedUserBlock{
