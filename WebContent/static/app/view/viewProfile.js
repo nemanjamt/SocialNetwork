@@ -17,7 +17,6 @@ Vue.component("view-profile", {
 	<div v-if="this.user" class="userProfilBlock">
 	
 	<div class="userProfilInfo">
-	
 		<!--	pic -->
 				<div style="float: left; width: 15%; margin-left: 5%; margin-top: 3%">
 					<img :src="'/userImages/'+this.user.profilePicture " alt="profile picture" width="100" height="100" style="border-radius:50%">
@@ -27,19 +26,15 @@ Vue.component("view-profile", {
 				<div class="userInfo">
 						<b style="font-size: 24px">
 							<a href=""> {{this.user.name}} {{this.user.lastName}} </a>
-							
 						</b>
 						
 						<br>
 
 						<p>  
-							
 							{{this.user.birthDate | dateFormat('DD.MM.YYYY')}} 
 						</p>
 						
 						<br>
-						
-						
 				</div>
 		
 	</div>
@@ -55,43 +50,42 @@ Vue.component("view-profile", {
 	</div>
 			
 <!-- posts-->
-		<div v-if="postsClicked">
-			<div class="userPostsBlock">
-					<div v-if="this.posts">
-					
-						<div v-for="post in this.posts" class="userPost">
-							<div @click="viewPost(post)">
-							Pogledaj post
-							</div>
-							<div class="postTxt">
-								{{post.postText}}
-							</div>
-							<div v-if="post.pictureName != 'null'">
-								<div class="postPic">						 
-									<img :src="'/userImages/'+post.pictureName" alt="post picture" >
-								</div>
-							</div>
-							
-							
-							<div class="postComment">
-								<a>
-								<img style="width: 5%; height: 5%" src="https://cdn-icons.flaticon.com/png/512/1944/premium/1944489.png?token=exp=1660684747~hmac=d04ea536bcccf08ec00c633ae10ead40">
-								</a>
-							</div>
-							
+	<div v-if="postsClicked">
+		<div class="userPostsBlock">
+				<div v-if="this.posts">
+				
+					<div v-for="post in this.posts" class="userPost">
+						
+						<div @click="viewPost(post)" style="text-align: center;">
+							<a href="/#/comments-modal">
+								<img src="/userImages/resize.png" style="float: right; width: 16px; height: 16px">
+							</a>
 						</div>
 						
+						<div class="postTxt">
+							{{post.postText}}
+						</div>
+						
+						<hr>
+						
+						<div v-if="post.pictureName != 'null'">
+							<div class="postPic">						 
+								<img :src="'/userImages/'+post.pictureName" alt="post picture" >
+							</div>
+						</div>
 					</div>
-					
-					<div v-else>
-					
-						Korisnik jos uvijek nema postova <br>
-					</div>
-					
-			</div>
+				</div>
+				
+				<div v-else>
+				
+					Korisnik jos uvijek nema postova <br>
+				</div>
+				
 		</div>
+	
+	</div>
 
-		<div v-else-if="photosClicked">
+	<div v-else-if="photosClicked">
 			<div class="userPostsBlock">
 					<div v-if="this.photos">
 					
@@ -127,8 +121,9 @@ Vue.component("view-profile", {
 					
 			</div>
 		</div>
-		</div>
+	
 	</div>
+</div>
 
 	
 <!--	user does not exist-->
