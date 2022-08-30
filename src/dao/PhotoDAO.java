@@ -65,10 +65,15 @@ public class PhotoDAO {
  	   p.setUsernameCreate(req.getUsername());
  	   p.setId((long) (photos.size()+1));
 		byte[] imgBytes = Base64.decode(req.getContent());
-		long name = 100;
-		String fileName = p.getId().toString().concat(".png");
-		File f = new File("WebContent/static/userImages//".concat(fileName));
-		p.setPath(fileName);
+
+		Long name = 100L;
+		File f = new File("WebContent/static/userImages//" + 100 + ".png");
+		
+		while(f.exists()) {
+			name++;
+			f = new File("WebContent/static/userImages//" + name + ".png");
+		}
+		p.setPath(name.toString()+".png");
 
 		FileOutputStream osf;
 		try {

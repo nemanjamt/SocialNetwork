@@ -3,7 +3,8 @@ Vue.component("navbar", {
 		    return {
 		      noLoggedIn:false,
               OrdinaryUserLoggedIn:true,
-              adminLoggedIn:false
+              adminLoggedIn:false,
+              currentLoggedUser:{}
 		    }
 	},
 	template: ` 
@@ -39,22 +40,28 @@ Vue.component("navbar", {
             </li>
             
             <li>
-            	<img src="/userImages/addIcon.png" style="width: 22px; height: 22px; padding-right: 20px">
+                <div class="dropdown">
+                    <img @click="openCreate()" src="/userImages/addIcon.png" class="dropbtn" style="width: 22px; height: 22px; padding-right: 20px">
+                    <div id="createDropDown" class="dropdown-content">
+                        <a href="#/create-post">add post</a>
+                        <a href="#/create-photo">add photo</a>
+                    </div>
+                </div>
 			</li>
 			
-            <li>
-            	<img src="/userImages/bellIcon.png" style="width: 22px; height: 22px; padding-right: 20px">
+            <li>              
+            	<img src="/userImages/bellIcon.png" style="width: 22px; height: 22px; padding-right: 20px">                  
 			</li>
 			
 			<li>
 				<div class="dropdown">
-				  <img src="/userImages/userIcon.png" style="width: 22px; height: 22px; padding-right: 20px">
-					  <div class="dropdown-content">
-						<a href="#"> Profile </a>
-						<a href="#"> Edit Profile</a>
-						<a href="#"> Change Password </a>
+				  <img @click="openProfile()" src="/userImages/userIcon.png" class="dropbtn" style="width: 22px; height: 22px; padding-right: 20px">
+					  <div id="profileDropDown" class="dropdown-content">
+						<a :href="'#/view-profile?user='+currentLoggedUser.username"> Profile </a>
+						<a href="#/edit-profile"> Edit Profile</a>
+						<a href="#/change-password"> Change Password </a>
 						<hr style="width: 95%">
-						<a href="#"> Logout </a>
+						<a v-on:click="logout()"> Logout </a>
 					  </div>
 				</div>
 			</li>
@@ -90,23 +97,51 @@ Vue.component("navbar", {
 
 		logout: function(){
 			axios.put("/logout").then(response => {
-				// this.$router.push('/');
-				this.$router.go(0);
+				this.$router.push('/');
 			}
 			);
+
 		},
+        openCreate:function() {
+            document.getElementById("createDropDown").classList.toggle("show");
+        },
+        openProfile:function(){
+            document.getElementById("profileDropDown").classList.toggle("show");
+        },
+        createClick:function(){
+            this.$router.push('/create-post');
+        },
+        myFunction:function() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+          
+        
 
         
 		
 	},
 	mounted () {
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+          
+              var dropdowns = document.getElementsByClassName("dropdown-content");
+              var i;
+              for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                  openDropdown.classList.remove('show');
+                }
+              }
+            }
+          }
 
         axios.get('/currentUser').then(response => {
 			if(response.data != null){
+                this.currentLoggedUser = response.data;
 				this.noLoggedIn = false;
                 this.OrdinaryUserLoggedIn = true;
                 this.adminLoggedIn = false;
-	
+                
 			}else{
                 this.noLoggedIn = true;
                 this.OrdinaryUserLoggedIn = false;

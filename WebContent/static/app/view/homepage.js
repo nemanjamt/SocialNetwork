@@ -8,11 +8,7 @@ Vue.component("home-page", {
 	},
 	template: ` 
 	<div class="searchAllUsersBlock" v-if="this.userLogedIn">
-			<div>WELCOME TO THE SIIT NETWORK</div>
-			<button v-on:click="logout()">Logout</button>
-			
-			
-			
+			<div><img src="/userImages/welcome.jpg" style="height: 100%; width: 100%;"></div>		
 	</div>	
 	
 		
@@ -145,13 +141,6 @@ Vue.component("home-page", {
 		init : function() {
 			console.log("DA?");
 		}, 
-		logout: function(){
-			axios.put("/logout").then(response => {
-				// this.$router.push('/');
-				this.$router.go(0);
-			}
-			);
-		},
 		login : function(){
 			console.log("UISAOO?");
 			if(this.credentials.username == ""){

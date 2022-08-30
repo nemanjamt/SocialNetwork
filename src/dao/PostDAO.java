@@ -206,6 +206,12 @@ public void savePosts(String contextPath) {
 		p.setDeleted(false);
 		p.setId((long) (posts.size()+1));
 		posts.put(p.getId(), p);
+		if(usersPost.containsKey(p.getUsernameCreator())) {
+			usersPost.get(p.getUsernameCreator()).add(p);
+		}else {
+			usersPost.put(p.getUsernameCreator(), new ArrayList<Post>());
+			usersPost.get(p.getUsernameCreator()).add(p);
+		}
 		savePosts("./WebContent/files");
 		return true;
 		
@@ -251,6 +257,7 @@ public void savePosts(String contextPath) {
 	public boolean deletePost(Long postId) {
 		if(!posts.containsKey(postId))
 			return false;
+		
 		posts.get(postId).setDeleted(true);
 		savePosts("./WebContent/files");
 		return true;
