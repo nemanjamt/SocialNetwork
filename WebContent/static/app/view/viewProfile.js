@@ -9,7 +9,8 @@ Vue.component("view-profile", {
 			  posts:null, 
 			  photos:null,
 			  photosClicked:false,
-			  postsClicked:false	
+			  postsClicked:false,
+			  currentLoggedUser:null	
 		    }
 	},
 	template: ` 
@@ -56,10 +57,10 @@ Vue.component("view-profile", {
 				
 					<div v-for="post in this.posts" class="userPost">
 						
-						<div @click="viewPost(post)" style="text-align: center;">
-							<a href="/#/comments-modal">
-								<img src="/userImages/resize.png" style="float: right; width: 16px; height: 16px">
-							</a>
+						<div @click="viewFullPost(post)" style="text-align: center;">
+
+							<img src="/userImages/resize.png" style="float: right; width: 16px; height: 16px">
+		
 						</div>
 						
 						<div class="postTxt">
@@ -91,8 +92,9 @@ Vue.component("view-profile", {
 					
 						<div v-for="photo in this.photos" class="userPost">
 						
-							<div @click="viewPhoto(photo)">
-								Pogledaj sliku
+							<div v-if="currentLoggedUser" @click="viewFullPhoto(photo)" style="text-align: center;">
+							
+								<img src="/userImages/resize.png" style="float: right; width: 16px; height: 16px">
 							</div>
 							<div v-if="photo.text != 'null'" class="postTxt">
 								{{photo.text}}
@@ -104,13 +106,11 @@ Vue.component("view-profile", {
 							</div>
 							
 							
-							<div class="postComment">
-								<a>
-								<img style="width: 5%; height: 5%" src="https://cdn-icons.flaticon.com/png/512/1944/premium/1944489.png?token=exp=1660684747~hmac=d04ea536bcccf08ec00c633ae10ead40">
-								</a>
-							</div>
+							
 							
 						</div>
+
+						
 						
 					</div>
 					
@@ -151,7 +151,14 @@ Vue.component("view-profile", {
 			console.log("implementiraj gledanje slika");
 			console.log(photo);
 		}
+		,viewFullPhoto(photo){
+			this.$router.push('/photo-full-view?photoId='+photo.id);
+		},
+		viewFullPost(post){
+			this.$router.push('/post-full-view?postId='+post.id);
+		}
 	},
+	
 
 	mounted () {
 		userId = this.$route.query.user
@@ -168,6 +175,7 @@ Vue.component("view-profile", {
 			  
         	  
           });
+
 		  axios
           .get('/posts?user='+userId)
           .then(response => {
@@ -182,7 +190,13 @@ Vue.component("view-profile", {
         	  this.photos = response.data;
 			  console.log(this.photos);
           });
-
+		  axios.get('/currentUser').then(response => {
+			if(response.data != null){
+                this.currentLoggedUser = response.data;
+				
+                
+			}
+		} )
 		  
         
     },

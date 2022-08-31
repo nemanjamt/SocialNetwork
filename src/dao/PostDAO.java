@@ -43,36 +43,7 @@ public class PostDAO {
 		System.out.println(posts);
 	}
 	
-//	public Text findOneText(Long id) {
-//		return texts.get(id);	
-//	}
-//	
-//	public Photo findOnePhoto(Long id) {
-//		return photos.get(id);
-//	}
-//	
-//	public void addOnePhoto(Photo p) {
-//		p.setId((long) photos.size() + texts.size());
-//		photos.put(p.getId(), p);
-//		if(userPhotos.containsKey(p.getUsernameCreator())) {
-//			userPhotos.get(p.getUsernameCreator()).add(p);
-//		}else {
-//			userPhotos.put(p.getUsernameCreator(), new ArrayList<Photo>());
-//			userPhotos.get(p.getUsernameCreator()).add(p);
-//		}
-//	}
-//	
-//	public void addOneText(Text t) {
-//		
-//		t.setId((long) texts.size() + photos.size());
-//		texts.put((long) t.getId(), t);
-//		if(userTexts.containsKey(t.getUsernameCreator())) {
-//			userTexts.get(t.getUsernameCreator()).add(t);
-//		}else {
-//			userTexts.put(t.getUsernameCreator(), new ArrayList<Text>());
-//			userTexts.get(t.getUsernameCreator()).add(t);
-//		}
-//	}
+
 	
 	public void loadPosts(String contextPath) {
 		

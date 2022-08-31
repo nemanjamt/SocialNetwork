@@ -51,6 +51,29 @@ header ul li a:hover
   color: white;
 }
 
+.fullViewBox{
+  position: relative;
+  top: 24px;
+  float: left;
+
+  border-radius: 5%;
+  text-align: center;
+  background-color: white;
+
+  margin-left: 80px;
+  margin-top: 20px;
+  width:450px;
+  height: 350px;
+  /* border-style: solid; */
+}
+
+.fullViewText{
+  padding:5px;
+}
+
+.fullViewPhoto{
+  padding:10px;
+}
 /* main block*/
 .loginBox{
   position: relative;
@@ -266,6 +289,25 @@ header ul li a:hover
   color: black;
 }
 
+textarea {
+  resize: none;
+  margin-right:15px;
+  
+}
+
+.photoComment{
+  display: flex;
+  margin-bottom: 5px;
+  align-items: center;
+
+}
+
+.photoComment button{
+  margin-right: 5px;
+}
+
+
+
 .postsPhotosLine{
   /*border-style: solid;*/
   /*border-color: purple;*/
@@ -318,6 +360,8 @@ header ul li a:hover
   /*border-style: solid;*/
   /*border-color: green;*/
 }
+
+
 
 
 
@@ -405,6 +449,7 @@ input[type="date"], focus {
 
   display: block;
 }
+
 
 /* Change color of dropdown links on hover */
 .dropdown-content a:hover {background-color: #f1f1f1}

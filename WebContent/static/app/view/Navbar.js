@@ -97,7 +97,7 @@ Vue.component("navbar", {
 
 		logout: function(){
 			axios.put("/logout").then(response => {
-				this.$router.push('/');
+				this.$router.go(0);
 			}
 			);
 

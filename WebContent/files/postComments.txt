@@ -1,1 +1,4 @@
-
+1;2;jovana;izmijenjeni komentar;1661955976847;1661955987478;true;true
+2;2;jovana;podrzite me;1661956017086;null;false;false
+3;11;jovana;novi komentar;1661956919343;1661956924885;true;false
+4;12;jovana;novi komentar :);1661979717830;1661979730293;true;true

@@ -11,6 +11,7 @@ public class PostComment {
 	private String usernameCreator;
 	private boolean deleted;
 	private Long postId;
+	private boolean isEdited = Boolean.FALSE;
 	
 	
 	
@@ -29,6 +30,15 @@ public class PostComment {
 		this.deleted = deleted;
 		this.postId = postId;
 	}
+	
+	public Boolean getIsEdited() {
+		return isEdited;
+	}
+
+	public void setIsEdited(Boolean isEdited) {
+		this.isEdited = isEdited;
+	}
+	
 	public String getContent() {
 		return content;
 	}

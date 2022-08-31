@@ -12,6 +12,7 @@ public class PhotoComment {
 	private String usernameCreator;
 	private boolean deleted;
 	private Long photoId;
+	private Boolean isEdited = Boolean.FALSE;
 	public PhotoComment(String content, LocalDateTime editDate, boolean edited, LocalDateTime publishedDate, Long id,
 			String usernameCreator, boolean deleted, Long photoId) {
 		super();
@@ -25,6 +26,15 @@ public class PhotoComment {
 		this.photoId = photoId;
 		
 	}
+	
+	public Boolean getIsEdited() {
+		return isEdited;
+	}
+
+	public void setIsEdited(Boolean isEdited) {
+		this.isEdited = isEdited;
+	}
+
 	public PhotoComment() {
 		super();
 	}

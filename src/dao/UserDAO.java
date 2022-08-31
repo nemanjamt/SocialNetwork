@@ -152,7 +152,7 @@ private Map<String, User> users = new HashMap<>();
 		user.setLastName(u.getLastName());
 		user.setGender(u.getGender());
 		user.setPassword(u.getPassword());
-		saveUsers("./WebContent/");
+		saveUsers(this.contextPath);
 		return true;
 	}
 	
@@ -194,7 +194,7 @@ private Map<String, User> users = new HashMap<>();
 					boolean isBlocked = Boolean.parseBoolean(st.nextToken().trim());
 					boolean isPrivate = Boolean.parseBoolean(st.nextToken().trim());
 					User u = new User(username, password, mail, name, lastName, date, gender, role, profilePicture, isPrivate, isBlocked);
-					
+					System.out.println("USEER "+u);
 					users.put(username, u);
 				}
 
