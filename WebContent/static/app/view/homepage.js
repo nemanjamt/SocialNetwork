@@ -7,10 +7,18 @@ Vue.component("home-page", {
 		    }
 	},
 	template: ` 
-	<div class="searchAllUsersBlock" v-if="this.userLogedIn">
-			<div><img src="/userImages/welcome.jpg" style="height: 100%; width: 100%;"></div>		
-	</div>	
-	
+<!--	<div class="searchAllUsersBlock" v-if="this.userLogedIn">-->
+<!--			<div><img src="/userImages/welcome.jpg" style="height: 100%; width: 100%;"></div>		-->
+<!--	</div>	-->
+	<div  v-if="this.userLogedIn">
+       <section>
+            <div class="welcomeContent">
+                <h2>Neki tekst dobrodoslice</h2>
+                <h2>Neki tekst dobrodoslice</h2>
+            </div>
+        </section>
+       
+   </div>
 		
 	<div v-else class="searchAllUsersBlock">
 	
@@ -140,7 +148,7 @@ Vue.component("home-page", {
 	methods : {
 		init : function() {
 			console.log("DA?");
-		}, 
+		},
 		login : function(){
 			console.log("UISAOO?");
 			if(this.credentials.username == ""){
@@ -289,7 +297,7 @@ Vue.component("home-page", {
 			console.log("ON CHANGE??");
 			console.log(this.credentials.username);
 		}
-		
+
 		
 	},
 	mounted () {

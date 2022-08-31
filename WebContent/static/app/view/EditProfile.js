@@ -7,74 +7,65 @@ Vue.component("edit-profile", {
 		    }
 	},
 	template: ` 	
-	<div v-if="currentLoggedUser"  class="userProfilBlock">
-	
-		
-		<div class="userPostsBlock">
-		
-			
-		<div class="userPost">
-			
-			<table class="registrationTable" >
-				<tr>
-					<td><input class="userInput" type="text" id="name" placeholder="name" v-model="currentLoggedUser.name" @change="handleChange"></td>
-					<td><p id="nameErrMessage" style="color:red"></p></td>
-				</tr>
-				
-				<tr>
-					<td><input class="userInput" type="text" id="lastName" placeholder="last name" v-model="currentLoggedUser.lastName" @change="handleChange"></td>
-					<td><p id="lastNameErrMessage" style="color:red"></p></td>
-				</tr>
+<div v-if="currentLoggedUser"  class="uploadBlock">
+    <table class="registrationTable" style="margin-left: 350px; padding-top: 55px">
+        <tr>
+            <td><input class="userInput" type="text" id="name" placeholder="name" v-model="currentLoggedUser.name" @change="handleChange"></td>
+            <td><p id="nameErrMessage" style="color:red"></p></td>
+        </tr>
+        
+        <tr>
+            <td><input class="userInput" type="text" id="lastName" placeholder="last name" v-model="currentLoggedUser.lastName" @change="handleChange"></td>
+            <td><p id="lastNameErrMessage" style="color:red"></p></td>
+        </tr>
 
-				<tr>
-					<td><input class="userInput" type="text" id="email" placeholder="email" v-model="currentLoggedUser.email" @change="handleChange"></td>
-					<td>
-						<p id="emailErrMessage" style="color:red"></p>
-					</td>
-				</tr>
+        <tr>
+            <td><input class="userInput" type="text" id="email" placeholder="email" v-model="currentLoggedUser.email" @change="handleChange"></td>
+            <td>
+                <p id="emailErrMessage" style="color:red"></p>
+            </td>
+        </tr>
 
-				<tr>
-					<td>
-						<select class="userInput" id="gender" placeholder="gender" v-model="currentLoggedUser.gender" v-on:change="handleChange()">
-							<option value="" disabled selected hidden>select your gender</option>
-							<option value="MALE">Male</option>
-							<option value="FEMALE">Female</option>
-						</select>
-					</td>
-					<td>
-						<p id="genderErrMessage" style="color:red"></p>
-					</td>
-				</tr>
-                <tr>
-                <td><label>private account</label><input type="checkbox" id="privateAccount" v-model="currentLoggedUser.privateAccount" v-on:change="handleChange()"></td>
-                </td>
-				
-				<tr>
-					<td>
-						<input style="float:right" type="date" placeholder="birth date" id="birthDate" v-model="userBirthDate" v-on:change="handleChange()">
-					</td>
-					<td>
-						<p id="birthDateErrMessage" style="color:red"></p>
-					</td>
-				</tr>
-				
-				
-				
-				<tr>
-					
-					<button class="btn" v-on:click="editProfile()" :disabled='!edited'>save changes</button>
-				</tr>
-				<tr>
-					<td><p id="registrationErrMessage" class="errMessage">Fail.Try another username.</p></td>
-					
-				</tr>
-				<tr>
-					<td><p id="registrationSuccessMessage"  class="successMessage" >Registration successfully done</p></td>
-				</tr>
-            </table>
-		</div>
-    </div>
-	</div>  
+        <tr>
+            <td>
+                <select class="userInput" id="gender" placeholder="gender" v-model="currentLoggedUser.gender" v-on:change="handleChange()">
+                    <option value="" disabled selected hidden> Select your gender </option>
+                    <option value="MALE">Male</option>
+                    <option value="FEMALE">Female</option>
+                </select>
+            </td>
+            <td>
+                <p id="genderErrMessage" style="color:red"></p>
+            </td>
+        </tr>
+        <tr>
+        <td><label> Private account</label><input type="checkbox" id="privateAccount" v-model="currentLoggedUser.privateAccount" v-on:change="handleChange()"></td>
+        </td>
+        
+        <tr>
+            <td>
+                <input style="float:right" type="date" placeholder="birth date" id="birthDate" v-model="userBirthDate" v-on:change="handleChange()">
+            </td>
+            <td>
+                <p id="birthDateErrMessage" style="color:red"></p>
+            </td>
+        </tr>
+        
+        
+        
+        <tr>
+            
+            <button class="btn" v-on:click="editProfile()" :disabled='!edited'> Save changes</button>
+        </tr>
+        <tr>
+            <td><p id="registrationErrMessage" class="errMessage">Fail.Try another username.</p></td>
+            
+        </tr>
+        <tr>
+            <td><p id="registrationSuccessMessage"  class="successMessage" >Registration successfully done</p></td>
+        </tr>
+    </table>
+</div>
 	
 	
 `

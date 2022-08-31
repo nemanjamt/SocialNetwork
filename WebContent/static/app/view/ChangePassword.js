@@ -7,38 +7,23 @@ Vue.component("change-password", {
 		    }
 	},
 	template: ` 	
-	<div v-if="currentLoggedUser"  class="userProfilBlock">
-	
-		
-		<div class="userPostsBlock">
-		
-			
-		<div class="userPost">
-			
-			<table class="registrationTable" >
-				
-                <tr>
+<div v-if="currentLoggedUser" class="uploadBlock">
+    <table class="registrationTable" style="margin-left: 350px; padding-top: 55px">
+        <tr>
+            <td><input class="userInput" type="password" id="password" placeholder="password" v-model="fields.password"></td>
+            <td><p id="passwordErrMessage" style="color:red"></p></td>
+        </tr>
+         
+        <tr>
+            <td><input class="userInput" type="password" id="confirmPassword" placeholder="confirm password" v-model="fields.confirmPassword"></td>
+            <td><p id="confirmPasswordErrMessage" style="color:red"></p></td>
+        </tr>
 
-                    <td><input class="userInput" type="password" id="password" placeholder="password" v-model="fields.password"></td>
-                    <td><p id="passwordErrMessage" style="color:red"></p></td>
-                </tr>
-                 <tr>
-
-                    <td><input class="userInput" type="password" id="confirmPassword" placeholder="confirm password" v-model="fields.confirmPassword"></td>
-                    <td><p id="confirmPasswordErrMessage" style="color:red"></p></td>
-                </tr>
-				
-				
-				<tr>
-					
-					<button class="btn" v-on:click="editProfile()" >change password</button>
-				</tr>
-				
-				
-            </table>
-		</div>
-    </div>
-	</div>  
+        <tr>
+            <button class="btn" v-on:click="editProfile()" > Change password </button>
+        </tr>
+    </table>
+</div>  
 	
 	
 `

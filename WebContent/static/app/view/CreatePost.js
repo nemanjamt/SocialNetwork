@@ -8,24 +8,30 @@ Vue.component("create-post", {
 		    }
 	},
 	template: ` 
-    <div class="userProfilBlock">
-	<div class="userPostsBlock">
-            <div class="userPost">
-            <table>
-                <input type="text" placeholder="post text" v-model="text">
-                <tr>
-                    <td> <input type="file" id="poster" name="poster" v-on:change="addPhoto(photo)"> </td>
-                </tr>
-                <tr>
-                    <td align=center colspan=2>
-                        <input type="button" value="add post" v-on:click="createPost()"/>
-                    </td>
-                </tr>
-            </table>
-            </div>
+<div class="uploadBlock">
+
+    <div class="split left"> 
+        <table class="uploadContent">
+            <tr>
+                <td> 
+                    <input type="file" id="poster" name="poster" v-on:change="addPhoto(photo)"> 
+                </td>
+            </tr>
             
-	</div>
+            <tr>
+                <td>
+                    <input type="button" value="add post" v-on:click="createPost()" class="btn"/>
+                </td>
+            </tr>
+        </table>
     </div>
+    
+    <div class="split right">
+        <input type="text" placeholder="post text" v-model="text" class="inputDescription">
+    </div>
+
+
+</div>
 	
 `
 	, 

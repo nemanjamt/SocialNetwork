@@ -10,10 +10,8 @@ Vue.component("upload-photo", {
 	},
 	template: ` 
 
-
 	<div style="margin-top: 12%">
 	<table>
-			
 			<tr>
 				<td> <h2>Slika:</h2> </td> <td> <input type="file" id="poster" name="poster"> </td>
 			</tr>

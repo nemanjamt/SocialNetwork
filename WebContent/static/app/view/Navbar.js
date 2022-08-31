@@ -18,6 +18,7 @@ Vue.component("navbar", {
 
             <li>
                 <a href="/#/search-users">
+<!--                    <img src="/userImages/searchIcon.png" style="width: 22px; height: 22px; padding-right: 20px">-->
                     Search users
                 </a>
             </li>
@@ -29,13 +30,15 @@ Vue.component("navbar", {
             <li>
                 <a href="">
 				<!-- prijavljenog obicnog korisnika -->
-                    Homepage 
+                    <img src="/userImages/homepageIcon.png" style="width: 24px; height: 24px;">
+<!--                    Homepage -->
                 </a>
             </li>
 
             <li>
                 <a href="/#/search-users">
-                    Search users
+                    <img src="/userImages/searchIcon.png" style="width: 22px; height: 22px; ">
+<!--                    Search users-->
                 </a>
             </li>
             
