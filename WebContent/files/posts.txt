@@ -3,9 +3,10 @@
 3;1660082400000;petar;null;Ipak sam se predomislio. Gdje ima najbbolja poslasticarnica?IZBRISAN POST;true
 4;1660082400000;petar;null;Mijenjam text laganoo;true
 5;1660082400000;petar;null;Ipak sam se predomislio, ne zelim da smrsam. Gdje ima najbolja poslasticarnica?;false
-6;1661881900238;jovana;110.png;navijam za crvenu zvezdu veceras!!!;false
-7;1661881911175;jovana;null;danas je lijep i suncan dan :);false
-8;1661881974311;jovana;null;hoce li neko na fudbal?;false
-9;1661881991415;jovana;null;hoce li neko na kosarku?;false
-10;1661882036399;jovana;null;neki novi post;false
-11;1661882739791;jovana;111.png;Odlucila sam da dodam sliku;false
+6;1661881900238;jovana;110.png;navijam za crvenu zvezdu veceras!!!;true
+7;1661881911175;jovana;null;danas je lijep i suncan dan :);true
+8;1661881974311;jovana;null;hoce li neko na fudbal?;true
+9;1661881991415;jovana;null;hoce li neko na kosarku?;true
+10;1661882036399;jovana;null;neki novi post;true
+11;1661882739791;jovana;111.png;Odlucila sam da dodam sliku;true
+12;1661978571464;jovana;118.png;Dodajem novi post;true

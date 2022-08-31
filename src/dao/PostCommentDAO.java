@@ -109,9 +109,11 @@ public class PostCommentDAO {
 					String user = st.nextToken().trim();
 					String content = st.nextToken().trim();
 					Long dt = Long.valueOf(st.nextToken().trim());
-
-					Long edt = Long.valueOf(st.nextToken().trim()) ;
+					String editedDate = st.nextToken().trim();
+					Long edt = editedDate.equals("null") ? null: Long.valueOf(editedDate) ;
+					
 					boolean edited = Boolean.parseBoolean(st.nextToken().trim());
+					
 					boolean deleted = Boolean.parseBoolean(st.nextToken().trim());
 					PostComment c = new PostComment(content, edt, edited, dt,id,  user, deleted, postId);
 					

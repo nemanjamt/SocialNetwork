@@ -289,12 +289,31 @@ public class SocialMediaMain {
 			
 			
 			String id = request.queryParams("user");
-			System.out.println(id);
 			List<Post> posts = postDAO.findAllActivePostByUser(id);
 
 			return new Gson().toJson(posts);
 		});
 
+		get("/post",(request, response) ->{
+			Long id;
+			try {
+				id = Long.parseLong(request.queryParams("id"));
+			} catch (Exception e) {
+				response.status(400);
+				return null;
+			}
+			if (id == null) {
+				response.status(400);
+				return "Bad request";
+			}
+			
+			Post p = postDAO.findOnePost(id);
+			if(p == null) {
+				response.status(404);
+				return "post not found";
+			}
+			return new Gson().toJson(p);
+		});
 		get("/posts/allActivePosts", (request, response) -> {
 			User u = request.session().attribute("currentUser");
 			;

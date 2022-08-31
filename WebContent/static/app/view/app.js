@@ -9,6 +9,8 @@ const CreatePost = {template: '<create-post></create-post>'}
 const CreatePhoto = {template:'<create-photo></create-photo>'}
 const EditProfile = {template: '<edit-profile></edit-profile>'}
 const ChangePassword = {template:'<change-password></change-password>'}
+const PhotoFullView = {template:'<photo-full-view></photo-full-view>'}
+const PostFullView = {template:'<post-full-view></post-full-view>'}
 const router = new VueRouter({
 	  mode: 'hash',
 	  routes: [
@@ -22,22 +24,12 @@ const router = new VueRouter({
 		{path:'/create-photo', component:CreatePhoto},
 		{path:'/edit-profile', component:EditProfile},
 		{path:'/change-password', component:ChangePassword},
+		{path:'/photo-full-view', component:PhotoFullView},
+		{path:'/post-full-view', component:PostFullView},
 	  ]
 });
 
-/*router.beforeEach((to, from, next) => {
-	const publicPages = ['/login', '/register', '/'];
-	const authRequired = !publicPages.includes(to.path);
-	const loggedIn = localStorage.getItem('user');
-  
-	// trying to access a restricted page + not logged in
-	// redirect to login page
-	if (authRequired && !loggedIn) {
-	  next('/login');
-	} else {
-	  next();
-	}
-  });*/
+
 
 var app = new Vue({
 	router,
