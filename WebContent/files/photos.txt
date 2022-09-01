@@ -3,3 +3,4 @@
 3;112.png;jovana;Odlucih da dodam sliku. Pa da vidimo kako ce to da izgleda;true;1661883096784
 4;114.png;jovana;slika koja ce biti izbrisana;true;1661951171474
 5;119.png;jovana;nova slika;true;1661978642653
+6;120.png;jovana2;;false;1662031797301

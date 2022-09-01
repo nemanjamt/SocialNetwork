@@ -42,7 +42,7 @@ public class FriendshipDAO {
 		return f;
 	}
 	
-	public boolean checkFriendship(String firstUser, String secondUser) {
+	public boolean checkFriendshipExist(String firstUser, String secondUser) {
 		
 		for(Friendship f : friendships.values()){
 			if((f.getFirstUser().equals(firstUser) && f.getSecondUser().equals(secondUser)) || (f.getFirstUser().equals(secondUser) && f.getSecondUser().equals(firstUser))
@@ -52,6 +52,20 @@ public class FriendshipDAO {
 		}
 		return false;
 	}
+	
+	
+	public Friendship checkFriendship(String firstUser, String secondUser) {
+		
+		for(Friendship f : friendships.values()){
+			if((f.getFirstUser().equals(firstUser) && f.getSecondUser().equals(secondUser)) || (f.getFirstUser().equals(secondUser) && f.getSecondUser().equals(firstUser))
+					&& (!f.isDeleted())) {
+				return f;
+			}
+		}
+		return null;
+	}
+	
+	
 	
 	public List<Friendship> getAllByUser(String user){
 		List<Friendship> userFriendships = new ArrayList<Friendship>();
@@ -72,7 +86,8 @@ public class FriendshipDAO {
 			return false;
 		if(friendships.get(id).isDeleted())
 			return false;
-		friendships.get(id).setDeleted(true);
+//		friendships.get(id).setDeleted(true);
+		friendships.remove(id);
 		save(this.contextPath);
 		return true;
 	}

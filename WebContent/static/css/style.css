@@ -51,6 +51,27 @@ header ul li a:hover
   /*color: white;*/
 }
 
+.allRequests{
+  display: flex;
+
+  width: 75%;
+  margin-top: 2%;
+  padding-left: 20px;
+
+  /*border-style: solid;*/
+  /*border-color: red;*/
+
+  border-radius: 17px;
+  background-color: white;
+  align-items: center;
+  /*background-color: white;*/
+}
+
+.requestButtons{
+  margin-left:15px ;
+  
+}
+
 .fullViewBox{
   position: relative;
   top: 24px;
@@ -69,7 +90,9 @@ header ul li a:hover
 
 .fullViewText{
   padding:5px;
+  
 }
+
 
 .fullViewPhoto{
   padding:10px;

@@ -13,8 +13,8 @@ Vue.component("home-page", {
 	<div  v-if="this.userLogedIn">
        <section>
             <div class="welcomeContent">
-                <h2>Neki tekst dobrodoslice</h2>
-                <h2>Neki tekst dobrodoslice</h2>
+                <h2>Welcome to the siit network</h2>
+                <h2>Welcome to the siit network</h2>
             </div>
         </section>
        

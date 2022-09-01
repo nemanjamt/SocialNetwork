@@ -25,7 +25,7 @@ Vue.component("navbar", {
         </ul>
     </header>
     
-    <header v-else-if="OrdinaryUserLoggedIn">
+    <header v-else-if="OrdinaryUserLoggedIn && currentLoggedUser">
         <ul>
             <li>
                 <a href="">
@@ -53,14 +53,14 @@ Vue.component("navbar", {
 			</li>
 			
             <li>              
-            	<img src="/userImages/bellIcon.png" style="width: 22px; height: 22px; padding-right: 20px">                  
+            	<img @click="viewRequests()" src="/userImages/bellIcon.png" style="width: 22px; height: 22px; padding-right: 20px">                  
 			</li>
 			
 			<li>
 				<div class="dropdown">
 				  <img @click="openProfile()" src="/userImages/userIcon.png" class="dropbtn" style="width: 22px; height: 22px; padding-right: 20px">
 					  <div id="profileDropDown" class="dropdown-content">
-						<a :href="'#/view-profile?user='+currentLoggedUser.username"> Profile </a>
+						<a v-on:click="viewOwnProfile()"> Profile </a>
 						<a href="#/edit-profile"> Edit Profile</a>
 						<a href="#/change-password"> Change Password </a>
 						<hr style="width: 95%">
@@ -100,6 +100,7 @@ Vue.component("navbar", {
 
 		logout: function(){
 			axios.put("/logout").then(response => {
+                this.$router.push("/");
 				this.$router.go(0);
 			}
 			);
@@ -116,6 +117,13 @@ Vue.component("navbar", {
         },
         myFunction:function() {
             document.getElementById("myDropdown").classList.toggle("show");
+        },
+        viewOwnProfile:function(){
+            this.$router.push("/view-profile?user="+this.currentLoggedUser.username);
+            this.$router.go(0);
+        },
+        viewRequests:function(){
+            this.$router.push('/all-requests');
         }
           
         
