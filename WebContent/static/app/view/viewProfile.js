@@ -10,7 +10,10 @@ Vue.component("view-profile", {
 			  photos:null,
 			  photosClicked:false,
 			  postsClicked:false,
-			  currentLoggedUser:null	
+			  currentLoggedUser:null,
+			  isFriend:false,
+			  isSender:false,
+			  isReceiver:false
 		    }
 	},
 	template: ` 
@@ -37,9 +40,32 @@ Vue.component("view-profile", {
 						
 						<br>
 				</div>
+				<div v-if="currentLoggedUser">
+					<div v-if="currentLoggedUser.username !== user.username">
+					
+						<button v-if="!isFriend && !isSender && !isReceiver" v-on:click="addFriend()">add friend</button>
+						<button v-if="isFriend" v-on:click="removeFriendship()">remove friend</button>
+						<div v-if="isReceiver">
+							<button v-on:click="acceptFriendship()">accept request</button>
+							<button v-on:click="declineRequest()">remove request</button>
+						</div>
+						<button v-if="isSender" v-on:click="removeRequest()">delete request</button>
+						<div  v-if="!this.user.privateAccount || isFriend">
+						<a @click="mutualFriends()">mutual friends</a>
+						</div>
+					</div>
+					
+				</div>
+
+				<div v-if="currentLoggedUser">
+					<div v-if="currentLoggedUser.username == user.username">
+					<a @click="myFriends()">friends list</a>
+					</div>
+				</div>
+				
 		
 	</div>
-	<div v-if="!this.user.privateAccount">
+	<div v-if="!this.user.privateAccount || isFriend || currentLoggedUser.username == user.username">
 <!--  fixed photos/post line	-->
 	<div class="postsPhotosLine">
 	
@@ -151,11 +177,119 @@ Vue.component("view-profile", {
 			console.log("implementiraj gledanje slika");
 			console.log(photo);
 		}
-		,viewFullPhoto(photo){
+		,viewFullPhoto:function(photo){
 			this.$router.push('/photo-full-view?photoId='+photo.id);
 		},
-		viewFullPost(post){
+		viewFullPost:function(post){
 			this.$router.push('/post-full-view?postId='+post.id);
+		},
+		mutualFriends:function(){
+			this.$router.push("/mutual-friends?user="+this.user.username);
+		},
+		myFriends:function(){
+			this.$router.push("/my-friends");
+		},
+		addFriend:function(){
+			console.log("POSALJI ZAHTJEV");
+			let obj = {
+				date:new Date().getTime(),
+				state: "WAITING",
+				sender:this.currentLoggedUser.username,
+				receiver:this.user.username
+			}
+			console.log(obj);
+			axios.post("/request", JSON.stringify(obj)).then( result => {
+				
+				this.$router.go(0);
+				
+			});
+		},
+		acceptFriendship:function(){
+			
+			axios.get('request/getBetweenUsers?firstUser='+this.currentLoggedUser.username +"&secondUser="+this.user.username).then(response => {
+				console.log("SRBIJA  "+ response.data);
+				console.log(response.data);
+				if(response.data != null){
+					console.log("PRIHVATI ZAHTJEV");
+					let obj = {
+						id:response.data.id,
+						date:new Date().getTime(),
+						state: "ACCEPTED",
+						sender:this.currentLoggedUser.username,
+						receiver:this.user.username
+					}
+					console.log(obj);
+					axios.put("/request", JSON.stringify(obj)).then( result => {
+						console.log(result.data);
+						console.log("KRAJINA");
+						this.$router.go(0);
+					});
+				}
+			});
+		},
+		removeRequest:function(){
+
+
+			axios.get('request/getBetweenUsers?firstUser='+this.currentLoggedUser.username +"&secondUser="+this.user.username).then(response => {
+				console.log("SRBIJA  "+ response.data);
+				console.log(response.data);
+				if(response.data != null){
+					console.log("IZBRISI ZAHTJEV");
+					let obj = {
+						id:response.data.id,
+						date:new Date().getTime(),
+						state: "DENIED",
+						sender:this.currentLoggedUser.username,
+						receiver:this.user.username
+					}
+					console.log(obj);
+					axios.put("/request", JSON.stringify(obj)).then( result => {
+						console.log(result.data);
+						console.log("KRAJINA");
+						this.$router.go(0);
+					});
+				}
+			});
+			
+		},
+		removeFriendship:function(){
+
+			axios.get('friendship/getBetweenUsers?firstUser='+this.currentLoggedUser.username +"&secondUser="+this.user.username).then(response => {
+				console.log("SRBIJA  "+ response.data);
+				console.log(response.data);
+				if(response.data != null){
+					console.log("IZBRISI PRIJATELJSTVO");
+					
+					console.log(response.data);
+					axios.delete("/friendship/"+response.data.id).then( result => {
+						console.log("KRAJINA!!");
+						this.$router.go(0);
+					});
+				}
+			});
+		},
+		declineRequest:function(){
+			
+			axios.get('request/getBetweenUsers?firstUser='+this.currentLoggedUser.username +"&secondUser="+this.user.username).then(response => {
+				console.log("SRBIJA  "+ response.data);
+				console.log(response.data);
+				if(response.data != null){
+					console.log("ODBIJ ZAHTJEV");
+					let obj = {
+						id:response.data.id,
+						date:new Date().getTime(),
+						state: "DENIED",
+						sender:this.currentLoggedUser.username,
+						receiver:this.user.username
+					}
+					console.log(obj);
+					axios.put("/request", JSON.stringify(obj)).then( result => {
+						console.log(result.data);
+						console.log("KRAJINA");
+						this.$router.go(0);
+					});
+				}
+			});
 		}
 	},
 	
@@ -171,7 +305,29 @@ Vue.component("view-profile", {
           .then(response => {
 			
         	  this.user = response.data;
-			  console.log(this.user);
+			  axios.get('/currentUser').then(response => {
+				if(response.data != null){
+					this.currentLoggedUser = response.data;
+					if(this.currentLoggedUser && this.user){
+						axios.get('friendship/checkFriendship?firstUser='+this.currentLoggedUser.username +"&secondUser="+this.user.username).then(response => {
+							this.isFriend = response.data;
+						});
+		
+						axios.get('request/getBetweenUsers?firstUser='+this.currentLoggedUser.username +"&secondUser="+this.user.username).then(response => {
+							console.log("SRBIJA  "+ response.data);
+							console.log(response.data);
+							if(response.data != null){
+								if(response.data.receiver == this.currentLoggedUser.username){
+									this.isReceiver=true;
+								}else{
+									this.isSender = true;
+								}
+							}
+						});
+					}
+					
+				}
+			} )
 			  
         	  
           });
@@ -190,13 +346,8 @@ Vue.component("view-profile", {
         	  this.photos = response.data;
 			  console.log(this.photos);
           });
-		  axios.get('/currentUser').then(response => {
-			if(response.data != null){
-                this.currentLoggedUser = response.data;
-				
-                
-			}
-		} )
+		  
+		
 		  
         
     },

@@ -43,7 +43,7 @@ public class FriendshipRequestDAO {
 	public FriendshipRequest addOne(FriendshipRequest f) {
 		if(checkFriendRequestExists(f.getSender(), f.getReceiver())) 
 			return null;
-		if(friendshipDAO.checkFriendship(f.getReceiver(), f.getSender()))
+		if(friendshipDAO.checkFriendshipExist(f.getReceiver(), f.getSender()))
 			return null;
 		FriendshipRequest req = new FriendshipRequest();
 		req.setDate(System.currentTimeMillis());
@@ -63,6 +63,15 @@ public class FriendshipRequestDAO {
 			}
 		}
 		return false;
+	}
+	
+	public FriendshipRequest checkFriendRequest(String firstUser, String secondUser) {
+		for(FriendshipRequest f : friendshipsRequests.values()){
+			if((f.getReceiver().equals(firstUser) && f.getSender().equals(secondUser)) || (f.getReceiver().equals(secondUser) && f.getSender().equals(firstUser))) {
+				return f;
+			}
+		}
+		return null;
 	}
 	
 	public void loadRequests(String contextPath) {

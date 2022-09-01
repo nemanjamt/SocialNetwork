@@ -31,7 +31,7 @@ public class UserDAO {
 	
 private Map<String, User> users = new HashMap<>();
 	private String contextPath;
-	
+	private FriendshipDAO friendshipDAO;
 	public UserDAO() {
 		this("./WebContent/files");
 	}
@@ -39,6 +39,12 @@ private Map<String, User> users = new HashMap<>();
 	public UserDAO(String contextPath) {
 		this.contextPath = contextPath;
 		loadUsers(contextPath);
+	}
+	
+	public UserDAO(String contextPath, FriendshipDAO friendshipDAO) {
+		this.contextPath = contextPath;
+		loadUsers(contextPath);
+		this.friendshipDAO = friendshipDAO;
 	}
 	
 	/**
@@ -82,6 +88,8 @@ private Map<String, User> users = new HashMap<>();
 		return result;
 	}
 	
+	
+	
 	public List<User> sortUser(List<User> users, List<String> sortParams, String orderBy){
 		for(String param: sortParams) {
 			switch(param) {
@@ -120,6 +128,18 @@ private Map<String, User> users = new HashMap<>();
 	
 	public Collection<User> findAll() {
 		return users.values();
+	}
+	
+	public List<User> getMutualFriends(String firstUser, String secondUser){
+		List<User> mutualFriends = new ArrayList<User>();
+		
+		for(User u: users.values()) {
+			if(friendshipDAO.checkFriendshipExist(firstUser, u.getUsername()) && friendshipDAO.checkFriendshipExist(secondUser, u.getUsername())) {
+				mutualFriends.add(u);
+			}
+		}
+		System.out.println("MUTUAL FRIENDS "+mutualFriends);
+		return mutualFriends;
 	}
 	
 	public boolean add(User u) {

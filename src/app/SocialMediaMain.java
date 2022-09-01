@@ -55,13 +55,14 @@ import spark.Route;
 
 public class SocialMediaMain {
 	private static String contextPath = "./WebContent/files";
-	private static UserDAO userDAO = new UserDAO();
+
 	private static PostDAO postDAO = new PostDAO(contextPath);
 	private static PhotoDAO photoDAO = new PhotoDAO(contextPath);
 	private static MessageDAO messDAO = new MessageDAO(contextPath);
 	private static PostCommentDAO postCommentDAO = new PostCommentDAO(contextPath);
 	private static PhotoCommentDAO photoCommentDAO = new PhotoCommentDAO(contextPath);
 	private static FriendshipDAO friendshipDAO = new FriendshipDAO(contextPath);
+	private static UserDAO userDAO = new UserDAO(contextPath, friendshipDAO);
 	private static FriendshipRequestDAO frequestDAO = new FriendshipRequestDAO(contextPath, friendshipDAO);
 	private static Gson gson = new Gson();
 	static Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
@@ -142,6 +143,17 @@ public class SocialMediaMain {
 			response.status(201);
 			return "success";
 
+		});
+		
+		get("/mutualFriends", (request, response)->{
+			String firstUser = request.queryParams("firstUser");
+			String secondUser = request.queryParams("secondUser");
+			if (firstUser == null || secondUser == null) {
+				response.status(400);
+				return "Bad arguments";
+			}
+			
+			return new Gson().toJson(userDAO.getMutualFriends(firstUser, secondUser));
 		});
 
 		get("/users", (request, response) -> {
@@ -788,6 +800,18 @@ public class SocialMediaMain {
 			}
 			return frequestDAO.checkFriendRequestExists(firstUser, secondUser);
 		});
+		
+		get("/request/getBetweenUsers",(request, response) ->{
+			
+			String firstUser = request.queryParams("firstUser");
+			String secondUser = request.queryParams("secondUser");
+			if (firstUser == null || secondUser == null) {
+				response.status(400);
+				return "Bad arguments";
+			}
+			return new Gson().toJson(frequestDAO.checkFriendRequest(firstUser, secondUser));
+			
+		});
 
 		get("/request/:username", (request, response) -> {
 			response.type("application/json");
@@ -821,7 +845,7 @@ public class SocialMediaMain {
 				response.status(400);
 				return "Bad request";
 			}
-			if(frequest.getSender().equals(u.getUsername())) {
+			if(!frequest.getSender().equals(u.getUsername())) {
 				response.status(403);
 				return "forbidden - sender is not current logged user";
 			}
@@ -901,7 +925,24 @@ public class SocialMediaMain {
 				response.status(400);
 				return "Bad request";
 			}
-			return friendshipDAO.checkFriendship(firstUser, secondUser);
+			return friendshipDAO.checkFriendshipExist(firstUser, secondUser);
+		});
+		
+		
+		get("/friendship/getBetweenUsers", (request, response) -> {
+			response.type("application/json");
+       	 	User u = request.session().attribute("currentUser");;
+			if(u == null) {
+				response.status(401);
+				return "access is denied";
+			}
+			String firstUser = request.queryParams("firstUser");
+			String secondUser = request.queryParams("secondUser");
+			if (firstUser == null || secondUser == null) {
+				response.status(400);
+				return "Bad request";
+			}
+			return new Gson().toJson( friendshipDAO.checkFriendship(firstUser, secondUser));
 		});
 
 		get("/friendship/:user", (request, response) -> {
@@ -920,7 +961,7 @@ public class SocialMediaMain {
 			}
 			List<Friendship> f = friendshipDAO.getAllByUser(user);
 
-			return f;
+			return new Gson().toJson(f);
 		});
 
 		post("/friendship", (request, response) -> {
@@ -952,7 +993,7 @@ public class SocialMediaMain {
 			Friendship friendship = friendshipDAO.addOne(frequestDAO.findOne(f.getId()));
 			return friendship;
 		});
-
+		
 		delete("friendship/:id", (request, response) -> {
 			response.type("application/json");
        	 	User u = request.session().attribute("currentUser");;
