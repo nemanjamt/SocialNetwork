@@ -10,53 +10,99 @@ Vue.component("post-full-view", {
 	template: ` 
 	
 	
-		
-	<div v-if="post && postComments && currentLoggedUser" class="searchAllUsersBlock">
-	
-		<div class="split left">
-			<div class="fullViewBox">
-                <div>
-                    
-                    
-                    <div  class="fullViewText">
-                        {{post.postText}}
-                    </div>
-                    <div v-if="post.pictureName != 'null'" class="fullViewPhoto">						 
-                        <img :src="'/userImages/'+post.pictureName" alt="post picture" >
-                    </div>
+<div class="postBlock">
 
-
-                    <div v-if="currentLoggedUser.username == post.usernameCreator">
-                        <button v-on:click="deletePost(post)" >delete post</button>
-                        
-                    </div>
-                 </div>
-		
-                 
-			
-			
-		    </div>
-		
-		</div>
-			
-		<div class="split right">
+    <div class="photoSection">
+        <div class="picSection">
             <div>
-                <div v-for="comment in this.postComments" class="postComment">
-                    <textarea rows='4' v-model="comment.content" v-on:change="handleCommentChange(comment)" :readonly="currentLoggedUser.username !== comment.usernameCreator"></textarea>
-                    <button v-if="currentLoggedUser.username == comment.usernameCreator" v-on:click="deleteComment(comment)">delete</button>
-                    <button v-if="currentLoggedUser.username == comment.usernameCreator" v-on:click="saveChanges(comment)" :disabled="!comment.isEdited">save changes</button>
+                <div  class="fullViewText">
+                    {{post.postText}}
                 </div>
-            </div>
-            <br>
-            <hr>
-            <div class="postComment">
-                <textarea rows='4' v-model="newComment" ></textarea>
-                <button v-on:click="addComment()">Dodaj komentar</button>
-            </div>
-
-		</div>
+                <div v-if="post.pictureName != 'null'" class="fullViewPhoto">						 
+                    <img :src="'/userImages/'+post.pictureName" alt="post picture" >
+                </div>
+    
+    
+                <div v-if="currentLoggedUser.username == post.usernameCreator">
+                    <button v-on:click="deletePost(post)"> Delete post </button>
+                </div>
+             </div>
+        </div>
+    
+    </div>
 	
-	</div>  
+	<div class="split right" style="margin-top: -850px;">
+	    
+	    <div class="sortUsersBlock addComment"> 
+	        <textarea v-model="newComment" class="inputComment" placeholder="Add a comment..."> </textarea>
+            <button v-on:click="addComment()" class="btn"> Post </button>
+	    </div>
+	    
+	    <div class="showUsersBlock" style="margin-top: 65px;"> 
+	         <div v-for="comment in this.postComments" class="commentBlock">
+	            <div class="commentBtns"> 
+<!--                    <button v-if="currentLoggedUser.username == comment.usernameCreator" v-on:click="deleteComment(comment)"> Delete </button>-->
+<!--                    <button v-if="currentLoggedUser.username == comment.usernameCreator" v-on:click="saveChanges(comment)" :disabled="!comment.isEdited"> Save changes </button>-->
+                    <img v-if="currentLoggedUser.username == comment.usernameCreator" v-on:click="deleteComment(comment)" src="/userImages/deleteIcon.png" style="width: 24px; height: 24px; float: right;">
+                    <img v-if="currentLoggedUser.username == comment.usernameCreator" v-on:click="saveChanges(comment)" :disabled="!comment.isEdited" src="/userImages/saveIcon.png" style="width: 24px; height: 24px; margin-right: 24px;  float: right">
+	            </div>
+	            
+                <div class="commentPart"> 
+                    <textarea v-model="comment.content" v-on:change="handleCommentChange(comment)" :readonly="currentLoggedUser.username !== comment.usernameCreator" class="commentContent"></textarea>
+                </div>
+                
+                <div class="datePart"> 
+                    <p style="color: #757576"> Date: </p>
+                </div>
+	         
+	         
+	         
+                </div>
+	    </div>
+	
+    </div>
+	
+	
+</div>
+	
+		
+<!--	<div v-if="post && postComments && currentLoggedUser" class="">-->
+<!--	-->
+<!--        <div class="picSection">-->
+<!--            <div>-->
+<!--                <div  class="fullViewText">-->
+<!--                    {{post.postText}}-->
+<!--                </div>-->
+<!--                <div v-if="post.pictureName != 'null'" class="fullViewPhoto">						 -->
+<!--                    <img :src="'/userImages/'+post.pictureName" alt="post picture" >-->
+<!--                </div>-->
+<!--    -->
+<!--    -->
+<!--                <div v-if="currentLoggedUser.username == post.usernameCreator">-->
+<!--                    <button v-on:click="deletePost(post)"> Delete post </button>-->
+<!--                </div>-->
+<!--             </div>-->
+<!--        </div>-->
+<!--			-->
+<!--			comment section -->
+<!--		<div class="">-->
+<!--            -->
+<!--                <div v-for="comment in this.postComments" class="postComment">-->
+<!--                    <textarea rows='4' v-model="comment.content" v-on:change="handleCommentChange(comment)" :readonly="currentLoggedUser.username !== comment.usernameCreator"></textarea>-->
+<!--                    <button v-if="currentLoggedUser.username == comment.usernameCreator" v-on:click="deleteComment(comment)">delete</button>-->
+<!--                    <button v-if="currentLoggedUser.username == comment.usernameCreator" v-on:click="saveChanges(comment)" :disabled="!comment.isEdited">save changes</button>-->
+<!--                </div>-->
+<!--                -->
+<!--                -->
+<!--                <div class="addComment">-->
+<!--                    <textarea rows='4' v-model="newComment" ></textarea>-->
+<!--                    <button v-on:click="addComment()">Dodaj komentar</button>-->
+<!--                </div>-->
+<!--        -->
+<!--        </div>-->
+<!--            -->
+<!--	-->
+<!--	</div>  -->
 	
 	
 `

@@ -12,24 +12,26 @@ Vue.component("requests-view", {
 	<div class="searchAllUsersBlock">
 	
 		<div v-for="request in allRequests" class="allRequests">
-            <div class="searchedUserPic">
-				<img :src="'/userImages/'+request.user.profilePicture " alt="profile picture" width="60" height="60" style="border-radius:50%">
-			</div>
-				
-            <!-- info block -->
-            <div  class="searchUsersInfo">
-                <b>
-                    <a :href="'#/view-profile?user='+request.user.username"> 
-                        {{request.user.name}} {{request.user.lastName}} 
-                    </a>
-                </b>
-        
-                
-                
+		
+		    <div class="reqUserInfo">
+                <div class="reqUserPic">
+                    <img :src="'/userImages/'+request.user.profilePicture " alt="profile picture" width="60" height="60" style="border-radius:50%; margin-left: 25px">
+                </div>
+                    
+                <!-- info block -->
+                <div  class="reqUsersInfo">
+                    <b>
+                        <a :href="'#/view-profile?user='+request.user.username"> 
+                            {{request.user.name}} {{request.user.lastName}} 
+                        </a>
+                    </b>
+                </div>
             </div>
+            
             <div class="requestButtons">
-                <button v-on:click="acceptRequest(request)">accept request</button>
-                <button v-on:click="declineRequest(request)">decline request</button>
+                <img v-on:click="acceptRequest(request)" src="/userImages/acceptIcon.png" style="width: 46px; height: 46px;">
+                <img v-on:click="declineRequest(request)" src="/userImages/declineIcon.png" style="width: 46px; height: 46px; margin-left: 80px;">
+<!--                <button v-on:click="declineRequest(request)">decline request</button>-->
             </div>
         </div>
 	

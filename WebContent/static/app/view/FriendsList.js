@@ -12,7 +12,7 @@ Vue.component("my-friends", {
 	<div class="searchAllUsersBlock">
 	
 		<div v-for="friend in myFriends" class="allRequests">
-            <div class="searchedUserPic">
+            <div class="searchedUserPic" style="margin-left: 15px">
 				<img :src="'/userImages/'+friend.profilePicture " alt="profile picture" width="60" height="60" style="border-radius:50%">
 			</div>
 				

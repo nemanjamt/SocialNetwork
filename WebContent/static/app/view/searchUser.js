@@ -29,22 +29,22 @@ Vue.component("search-user", {
 				
 				<tr>
 					<td>
-						<input type="date"  name="startDate" v-model="searchParams.startDate"/>
+						<div class="datepickerBlock"> 
+							<span> Start date: </span>
+							<input type="date"  name="startDate" v-model="searchParams.startDate"/>
+						
+						</div>
+						
 					</td>
-	
+						
 					<td>
-						<input type="date" name="endDate" v-model="searchParams.endDate"/>
+						<div class="datepickerBlock"> 
+							<span> End date: </span>
+							<input type="date" name="endDate" v-model="searchParams.endDate"/>
+						</div>
 					</td>
 				</tr>
-
-				<tr>
-					<td>
-						<span> Start date </span>
-					</td>
-					<td>
-						<span> End date </span>
-					</td>
-				</tr>
+				
 			</table>
 			
 			<div style="text-align: center">
@@ -58,6 +58,7 @@ Vue.component("search-user", {
 <!-- sort part -->
 				<div class="sortUsersBlock">
 					<!--	sort by -->
+					
 					<form>
 						<select v-model="sortParam"> 
 							<option disabled selected value> -- select an option -- </option>
@@ -69,31 +70,22 @@ Vue.component("search-user", {
 						<input type="button" value="Sort" v-on:click="sortUser()" class="btn"/>
 					</form>
 					
-					<!-- sort ikonica-->
-					
-					<div class="order">
-						<label>asceding</label>
-						<input type="checkbox" id="sort4" name="sortAsceding" value="asceding" v-model="orderBy.asc" >
+					<input type="checkbox" id="sort4" name="sortAsceding" value="asceding" v-model="orderBy.asc" >
+					<div v-on:click="clickedArrow()" id="picChecked" style="margin-top: -18px">
+						<img for="sort4" id="oldArrow" src="/userImages/upArrowIcon.png" style="width: 34px; height: 34px; ">
+						<img id="newArrow" src="/userImages/clickedArrowIcon.png" style="width: 34px; height: 34px; display: none">
 					</div>
 					
 					
+					<!-- sort ikonica-->
+					
+<!--					<div class="order">-->
+<!--						<label>asceding</label>-->
+<!--						<input type="checkbox" id="sort4" name="sortAsceding" value="asceding" v-model="orderBy.asc" >-->
+<!--					</div>-->
+					
+					
 				</div>
-					
-<!--						
-						<label>name</label>
-						<input type="checkbox" id="sort1" name="sortName" value="Name" v-model="sortParams.byName" >
-		
-						<label>last name</label>
-						<input type="checkbox" id="sort2" name="sortLastName" value="Last name" v-model="sortParams.byLastName" >
-		
-						<label>birth date</label>
-						<input type="checkbox" id="sort3" name="sortBirthDate" value="birth date" v-model="sortParams.byBirthDate" >
-		
-						<label>asceding</label>
-						<input type="checkbox" id="sort4" name="sortAsceding" value="asceding" v-model="orderBy.asc" >
-					
-						<input type="button" value="Sort" v-on:click="sortUser()" class="btn"/>
--->
 				
 				<!-- users info -->
 				<div class="showUsersBlock">
@@ -133,6 +125,22 @@ Vue.component("search-user", {
 			this.users = {};
 			
 		},
+
+		clickedArrow:function(){
+			var checkBox = document.getElementById("picChecked");
+			var oldArrow = document.getElementById("oldArrow");
+			var newArrow = document.getElementById("newArrow");
+
+			if (checkBox.checked === true){
+				oldArrow.style.display = "none";
+				newArrow.style.display = "block";
+
+			} else {
+				oldArrow.style.display = "block";
+				newArrow.style.display = "none";
+			}
+	},
+
 		searchUser:function(){
 			let startDate = (new Date(this.searchParams.startDate)).getTime();
 			let endDate = (new Date(this.searchParams.endDate)).getTime();

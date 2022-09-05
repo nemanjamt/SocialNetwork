@@ -54,9 +54,7 @@ header ul li a:hover
 .allRequests{
   display: flex;
 
-  width: 75%;
-  margin-top: 2%;
-  padding-left: 20px;
+  width: 600px;
 
   /*border-style: solid;*/
   /*border-color: red;*/
@@ -64,28 +62,48 @@ header ul li a:hover
   border-radius: 17px;
   background-color: white;
   align-items: center;
-  /*background-color: white;*/
+
+  margin-bottom: 15px;
+  margin-left: 380px;
+  padding: 5px 0 8px 0;
 }
+
+.reqUserInfo{
+  position: relative;
+  width: 370px;
+
+  /*border-style: solid;*/
+  /*border-color: greenyellow;*/
+
+
+}
+
 
 .requestButtons{
-  margin-left:15px ;
-  
+  margin-left:15px;
+  float: right;
+
+  /*border-style: solid;*/
 }
 
-.fullViewBox{
+.picSection{
   position: relative;
   top: 24px;
   float: left;
 
   border-radius: 5%;
   text-align: center;
+  /*background-color: white;*/
+
+  /*margin-left: 80px;*/
+  /*margin-top: 20px;*/
+  width:750px;
+  height: 800px;
+
+  border-style: solid;
+  border-color: green;
   background-color: white;
 
-  margin-left: 80px;
-  margin-top: 20px;
-  width:450px;
-  height: 350px;
-  /* border-style: solid; */
 }
 
 .fullViewText{
@@ -135,7 +153,7 @@ header ul li a:hover
   height: 83%;
   margin: auto;
 
-  /*background-color: white;*/
+  /*background-color: yellow;*/
 }
 
 
@@ -201,12 +219,13 @@ header ul li a:hover
 
 
 .order{
-  width: 42px;
-  height: 42px;
-  float: right;
-  margin-top: 18px;
-  margin-right: 22px;
+  /*width: 42px;*/
+  /*height: 42px;*/
+  /*float: right;*/
+  /*margin-top: 18px;*/
+  /*margin-right: 22px;*/
 
+  border-style: solid;
 }
 
 
@@ -246,9 +265,31 @@ header ul li a:hover
   padding-top: 1.2%;
 }
 
+.reqUserPic{
+  /*border-style: solid;*/
+  /*color: blue;*/
+
+  width: 120px;
+  height: 64px;
+  float: left;
+
+  margin: auto;
+
+}
+
 .searchUsersInfo{
   padding-left: 3%;
   padding-top: 1%;
+
+}
+
+.reqUsersInfo{
+  height: 64px;
+  width: 220px;
+  margin-left: 120px;
+
+  /*border-style: solid;*/
+
 }
 
 .userInput{
@@ -258,6 +299,26 @@ header ul li a:hover
   width: 250px;
   height: 44px;
   padding-left: 8px;
+  border: none;
+  box-shadow: 2px 2px 10px #757576;
+}
+
+.datepickerBlock{
+  background-color: white;
+  color: #76785E;
+  border-radius: 35px;
+
+  width: 240px;
+  height: 44px;
+  padding-left: 8px;
+}
+
+.datepickerBlock input[type="date"]{
+  background-color: white;
+  margin-top: 5px;
+  border: none;
+  color: #757576;
+
 }
 
 .btn{
@@ -294,16 +355,46 @@ header ul li a:hover
   margin-top: 5%;
   margin-left: 5%;
 
+  display: flex;
+
   /*border-style: solid;*/
   /*border-color: red;*/
 }
 
+
 .userInfo{
-  float: right; width: 78%;
-  margin-top: 2%;
+
+  width: 320px;
+
 
   /*border-style: solid;*/
   /*border-color: green;*/
+
+}
+
+.profilePic{
+
+  width: 140px;
+  /*margin-left: 5px;*/
+
+  /*border-style: solid;*/
+  /*border-color: yellow;*/
+
+}
+
+.profilePic img{
+  margin-left: 18px;
+
+}
+
+
+.profileBtns{
+
+  width: 348px;
+
+  /*border-style: solid;*/
+  /*border-color: blue;*/
+
 
 }
 
@@ -521,7 +612,7 @@ input[type="date"], focus {
 
 .welcomeContent {
   position: relative;
-  margin-left: 460px;
+  margin-left: 560px;
   margin-top: 140px;
 
 
@@ -580,3 +671,163 @@ input[type="date"], focus {
 /*   *   *   *   *   *   *   *   *   *   *   *   *   *   *   */
 /*   *   *   *   *   *   *   *   *   *   *   *   *   *   *   */
 /*   *   *   *   *   *   *   *   *   *   *   *   *   *   *   */
+
+
+
+.messageBlock{
+  width: 160px;
+
+  /*border-style: solid;*/
+  /*border-color: blue;*/
+}
+
+
+.friendshipBlock{
+  width: 180px;
+
+  float: right;
+  margin-top: -52px;
+
+  /*border-style: solid;*/
+  /*border-color: deeppink;*/
+}
+
+
+.friendshipBtn{
+  color: white;
+
+  font-size: 16px;
+  border-radius: 45px;
+
+  width: 128px;
+  height: 48px;
+  outline: none;
+
+  margin-left: 46px;
+
+}
+
+.addBtn{
+  background-color: #0095F6;
+  box-shadow: 5px 5px 10px #003690;
+
+}
+
+.removeBtn{
+  color: black;
+  background-color: white;
+  box-shadow: 5px 5px 10px darkgray;
+}
+
+.uploadPhoto{
+  display: inline-block;
+
+  /*background-color: indigo;*/
+  color: #757576;
+
+  height: 50px;
+  width: 190px;
+  cursor: pointer;
+  font-size: 24px;
+  padding-top: 20px;
+
+  border-radius: 12px;
+  border-style: solid;
+  border-width: 3px;
+  border-color: #757576;
+
+}
+
+
+.postBlock{
+  position: relative;
+
+  /*display: inline-block;*/
+
+  margin-top: 80px;
+  margin-left: 70px;
+  height: 850px;
+  width: 1640px;
+  display: inline-block;
+
+  /*background-color: pink;*/
+
+}
+
+.photoSection{
+  width: 900px;
+  height: 850px;
+
+  /*background-color: #76785E;*/
+}
+
+
+.addComment{
+  /*background-color: lightgreen;*/
+  width: 800px;
+}
+
+.inputComment{
+  width: 400px;
+  height: 50px;
+  border-radius: 35px;
+
+  font-size: 16px;
+
+  margin-top: 30px;
+  margin-left: 50px;
+
+  padding-left: 15px;
+  padding-top: 15px;
+
+  box-shadow: 2px 2px 10px #757576;
+  border:none;
+}
+
+.commentBlock{
+  width: 560px;
+  height: 160px;
+  margin-top: 34px;
+  margin-left: 30px;
+
+  border-radius: 20px;
+
+  background-color: white;
+
+}
+
+.commentBtns{
+  margin: 0 24px 0 24px;
+  height: 38px;
+  padding-top: 10px;
+
+  /*border-style: solid;*/
+}
+
+.commentPart{
+  margin: 0 24px 0 24px;
+  height: 74px;
+
+  /*border-style: solid;*/
+  /*border-color: red;*/
+
+}
+
+.commentPart textarea{
+  border: none;
+}
+
+.commentContent{
+  margin-top: 15px;
+  height: 50px;
+  width: 500px;
+}
+
+.datePart{
+  margin: 0 24px 0 24px;
+  height: 34px;
+
+  /*border-style: solid;*/
+  /*border-color: green;*/
+
+}
