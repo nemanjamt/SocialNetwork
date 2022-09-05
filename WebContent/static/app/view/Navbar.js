@@ -12,14 +12,13 @@ Vue.component("navbar", {
         <ul>
             <li>
                 <a href="">
-                    Homepage
+                    <img src="/userImages/homepageIcon.png" style="width: 24px; height: 24px;">
                 </a>
             </li>
 
             <li>
                 <a href="/#/search-users">
-<!--                    <img src="/userImages/searchIcon.png" style="width: 22px; height: 22px; padding-right: 20px">-->
-                    Search users
+                    <img src="/userImages/searchIcon.png" style="width: 22px; height: 22px; padding-right: 20px">
                 </a>
             </li>
         </ul>
@@ -31,14 +30,12 @@ Vue.component("navbar", {
                 <a href="">
 				<!-- prijavljenog obicnog korisnika -->
                     <img src="/userImages/homepageIcon.png" style="width: 24px; height: 24px;">
-<!--                    Homepage -->
                 </a>
             </li>
 
             <li>
                 <a href="/#/search-users">
                     <img src="/userImages/searchIcon.png" style="width: 22px; height: 22px; ">
-<!--                    Search users-->
                 </a>
             </li>
             

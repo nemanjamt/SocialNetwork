@@ -18,11 +18,11 @@ Vue.component("view-profile", {
 	},
 	template: ` 
 	
-	<div v-if="this.user" class="userProfilBlock">
+<div v-if="this.user" class="userProfilBlock">
 	
 	<div class="userProfilInfo">
 		<!--	pic -->
-				<div style="float: left; width: 15%; margin-left: 5%; margin-top: 3%">
+				<div class="profilePic">
 					<img :src="'/userImages/'+this.user.profilePicture " alt="profile picture" width="100" height="100" style="border-radius:50%">
 				</div>
 				
@@ -35,37 +35,59 @@ Vue.component("view-profile", {
 						<br>
 
 						<p>  
+							<img src="/userImages/birthdayIcon.png" style="width: 18px; height: 18px;">
 							{{this.user.birthDate | dateFormat('DD.MM.YYYY')}} 
 						</p>
 						
 						<br>
+						
+						<div v-if="currentLoggedUser">
+							<div v-if="currentLoggedUser.username !== user.username">
+								<div  v-if="!this.user.privateAccount || isFriend">
+									<a @click="mutualFriends()">mutual friends</a>
+								</div>
+							</div>
+							
+							<!--				friends list -->
+							<div v-if="currentLoggedUser">
+								<div v-if="currentLoggedUser.username == user.username">
+									<a @click="myFriends()">friends list</a>
+								</div>
+							</div>
+						</div>
+						
 				</div>
-				<div v-if="currentLoggedUser">
-					<div v-if="currentLoggedUser.username !== user.username">
+				
+<!--				add/remove friend button -->
+				<div v-if="currentLoggedUser" class="profileBtns">
+				
+					<div class="messageBlock">
+						<img src="/userImages/messageIcon.png" style="width: 46px; height: 46px; padding-left: 120px">
+					</div>
+				
+					<div v-if="currentLoggedUser.username !== user.username" class="friendshipBlock">
 					
-						<button v-if="!isFriend && !isSender && !isReceiver" v-on:click="addFriend()">add friend</button>
-						<button v-if="isFriend" v-on:click="removeFriendship()">remove friend</button>
+						<button v-if="!isFriend && !isSender && !isReceiver" v-on:click="addFriend()" class="friendshipBtn addBtn"> Add friend</button>
+						<button v-if="isFriend" v-on:click="removeFriendship()" class="friendshipBtn removeBtn"> Remove friend</button>
+						
 						<div v-if="isReceiver">
-							<button v-on:click="acceptFriendship()">accept request</button>
-							<button v-on:click="declineRequest()">remove request</button>
+							<button v-on:click="acceptFriendship()" class="friendshipBtn addBtn"> Accept request</button>
+							<button v-on:click="declineRequest()" class="friendshipBtn removeBtn" style="margin-top: 12px"> Remove request</button>
 						</div>
-						<button v-if="isSender" v-on:click="removeRequest()">delete request</button>
-						<div  v-if="!this.user.privateAccount || isFriend">
-						<a @click="mutualFriends()">mutual friends</a>
-						</div>
+						
+						<button v-if="isSender" v-on:click="removeRequest()" class="friendshipBtn removeBtn"> Delete request</button>
+						
 					</div>
 					
-				</div>
-
-				<div v-if="currentLoggedUser">
-					<div v-if="currentLoggedUser.username == user.username">
-					<a @click="myFriends()">friends list</a>
-					</div>
 				</div>
 				
 		
 	</div>
+	
+	
 	<div v-if="!this.user.privateAccount || isFriend || currentLoggedUser.username == user.username">
+
+
 <!--  fixed photos/post line	-->
 	<div class="postsPhotosLine">
 	

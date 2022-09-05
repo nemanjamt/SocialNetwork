@@ -14,7 +14,8 @@ Vue.component("create-post", {
         <table class="uploadContent">
             <tr>
                 <td> 
-                    <input type="file" id="poster" name="poster" v-on:change="addPhoto(photo)"> 
+                    <input type="file" id="poster" name="poster" v-on:change="addPhoto(photo)" hidden> 
+                    <label for="poster" class="uploadPhoto"> <b> Choose photo </b> </label>
                 </td>
             </tr>
             
