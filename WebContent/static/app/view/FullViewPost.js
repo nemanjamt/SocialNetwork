@@ -14,19 +14,20 @@ Vue.component("post-full-view", {
 
     <div class="photoSection">
         <div class="picSection">
-            <div>
-                <div  class="fullViewText">
-                    {{post.postText}}
-                </div>
-                <div v-if="post.pictureName != 'null'" class="fullViewPhoto">						 
-                    <img :src="'/userImages/'+post.pictureName" alt="post picture" >
-                </div>
+             <div v-if="currentLoggedUser.username == post.usernameCreator" class="fullViewBtns">
+                <button v-on:click="deletePost(post)" class="friendshipBtn removeBtn"> Delete post </button>
+            </div>
     
-    
-                <div v-if="currentLoggedUser.username == post.usernameCreator">
-                    <button v-on:click="deletePost(post)"> Delete post </button>
-                </div>
-             </div>
+            <div  class="fullViewText">
+                {{post.postText}}
+                
+                <hr>
+            </div>
+            
+            <div v-if="post.pictureName != 'null'" class="fullViewPhoto">						 
+                <img :src="'/userImages/'+post.pictureName" alt="post picture" >
+            </div>
+
         </div>
     
     </div>
@@ -44,7 +45,7 @@ Vue.component("post-full-view", {
 <!--                    <button v-if="currentLoggedUser.username == comment.usernameCreator" v-on:click="deleteComment(comment)"> Delete </button>-->
 <!--                    <button v-if="currentLoggedUser.username == comment.usernameCreator" v-on:click="saveChanges(comment)" :disabled="!comment.isEdited"> Save changes </button>-->
                     <img v-if="currentLoggedUser.username == comment.usernameCreator" v-on:click="deleteComment(comment)" src="/userImages/deleteIcon.png" style="width: 24px; height: 24px; float: right;">
-                    <img v-if="currentLoggedUser.username == comment.usernameCreator" v-on:click="saveChanges(comment)" :disabled="!comment.isEdited" src="/userImages/saveIcon.png" style="width: 24px; height: 24px; margin-right: 24px;  float: right">
+                    <img v- if="currentLoggedUser.username == comment.usernameCreator" v-on:click="saveChanges(comment)" :disabled="!comment.isEdited" src="/userImages/saveIcon.png" style="width: 24px; height: 24px; margin-right: 24px;  float: right">
 	            </div>
 	            
                 <div class="commentPart"> 

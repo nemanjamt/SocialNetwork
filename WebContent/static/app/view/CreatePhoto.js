@@ -22,14 +22,14 @@ Vue.component("create-photo", {
             </tr>
             <tr>
                 <td>
-                    <input type="button" value="add photo" v-on:click="createPost()" class="btn"/>
+                    <input type="button" value="Add photo" v-on:click="createPost()" class="btn"/>
                 </td>
             </tr>
         </table>
     </div>
     
     <div class="split right">
-        <input type="text" placeholder="photo text" v-model="text" class="inputDescription">
+        <input type="text" placeholder="Photo text.." v-model="text" class="inputDescription">
     </div>
 
 
