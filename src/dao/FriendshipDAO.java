@@ -36,7 +36,11 @@ public class FriendshipDAO {
 		f.setFirstUser(req.getReceiver());
 		f.setSecondUser(req.getSender());
 		f.setDeleted(false);
-		f.setId((long) friendships.size()+1);
+		long id = (long) friendships.size()+1;
+		while(friendships.containsKey(id)) {
+			++id;
+		}
+		f.setId(id);
 		friendships.put(f.getId(), f);
 		save(this.contextPath);
 		return f;

@@ -7,9 +7,12 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
+import java.util.concurrent.ConcurrentHashMap;
 
 import beans.Gender;
 import beans.Message;
@@ -18,18 +21,22 @@ import beans.User;
 
 public class MessageDAO {
 	
+	private static MessageDAO dao;
 	private Map<Long, Message> messages;
-	
-	public MessageDAO() {
+	private String contextPath = "./WebContent/files";
+	private MessageDAO() {
 		
-		messages = new HashMap<Long, Message>();
-		
-	}
-	
-	public MessageDAO(String contextPath) {
-		this();
+		messages = new ConcurrentHashMap<Long, Message>();
 		loadMessages(contextPath);
 	}
+	
+	public static MessageDAO getInstance() {
+		if(dao == null) {}
+			dao = new MessageDAO();
+		return dao;
+	}
+	
+	
 	
 	
 	public Message findOne(Long id) {
@@ -37,8 +44,25 @@ public class MessageDAO {
 	}
 	
 	public void add(Message m) {
+		System.out.println("PRIJE DODAVANJA je velicina "+messages.size());
 		m.setId((long) messages.size());
-		messages.put(m.getId(), m);
+		this.messages.put(m.getId(), m);
+		System.out.println("NAKON DODAVANJA je velicina "+messages.size());
+		saveMessages(this.contextPath);
+	}
+	
+	public int getSize() {
+		return this.messages.size();
+	}
+	
+	public List<Message> findByTwoUsers(String receiver, String sender){
+		messages = new ConcurrentHashMap<Long, Message>();
+		loadMessages(contextPath);
+		
+		List<Message> mess = new ArrayList<>();
+		messages.values().stream().filter(m -> (m.getReceiverUsername().equals(receiver) && m.getSenderUsername().equals(sender))|| (m.getReceiverUsername().equals(sender) && m.getSenderUsername().equals(receiver))).forEach(m -> mess.add(m));
+		
+		return mess;
 	}
 	
 	private void loadMessages(String contextPath) {

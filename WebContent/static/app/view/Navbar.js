@@ -38,6 +38,12 @@ Vue.component("navbar", {
                     <img src="/userImages/searchIcon.png" style="width: 22px; height: 22px; ">
                 </a>
             </li>
+                <a href="/#/chat">
+                <img src="/userImages/chat-icon.png" style="width: 24px; height: 25px; margin-left:22px">
+                </a>
+            <li>
+
+            </li>
             
             <li>
                 <div class="dropdown">

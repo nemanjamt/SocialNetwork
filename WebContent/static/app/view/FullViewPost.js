@@ -10,7 +10,7 @@ Vue.component("post-full-view", {
 	template: ` 
 	
 	
-<div class="postBlock">
+<div  v-if="post && postComments && currentLoggedUser" class="postBlock">
 
     <div class="photoSection">
         <div class="picSection">

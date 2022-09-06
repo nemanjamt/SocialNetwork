@@ -14,6 +14,7 @@ const PostFullView = {template:'<post-full-view></post-full-view>'}
 const AllRequestsView = {template:'<requests-view></requests-view>'}
 const MutualFriends = {template:'<mutual-friends></mutual-friends>'}
 const MyFriends = {template:'<my-friends></my-friends>'}
+const Chat = {template:'<chat></chat>'}
 const router = new VueRouter({
 	  mode: 'hash',
 	  routes: [
@@ -31,7 +32,8 @@ const router = new VueRouter({
 		{path:'/post-full-view', component:PostFullView},
 		{path:'/all-requests', component: AllRequestsView},
 		{path:"/mutual-friends", component:MutualFriends},
-		{path:"/my-friends", component:MyFriends}
+		{path:"/my-friends", component:MyFriends},
+		{path:"/chat", component:Chat}
 	  ]
 });
 

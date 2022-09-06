@@ -8,37 +8,14 @@
 8;1;jovana2;werwerwre;1662336629720;null;false;false
 9;1;jovana2;wrerwerwe;1662336632236;null;false;false
 10;1;jovana2;er;1662336634082;null;false;false
-11;1;jovana2;ewe
-;1662336637189;null;false;false
-12;1;jovana2;ewr;1662336638888;null;false;false
-13;1;jovana2;rewr;1662336642065;null;false;false
-14;1;jovana2;rwerw;1662336643988;null;false;false
-15;1;petar;dsfsdf;1662336700902;null;false;true
-16;1;petar;asfdsfdsffsd
-;1662376812362;null;false;true
-17;1;petar;wqedsad;1662377456213;null;false;true
-18;1;petar;asdasd;1662377458395;null;false;true
-19;1;petar;fdsfds;1662379119919;null;false;true
-20;1;petar;dsfdsf;1662379122037;null;false;true
-21;1;petar;sdfsdf;1662379140450;null;false;true
-22;1;petar;dasdasda;1662379725128;null;false;false
-23;1;petar;sadsadas;1662379727710;null;false;false
-24;1;petar;asdsadasd;1662380610975;null;false;false
-25;1;petar;asdasdasd;1662380613420;null;false;false
-26;1;petar;sdasdas
-sadasda
-sadasd
-sa
-s
-ds
-s
-s
-s
-s
-s
-s
-;1662382559016;null;false;true
-27;1;nina_nina;dsfsdfsdfsds;1662391212112;null;false;true
-28;1;nina_nina;dsfdsfsdf
-
-sdfdsfdsfdsf;1662391221639;1662391227858;true;false
+11;1;jovana;moj komentar;1662413197550;null;false;true
+12;1;jovana;najnoviji komentar;1662413215449;null;false;true
+13;1;jovana;kom22;1662413231691;null;false;true
+14;1;jovana;krv se od nje ledi;1662413263482;null;false;true
+15;1;jovana;1337;1662413391811;null;false;true
+16;1;jovana;ratatatatatatata;1662413403874;null;false;true
+17;1;jovana;krajiska muzika;1662413763762;null;false;true
+18;1;jovana;155789;1662413772395;null;false;true
+19;1;jovana;zbogom kafano;1662413793579;null;false;true
+20;1;jovana;ajde czv!!!;1662413866091;null;false;true
+21;1;jovana;najnoviji komentar;1662414147268;null;false;true

@@ -52,13 +52,15 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import javaxt.utils.Base64;
 import spark.Route;
+import ws.WsHandler;
+import static spark.Spark.webSocket;
 
 public class SocialMediaMain {
 	private static String contextPath = "./WebContent/files";
 
 	private static PostDAO postDAO = new PostDAO(contextPath);
 	private static PhotoDAO photoDAO = new PhotoDAO(contextPath);
-	private static MessageDAO messDAO = new MessageDAO(contextPath);
+	private static MessageDAO messDAO = MessageDAO.getInstance();
 	private static PostCommentDAO postCommentDAO = new PostCommentDAO(contextPath);
 	private static PhotoCommentDAO photoCommentDAO = new PhotoCommentDAO(contextPath);
 	private static FriendshipDAO friendshipDAO = new FriendshipDAO(contextPath);
@@ -70,7 +72,7 @@ public class SocialMediaMain {
 	public static void main(String[] args) throws IOException {
 
 		port(9090);
-
+		webSocket("/ws", WsHandler.class);
 //		mockData();
 
 		staticFiles.externalLocation(new File("./WebContent/static").getCanonicalPath());
@@ -292,6 +294,22 @@ public class SocialMediaMain {
 			return res == true ? "success" : "false";
 		});
 
+		/*
+		 * MESSAGES
+		 * 
+		 * */
+		
+		get("/message",(request, response)->{
+			String receiver = request.queryParams("receiver");
+			String sender = request.queryParams("sender");
+			if(receiver == null || sender == null) {
+				response.status(400);
+				return "Bad request";
+			}
+			
+			return    new Gson().toJson(messDAO.findByTwoUsers(receiver, sender));
+		});
+		
 		/*
 		 * POSTS
 		 *

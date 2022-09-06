@@ -1,9 +1,32 @@
-0;nikola;marko;cao;1660492595822
-1;marko;nikola;cao;1660492595822
-2;marko;nikola;sta radis?;1660492595822
-3;nikola;marko;cao;1660492595822
-4;marko;nikola;cao;1660492595822
-5;marko;nikola;sta radis?;1660492595822
-6;nikola;marko;cao;1660492595822
-7;marko;nikola;cao;1660492595822
-8;marko;nikola;sta radis?;1660492595822
+0;nikola;marko2;cao;1660492595822
+1;marko2;nikola;cao;1660492595822
+2;marko2;nikola;sta radis?;1660492595822
+3;nikola;marko2;cao;1660492595822
+4;marko2;nikola;cao;1660492595822
+5;marko2;nikola;sta radis?;1660492595822
+6;nikola;marko2;cao;1660492595822
+7;marko2;nikola;cao;1660492595822
+8;marko2;nikola;sta radis?;1660492595822
+9;marko2;jovana;cao;1660492595822
+10;marko2;jovana;sta radis?;1660492595822
+11;jovana;marko2;cao;1660492595822
+12;jovana;marko2;nista spremam ispit;1660492595822
+13;marko2;jovana;ok uci onda;1660492595822
+14;jovana;petar;cao jovana;1662475152785
+15;jovana;petar;sta radis;1662475167338
+16;petar;jovana;radim projekat iz veba;1662475182170
+17;marko2;jovana;:);1662475194875
+18;jovana;marko2;:D;1662475215154
+19;jovana;marko2;:D;1662475220611
+20;jovana;marko2;je li ti stiglo obavjestenje za novu poruku?;1662476854339
+21;jovana;marko2;?;1662476884478
+22;marko2;jovana;jeste;1662476893941
+23;marko2;jovana;ratata;1662476948732
+24;jovana;marko2;mhm;1662476960227
+25;jovana;marko2;je li tebi sada sttgilo?;1662476971259
+26;marko2;jovana;jeste;1662476987451
+27;marko2;jovana;:);1662477012277
+28;marko2;jovana;:D;1662477100461
+29;marko2;jovana;hoces li do menze?;1662477123788
+30;jovana;marko2;hocu;1662477141587
+31;jovana;marko2;cekam te;1662477149675
