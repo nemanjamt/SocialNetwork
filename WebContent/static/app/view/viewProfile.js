@@ -61,7 +61,7 @@ Vue.component("view-profile", {
 <!--				add/remove friend button -->
 				<div v-if="currentLoggedUser" class="profileBtns">
 				
-					<div class="messageBlock">
+					<div  v-on:click="messageTo(user)" v-if="currentLoggedUser.username !== user.username && isFriend" class="messageBlock">
 						<img src="/userImages/messageIcon.png" style="width: 46px; height: 46px; padding-left: 120px">
 					</div>
 				
@@ -191,15 +191,10 @@ Vue.component("view-profile", {
 			this.photosClicked = false;
 			this.postsClicked = true;
 		},
-		viewPost: function(post){
-			console.log("implementiraj gledanje postova");
-			console.log(post);
+		messageTo:function(user){
+			this.$router.push("/chat?messageTo="+user.username);
 		},
-		viewPhoto: function(photo){
-			console.log("implementiraj gledanje slika");
-			console.log(photo);
-		}
-		,viewFullPhoto:function(photo){
+		viewFullPhoto:function(photo){
 			this.$router.push('/photo-full-view?photoId='+photo.id);
 		},
 		viewFullPost:function(post){
@@ -242,8 +237,6 @@ Vue.component("view-profile", {
 					}
 					console.log(obj);
 					axios.put("/request", JSON.stringify(obj)).then( result => {
-						console.log(result.data);
-						console.log("KRAJINA");
 						this.$router.go(0);
 					});
 				}
@@ -306,8 +299,6 @@ Vue.component("view-profile", {
 					}
 					console.log(obj);
 					axios.put("/request", JSON.stringify(obj)).then( result => {
-						console.log(result.data);
-						console.log("KRAJINA");
 						this.$router.go(0);
 					});
 				}

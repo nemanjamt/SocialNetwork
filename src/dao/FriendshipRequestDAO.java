@@ -47,7 +47,11 @@ public class FriendshipRequestDAO {
 			return null;
 		FriendshipRequest req = new FriendshipRequest();
 		req.setDate(System.currentTimeMillis());
-		req.setId((long)friendshipsRequests.size()+1);
+		long id = (long) friendshipsRequests.size()+1;
+		while(friendshipsRequests.containsKey(id)) {
+			++id;
+		}
+		req.setId(id);
 		req.setReceiver(f.getReceiver());
 		req.setSender(f.getSender());
 		req.setState(FriendshipRequestState.WAITING);

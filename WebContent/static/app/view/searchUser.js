@@ -7,7 +7,8 @@ Vue.component("search-user", {
 		      users: null,
 			  searchParams:{name:"", lastName:"", startDate:"", endDate:""},
 			  sortParam:"",
-			  orderBy:{asc:true}
+			  orderBy:{asc:false},
+			  isAsceding:false
 		    }
 	},
 	template: ` 
@@ -70,10 +71,16 @@ Vue.component("search-user", {
 						<input type="button" value="Sort" v-on:click="sortUser()" class="btn"/>
 					</form>
 					
-					<input type="checkbox" id="sort4" name="sortAsceding" value="asceding" v-model="orderBy.asc" >
-					<div v-on:click="clickedArrow()" id="picChecked" style="margin-top: -18px">
-						<img for="sort4" id="oldArrow" src="/userImages/upArrowIcon.png" style="width: 34px; height: 34px; ">
-						<img id="newArrow" src="/userImages/clickedArrowIcon.png" style="width: 34px; height: 34px; display: none">
+					
+					<div v-on:click="clickedArrow"  style="margin-top: -18px">
+						<div v-if="isAsceding">
+							<img  src="/userImages/clickedArrowIcon.png" style="width: 34px; height: 34px; ">
+						</div>
+						<div v-else>
+							<img for="sort4"  src="/userImages/upArrowIcon.png" style="width: 34px; height: 34px; ">
+						</div>
+						
+						
 					</div>
 					
 					
@@ -127,18 +134,17 @@ Vue.component("search-user", {
 		},
 
 		clickedArrow:function(){
-			var checkBox = document.getElementById("picChecked");
-			var oldArrow = document.getElementById("oldArrow");
-			var newArrow = document.getElementById("newArrow");
+			console.log('clicked?');
+			
+			this.isAsceding = this.isAsceding ? false:true;
+			// if (checkBox.checked === true){
+			// 	oldArrow.style.display = "none";
+			// 	newArrow.style.display = "block";
 
-			if (checkBox.checked === true){
-				oldArrow.style.display = "none";
-				newArrow.style.display = "block";
-
-			} else {
-				oldArrow.style.display = "block";
-				newArrow.style.display = "none";
-			}
+			// } else {
+			// 	oldArrow.style.display = "block";
+			// 	newArrow.style.display = "none";
+			// }
 	},
 
 		searchUser:function(){
@@ -157,9 +163,8 @@ Vue.component("search-user", {
 		  });
 		},
 		sortUser: function(){
-			
-			
-			console.log(this.orderBy.asc);
+			console.log(this.isAsceding);
+			this.orderBy.asc = this.isAsceding;
 			console.log(this.sortParam + " mhmmm");
 			let order = '';
 			if(this.orderBy.asc){
