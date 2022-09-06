@@ -216,16 +216,36 @@ header ul li a:hover
   /*margin-top: 20px;*/
   width:750px;
   height: 800px;
-
-  border-style: solid;
-  border-color: green;
   background-color: white;
 
+  /*border-style: solid;*/
+  /*border-color: green;*/
+
+}
+
+.fullViewBtns{
+  height: 50px;
+  padding-top: 15px;
+  margin-left: 500px;
+
+  /*border-style: solid;*/
+  /*border-color: orangered;*/
 }
 
 .fullViewText{
   padding:5px;
-  
+  height: 64px;
+  font-size: 18px;
+
+  /*border-style: solid;*/
+  /*border-color: blue;*/
+
+
+
+}
+
+.fullViewText hr{
+  width: 70%;
 }
 
 
@@ -665,6 +685,7 @@ input[type="date"], focus {
 .dropdown-content {
   display: none;
   position: absolute;
+  text-align: left;
 
   margin-top: 5px;
   margin-left: -150px;
@@ -952,3 +973,5 @@ input[type="date"], focus {
   /*border-color: green;*/
 
 }
+
+

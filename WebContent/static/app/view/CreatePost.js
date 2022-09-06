@@ -21,14 +21,14 @@ Vue.component("create-post", {
             
             <tr>
                 <td>
-                    <input type="button" value="add post" v-on:click="createPost()" class="btn"/>
+                    <input type="button" value="Add post" v-on:click="createPost()" class="btn"/>
                 </td>
             </tr>
         </table>
     </div>
     
     <div class="split right">
-        <input type="text" placeholder="post text" v-model="text" class="inputDescription">
+        <input type="text" placeholder="Post text.." v-model="text" class="inputDescription">
     </div>
 
 
