@@ -400,6 +400,16 @@ header ul li a:hover
 .reason{
   display:flex;
 }
+
+.reason textarea{
+  width:420px;
+  height: 150px;
+  overflow-y: auto;
+  text-align: center;
+  border:none;
+  padding-top:70px;
+}
+
 .searchedUserBlock{
   display: flex;
 

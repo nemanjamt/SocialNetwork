@@ -13,8 +13,28 @@ Vue.component("reason-photo-delete", {
 		
 	<div v-if="photo && currentLoggedUser" class="searchAllUsersBlock">
         <div class="reason">
-            <textarea v-model="reason"></textarea><br>
-            <button v-on:click="deletePhotoByAdmin">delete</button>
+            <table>
+                <tr>
+                    <td>
+                        <textarea placeholder="input reason for delete" v-on:change="reasonChange" v-model="reason"></textarea><br>
+                    </td>
+                    <td>
+                        <button v-on:click="deletePhotoByAdmin" class="btn">delete</button>
+                    </td>
+                </tr>
+                <tr colspan="2">
+                    <p id="errMess" style="color:red; text-align:center">
+                    
+                    </p>
+                </tr>
+                <tr colspan="2">
+                    <p id="succMess" style="color:blue; text-align:center">
+                   
+                    </p>
+                </tr>
+            </table>
+            
+            
 		</div>
 	
 	</div>  
@@ -26,11 +46,18 @@ Vue.component("reason-photo-delete", {
 		init : function() {
 			console.log("DA?");
 		}, 
+        reasonChange:function(){
+            document.getElementById("errMess").innerHTML = "";
+        },
 		
         deletePhotoByAdmin:function(){
-            console.log("BRISANJE BY ADMIN");
-            console.log(this.reason);
-            console.log(this.photo);
+            if(this.reason == ""){
+                document.getElementById("errMess").innerHTML = "reason must not be empty";
+                return;
+            }else{
+                document.getElementById("errMess").innerHTML = "";
+                document.getElementById("errMess").innerHTML = "successful deleted";
+            }
             axios.delete("/photo/"+this.photo.id).then(response =>{
                 this.$router.push('/view-profile?user='+this.photo.usernameCreate);
             });
