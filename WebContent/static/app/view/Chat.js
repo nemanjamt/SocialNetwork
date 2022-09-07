@@ -17,19 +17,36 @@ Vue.component("chat", {
 	
 		<div class="split left">
 		
-            <div v-for="friend in myFriends" class="allFriendChat">
-                <div class="searchedUserPic" >
-                    <img :src="'/userImages/'+friend.user.profilePicture " alt="profile picture" width="60" height="60" style="border-radius:50%; margin-right:15px">
+            <div v-for="friend in myFriends" >
+                <div v-if="friend.user.role != 'ADMIN'" class="allFriendChat">
+                    <div class="searchedUserPic" >
+                        <img :src="'/userImages/'+friend.user.profilePicture " alt="profile picture" width="60" height="60" style="border-radius:50%; margin-right:15px">
+                    </div>
+                        
+                    <!-- info block -->
+                    <div v-on:click="chooseUser(friend)" >
+                        <b>
+                            <a> 
+                                {{friend.user.name}} {{friend.user.lastName}} 
+                            </a>
+                        </b> 
+                        <b v-if="friend.messageArrived" class="newMessage">new message!</b>    
+                    </div>
                 </div>
-                    
-                <!-- info block -->
-                <div v-on:click="chooseUser(friend)" >
-                    <b>
-                        <a> 
-                            {{friend.user.name}} {{friend.user.lastName}} 
-                        </a>
-                    </b> 
-                    <b v-if="friend.messageArrived" class="newMessage">new message!</b>    
+                <div v-else class="adminChat">
+                    <div class="searchedUserPic" >
+                    <img :src="'/userImages/'+friend.user.profilePicture " alt="profile picture" width="60" height="60" style="border-radius:50%; margin-right:15px">
+                    </div>
+                        
+                    <!-- info block -->
+                    <div v-on:click="chooseUser(friend)" >
+                        <b>
+                            <a> 
+                                {{friend.user.name}} {{friend.user.lastName}} 
+                            </a>
+                        </b> 
+                        <b v-if="friend.messageArrived" class="newMessage">new message!</b>    
+                    </div>
                 </div>
             
         </div>
@@ -38,7 +55,12 @@ Vue.component("chat", {
 		<div v-if="choosedUser" class="split right">
             <div class="allMessages">
                 <div v-for="message in messages" class="chat-messages">
-                    <div v-if="message.receiverUsername == currentLoggedUser.username" class="message-box-holder">
+                    <div v-if="message.receiverUsername == currentLoggedUser.username && choosedUser.role == 'ADMIN'" class="message-box-holder">
+                        <div class="message-partner" style="background-color:red">
+                            {{message.context}}
+                        </div>
+                    </div>
+                    <div v-else-if="message.receiverUsername == currentLoggedUser.username" class="message-box-holder">
                         <div class="message-partner">
                             {{message.context}}
                         </div>
@@ -50,7 +72,7 @@ Vue.component("chat", {
                     </div>
                 </div>
             </div>
-            <div class="chat-input-holder">
+            <div v-if="choosedUser.role != 'ADMIN'" class="chat-input-holder">
                 <textarea class="chat-input" v-model="newMessage"></textarea>
                 <input v-on:click="send" type="submit" value="Send" class="message-send" />
             </div>
@@ -139,6 +161,15 @@ Vue.component("chat", {
                             });
                         }
                     });
+
+                    axios.get("/users/admin").then(result => {
+                        let user = result.data;
+                        userChat = {
+                            user:user,
+                            messageArrived:false
+                        }
+                        this.myFriends.push(userChat);
+                    })
                    
                 });
 
@@ -159,16 +190,31 @@ Vue.component("chat", {
                             console.log(self.messages);
                             self.messages.push(message);
     
+                        }else {
+                        
+                            self.myFriends.forEach((friend) =>{
+                                console.log('___________________');
+                                console.log(friend.user);
+                                console.log(message.senderUsername);
+                                if(friend.user.username == message.senderUsername){
+                                    friend.messageArrived = true;
+                                    return;
+                                }
+                            });
                         }
-                    }
-                    else {
+                    }else {
+                        
                         self.myFriends.forEach((friend) =>{
+                            console.log('___________________');
+                            console.log(friend.user);
+                            console.log(message.senderUsername);
                             if(friend.user.username == message.senderUsername){
                                 friend.messageArrived = true;
                                 return;
                             }
                         });
                     }
+                    
                    
                 }
 

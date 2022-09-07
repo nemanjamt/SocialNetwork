@@ -42,7 +42,7 @@ Vue.component("view-profile", {
 						<br>
 						
 						<div v-if="currentLoggedUser">
-							<div v-if="currentLoggedUser.username !== user.username">
+							<div v-if="currentLoggedUser.username !== this.user.username">
 								<div  v-if="!this.user.privateAccount || isFriend">
 									<a @click="mutualFriends()">mutual friends</a>
 								</div>
@@ -50,7 +50,7 @@ Vue.component("view-profile", {
 							
 							<!--				friends list -->
 							<div v-if="currentLoggedUser">
-								<div v-if="currentLoggedUser.username == user.username">
+								<div v-if="currentLoggedUser.username == this.user.username">
 									<a @click="myFriends()">friends list</a>
 								</div>
 							</div>
@@ -61,13 +61,13 @@ Vue.component("view-profile", {
 <!--				add/remove friend button -->
 				<div v-if="currentLoggedUser" class="profileBtns">
 				
-					<div  v-on:click="messageTo(user)" v-if="currentLoggedUser.username !== user.username && isFriend" class="messageBlock">
+					<div  v-on:click="messageTo(user)" v-if="currentLoggedUser.username !== this.user.username && isFriend" class="messageBlock">
 						<img src="/userImages/messageIcon.png" style="width: 46px; height: 46px; padding-left: 120px">
 					</div>
 				
-					<div v-if="currentLoggedUser.username !== user.username" class="friendshipBlock">
+					<div v-if="currentLoggedUser.username !== this.user.username" class="friendshipBlock">
 					
-						<button v-if="!isFriend && !isSender && !isReceiver" v-on:click="addFriend()" class="friendshipBtn addBtn"> Add friend</button>
+						<button v-if="!isFriend && !isSender && !isReceiver && currentLoggedUser.role != 'ADMIN'" v-on:click="addFriend()" class="friendshipBtn addBtn"> Add friend</button>
 						<button v-if="isFriend" v-on:click="removeFriendship()" class="friendshipBtn removeBtn"> Remove friend</button>
 						
 						<div v-if="isReceiver">
@@ -85,81 +85,44 @@ Vue.component("view-profile", {
 	</div>
 	
 	
-	<div v-if="!this.user.privateAccount || isFriend || currentLoggedUser.username == user.username">
+	<div v-if="!this.user.privateAccount || isFriend ">
 
 
 <!--  fixed photos/post line	-->
-	<div class="postsPhotosLine">
-	
-	<button class="btn" style="margin-right: 12%" v-on:click="onPhotosClicked()"> Photos </button>
-	<button class="btn" v-on:click="onPostsClicked()"> Posts </button>
-	
-	<hr>
-	
-	</div>
-			
-<!-- posts-->
-	<div v-if="postsClicked">
-		<div class="userPostsBlock">
-				<div v-if="this.posts">
-				
-					<div v-for="post in this.posts" class="userPost">
-						
-						<div @click="viewFullPost(post)" style="text-align: center;">
-
-							<img src="/userImages/resize.png" style="float: right; width: 16px; height: 16px">
+		<div class="postsPhotosLine">
 		
-						</div>
-						
-						<div class="postTxt">
-							{{post.postText}}
-						</div>
-						
-						<hr>
-						
-						<div v-if="post.pictureName != 'null'">
-							<div class="postPic">						 
-								<img :src="'/userImages/'+post.pictureName" alt="post picture" >
-							</div>
-						</div>
-					</div>
-				</div>
-				
-				<div v-else>
-				
-					Korisnik jos uvijek nema postova <br>
-				</div>
-				
+			<button class="btn" style="margin-right: 12%" v-on:click="onPhotosClicked()"> Photos </button>
+			<button class="btn" v-on:click="onPostsClicked()"> Posts </button>
+			
+			<hr>
+		
 		</div>
-	
-	</div>
-
-	<div v-else-if="photosClicked">
+				
+	<!-- posts-->
+		<div v-if="postsClicked">
 			<div class="userPostsBlock">
-					<div v-if="this.photos">
+					<div v-if="this.posts">
 					
-						<div v-for="photo in this.photos" class="userPost">
-						
-							<div v-if="currentLoggedUser" @click="viewFullPhoto(photo)" style="text-align: center;">
+						<div v-for="post in this.posts" class="userPost">
 							
+							<div @click="viewFullPost(post)" style="text-align: center;">
+
 								<img src="/userImages/resize.png" style="float: right; width: 16px; height: 16px">
+			
 							</div>
-							<div v-if="photo.text != 'null'" class="postTxt">
-								{{photo.text}}
+							
+							<div class="postTxt">
+								{{post.postText}}
 							</div>
-							<div>
+							
+							<hr>
+							
+							<div v-if="post.pictureName != 'null' && post.pictureName != undefined">
 								<div class="postPic">						 
-									<img :src="'/userImages/'+photo.path" alt="post picture" >
+									<img :src="'/userImages/'+post.pictureName" alt="post picture" >
 								</div>
 							</div>
-							
-							
-							
-							
 						</div>
-
-						
-						
 					</div>
 					
 					<div v-else>
@@ -168,14 +131,137 @@ Vue.component("view-profile", {
 					</div>
 					
 			</div>
+		
+		</div>
+
+		<div v-else-if="photosClicked">
+				<div class="userPostsBlock">
+						<div v-if="this.photos">
+						
+							<div v-for="photo in this.photos" class="userPost">
+							
+								<div v-if="currentLoggedUser" @click="viewFullPhoto(photo)" style="text-align: center;">
+								
+									<img src="/userImages/resize.png" style="float: right; width: 16px; height: 16px">
+								</div>
+								<div v-if="photo.text != 'null'" class="postTxt">
+									{{photo.text}}
+								</div>
+								<div>
+									<div class="postPic">						 
+										<img :src="'/userImages/'+photo.path" alt="post picture" >
+									</div>
+								</div>
+								
+								
+								
+								
+							</div>
+
+							
+							
+						</div>
+						
+						<div v-else>
+						
+							Korisnik jos uvijek nema postova <br>
+						</div>
+						
+				</div>
 		</div>
 	
+	</div>
+	<div v-else-if="currentLoggedUser">
+		<div v-if="currentLoggedUser.username == this.user.username || currentLoggedUser.role == 'ADMIN'">
+
+	<!--  fixed photos/post line	-->
+			<div class="postsPhotosLine">
+			
+				<button class="btn" style="margin-right: 12%" v-on:click="onPhotosClicked()"> Photos </button>
+				<button class="btn" v-on:click="onPostsClicked()"> Posts </button>
+				
+				<hr>
+			
+			</div>
+					
+		<!-- posts-->
+			<div v-if="postsClicked">
+				<div class="userPostsBlock">
+						<div v-if="this.posts">
+						
+							<div v-for="post in this.posts" class="userPost">
+								
+								<div @click="viewFullPost(post)" style="text-align: center;">
+
+									<img src="/userImages/resize.png" style="float: right; width: 16px; height: 16px">
+				
+								</div>
+								
+								<div class="postTxt">
+									{{post.postText}}
+								</div>
+								
+								<hr>
+								
+								<div v-if="post.pictureName != 'null' && post.pictureName != undefined">
+									<div class="postPic">						 
+										<img :src="'/userImages/'+post.pictureName" alt="post picture" >
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div v-else>
+						
+							Korisnik jos uvijek nema postova <br>
+						</div>
+						
+				</div>
+			
+			</div>
+
+			<div v-else-if="photosClicked">
+					<div class="userPostsBlock">
+							<div v-if="this.photos">
+							
+								<div v-for="photo in this.photos" class="userPost">
+								
+									<div v-if="currentLoggedUser" @click="viewFullPhoto(photo)" style="text-align: center;">
+									
+										<img src="/userImages/resize.png" style="float: right; width: 16px; height: 16px">
+									</div>
+									<div v-if="photo.text != 'null'" class="postTxt">
+										{{photo.text}}
+									</div>
+									<div>
+										<div class="postPic">						 
+											<img :src="'/userImages/'+photo.path" alt="post picture" >
+										</div>
+									</div>
+									
+									
+									
+									
+								</div>
+
+								
+								
+							</div>
+							
+							<div v-else>
+							
+								Korisnik jos uvijek nema postova <br>
+							</div>
+							
+					</div>
+			</div>
+		</div>
 	</div>
 </div>
 
 	
 <!--	user does not exist-->
-	<div v-else>Korisnik ne postoji</div>
+<div v-else>Korisnik ne postoji</div>
 	  
 `
 	, 
@@ -192,7 +278,7 @@ Vue.component("view-profile", {
 			this.postsClicked = true;
 		},
 		messageTo:function(user){
-			this.$router.push("/chat?messageTo="+user.username);
+			this.$router.push("/chat?messageTo="+this.user.username);
 		},
 		viewFullPhoto:function(photo){
 			this.$router.push('/photo-full-view?photoId='+photo.id);

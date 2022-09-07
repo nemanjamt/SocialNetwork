@@ -170,6 +170,22 @@ header ul li a:hover
   padding: 5px 0 8px 0;
 }
 
+.adminChat{
+  display: flex;
+
+  width: 300px;
+
+  /*border-style: solid;*/
+  /*border-color: red;*/
+
+  border-radius: 17px;
+  background-color: red;
+  align-items: center;
+  margin-bottom: 15px;
+  
+  padding: 5px 0 8px 0;
+}
+
 .newMessage{
   display: flex;
   position:relative;
@@ -224,13 +240,18 @@ header ul li a:hover
 }
 
 .fullViewText{
-  padding:5px;
+  padding:20px;
   
 }
 
 
 .fullViewPhoto{
-  padding:10px;
+  padding:85px;
+}
+
+.fullViewPhoto img{
+    width:400px;
+    height: 350px;
 }
 /* main block*/
 .loginBox{
@@ -365,7 +386,9 @@ header ul li a:hover
   visibility: hidden;
   color: green;
 }
-
+.reason{
+  display:flex;
+}
 .searchedUserBlock{
   display: flex;
 
@@ -375,7 +398,7 @@ header ul li a:hover
 
   /*border-style: solid;*/
   /*border-color: red;*/
-
+  align-items: center;
   border-radius: 17px;
   background-color: white;
 }
@@ -578,6 +601,12 @@ textarea {
 
   /*border-style: solid;*/
   /*border-color: darkviolet;*/
+
+}
+
+.userPost img {
+  width:250px;
+  height: 150px;;
 
 }
 

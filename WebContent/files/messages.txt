@@ -30,3 +30,32 @@
 29;marko2;jovana;hoces li do menze?;1662477123788
 30;jovana;marko2;hocu;1662477141587
 31;jovana;marko2;cekam te;1662477149675
+32;marko2;admin;ras;1662505333450
+33;marko2;admin;ras;1662505343842
+34;marko2;admin;ras;1662505364267
+35;marko2;admin;ras;1662505368723
+36;marko2;admin;rass;1662505376716
+37;marko2;jovana;);1662505396763
+38;jovana;marko2;:D;1662505426123
+39;marko2;admin;Vasa slike je obrisana. Razlog: neki razlog za brisanje slike;1662506437123
+40;marko2;admin;Vasa slike je obrisana. Razlog: neki razlog za brisanje slike;1662506444684
+41;marko2;admin;Vasa slike je obrisana. Razlog: neki razlog za brisanje slike;1662506446443
+42;marko2;admin;Vasa slike je obrisana. Razlog: neki razlog za brisanje slike;1662506447052
+43;marko2;admin;Vasa objava je obrisana. Razlog: testiranje brisanja objave;1662540992503
+44;jovana;marko2;cao jovana;1662555756820
+45;jovana;marko2;:D;1662555765797
+46;jovana;marko2;hej hej;1662556056079
+47;marko2;jovana;hej;1662556089455
+48;marko2;jovana;1;1662556125278
+49;jovana;admin;Vasa slika je obrisana. Razlog: .,;1662556176565
+50;jovana;admin;Vasa slika je obrisana. Razlog: .,;1662556198893
+51;jovana;admin;Vasa slika je obrisana. Razlog: .,;1662556286469
+52;jovana;admin;Vasa slika je obrisana. Razlog: .,;1662556358284
+53;jovana;marko2;je li ti sada stiglo obavjestenje;1662556395270
+54;jovana;admin;Vasa slika je obrisana. Razlog: testiranje brisanja slike od strane admina;1662556749894
+55;jovana;admin;Vasa objava je obrisana. Razlog: testiranje brisanja objave od strane admina;1662556807510
+56;jovana;admin;Vasa objava je obrisana. Razlog: testiranje brisanje objave od strane admina;1662556854078
+57;jovana;admin;Vasa objava je obrisana. Razlog: testiranje brisanja objave od strane admina;1662556880990
+58;jovana;admin;Vasa objava je obrisana. Razlog: testiranje brisanja objave od strane admina;1662556915942
+59;jovana;admin;Vasa objava je obrisana. Razlog: testiranje brisanja objave od strane admina;1662556982740
+60;jovana;admin;Vasa objava je obrisana. Razlog: testiranNje brisanja objave od strane admina;1662557109870

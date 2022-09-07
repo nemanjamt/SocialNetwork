@@ -82,13 +82,18 @@ Vue.component("navbar", {
         <ul>
             <li>
                 <a href="">
-                    Homepage admina
+                    <img src="/userImages/homepageIcon.png" style="width: 24px; height: 24px;">
                 </a>
             </li>
 
             <li>
                 <a href="/#/search-users">
-                    Search users
+                    <img src="/userImages/searchIcon.png" style="width: 22px; height: 22px; ">
+                </a>
+            </li>
+            <li>
+                <a v-on:click="logout()">
+                    <img src="/userImages/logout-icon.ico" style="width: 22px; height: 22px; ">
                 </a>
             </li>
         </ul>
@@ -153,8 +158,14 @@ Vue.component("navbar", {
 			if(response.data != null){
                 this.currentLoggedUser = response.data;
 				this.noLoggedIn = false;
-                this.OrdinaryUserLoggedIn = true;
-                this.adminLoggedIn = false;
+                if(this.currentLoggedUser.role == "ADMIN"){
+                    this.adminLoggedIn = true;
+                    this.OrdinaryUserLoggedIn = false;
+                }else{
+                    this.OrdinaryUserLoggedIn = true;
+                    this.adminLoggedIn = false;
+                }
+                
                 
 			}else{
                 this.noLoggedIn = true;

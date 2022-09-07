@@ -11,11 +11,11 @@ Vue.component("photo-full-view", {
 	
 	
 		
-	<div v-if="photo && photoComments && currentLoggedUser" class="searchAllUsersBlock">
+	<div v-if="photo && photoComments && currentLoggedUser" class="postBlock">
 	
-		<div class="split left">
-			<div class="fullViewBox">
-                <div>
+		<div >
+			<div class="photoSection">
+                <div class="picSection">
                     
                     
                     <div v-if="photo.text != 'null'" class="fullViewText">
@@ -26,9 +26,12 @@ Vue.component("photo-full-view", {
                     </div>
 
 
-                    <div v-if="currentLoggedUser.username == photo.usernameCreate">
-                        <button v-on:click="deletePhoto(photo)" >delete photo</button>
-                        <button v-on:click="setProfilePicture(photo)" >set as profile picture</button>
+                    <div v-if="currentLoggedUser.username == photo.usernameCreate" >
+                        <button class="btn" v-on:click="deletePhoto(photo)" >delete photo</button>
+                        <button class="btn" v-on:click="setProfilePicture(photo)" >set as profile picture</button>
+                    </div>
+                    <div v-else-if="currentLoggedUser.role == 'ADMIN'">
+                        <button class="btn" v-on:click="deletePhotoByAdmin(photo)" >delete photo</button>
                     </div>
                  </div>
 		
@@ -39,20 +42,33 @@ Vue.component("photo-full-view", {
 		
 		</div>
 			
-		<div class="split right">
-            <div>
-                <div v-for="comment in this.photoComments" class="photoComment">
-                    <textarea rows='4' v-model="comment.content" v-on:change="handleCommentChange(comment)" :readonly="currentLoggedUser.username !== comment.usernameCreator"></textarea>
-                    <button v-if="currentLoggedUser.username == comment.usernameCreator" v-on:click="deleteComment(comment)">delete</button>
-                    <button v-if="currentLoggedUser.username == comment.usernameCreator" v-on:click="saveChanges(comment)" :disabled="!comment.isEdited">save changes</button>
+		<div class="split right" style="margin-top: -850px;">
+            <div class="sortUsersBlock addComment">
+                <textarea placeholder="Add a comment..." class="inputComment" v-model="newComment" ></textarea>
+                <button v-on:click="addComment()" class="btn">Dodaj komentar</button>
+            </div>
+            <div class="showUsersBlock" style="margin-top: 65px;">
+                <div v-for="comment in this.photoComments" class="commentBlock">
+                    <div class="commentBtns">
+                        <img v-if="currentLoggedUser.username == comment.usernameCreator" v-on:click="deleteComment(comment)" src="/userImages/deleteIcon.png" style="width: 24px; height: 24px; float: right;">
+                        <img v-if="currentLoggedUser.username == comment.usernameCreator" v-on:click="saveChanges(comment)" :disabled="!comment.isEdited" src="/userImages/saveIcon.png" style="width: 24px; height: 24px; margin-right: 24px;  float: right">
+                    </div>
+                    <div class="commentPart">
+                        <textarea class="commentContent" v-model="comment.content" v-on:change="handleCommentChange(comment)" :readonly="currentLoggedUser.username !== comment.usernameCreator"></textarea>
+                    </div>
+
+                    <div v-if="!comment.edited" class="datePart"> 
+                        <p style="color: #757576"> date: {{comment.publishedDate | dateFormat('DD.MM.YYYY')}} </p>
+                    </div>
+                    <div v-else class="datePart"> 
+                        <p style="color: #757576"> edit date: {{comment.editDate | dateFormat('DD.MM.YYYY')}} </p>
+                    </div>
+
                 </div>
             </div>
             <br>
             <hr>
-            <div class="photoComment">
-                <textarea rows='4' v-model="newComment" ></textarea>
-                <button v-on:click="addComment()">Dodaj komentar</button>
-            </div>
+            
 
 		</div>
 	
@@ -101,6 +117,11 @@ Vue.component("photo-full-view", {
             });
         },
 
+        deletePhotoByAdmin:function(photo){
+            
+            this.$router.push("/reason-photo-delete?photoId="+photo.id);
+        },
+
         deletePhoto: function(photo){
             axios.delete("/photo/"+photo.id).then(response =>{
                 this.$router.push('/view-profile?user='+photo.usernameCreate);
@@ -143,5 +164,15 @@ Vue.component("photo-full-view", {
             this.photoComments = response.data;
             console.log(response.data);
         });
-    }
+    },
+    filters: {
+    	dateFormat: function (value, format) {
+            console.log(value.date.day);
+            console.log(value.date.month);
+            console.log(value.date.year);
+			convertedValue = new Date(value.date.year, value.date.month-1, value.date.day);
+    		var parsed = moment(convertedValue);
+    		return parsed.format(format);
+    	}
+   	}
 });

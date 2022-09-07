@@ -16,6 +16,8 @@ Vue.component("create-post", {
                 <td> 
                     <input type="file" id="poster" name="poster" v-on:change="addPhoto(photo)" hidden> 
                     <label for="poster" class="uploadPhoto"> <b> Choose photo </b> </label>
+                    <p v-if="this.photo">photo choosed</p>
+                    <p v-else>no photo choosed</p>
                 </td>
             </tr>
             
@@ -23,12 +25,18 @@ Vue.component("create-post", {
                 <td>
                     <input type="button" value="add post" v-on:click="createPost()" class="btn"/>
                 </td>
+                <td>
+                    <p id="errMess" style="color:red"></p>
+                </td>
+                 <td>
+                    <p id="succMess" style="color:blue"></p>
+                </td>
             </tr>
         </table>
     </div>
     
     <div class="split right">
-        <input type="text" placeholder="post text" v-model="text" class="inputDescription">
+        <input type="text" placeholder="post text" v-on:change="textChange" v-model="text" class="inputDescription">
     </div>
 
 
@@ -40,6 +48,9 @@ Vue.component("create-post", {
 		init : function() {		
 			
 		},
+        textChange:function(){
+            document.getElementById("errMess").innerHTML = "";
+        },
         addPhoto:function(){
 
 
@@ -53,7 +64,7 @@ Vue.component("create-post", {
               alert("Morate unijeti sliku.");
               return;
           }
-            let content = 'nesto prije';
+            
 			reader.onloadend = ( content => {
 			    // Since it contains the Data URI, we should remove the prefix and keep only Base64 string
 			    let b64 = reader.result.replace(/^data:.+;base64,/, '');
@@ -66,7 +77,10 @@ Vue.component("create-post", {
         createPost:function(){
             if(this.text == ""){
                 console.log("mora postojati text");
+                document.getElementById("errMess").innerHTML = "text must not be empty";
                 return;
+            }else{
+                document.getElementById("errMess").innerHTML = "";
             }
             
             
@@ -79,6 +93,7 @@ Vue.component("create-post", {
             }
             
             axios.post("/posts", JSON.stringify(obj)).then(result => {
+                document.getElementById("succMess").innerHTML = "post successful added";
                 this.$router.go(0);
             });
         }

@@ -18,13 +18,16 @@ Vue.component("post-full-view", {
                 <div  class="fullViewText">
                     {{post.postText}}
                 </div>
-                <div v-if="post.pictureName != 'null'" class="fullViewPhoto">						 
+                <div v-if="post.pictureName != 'null' && post.pictureName != undefined" class="fullViewPhoto">						 
                     <img :src="'/userImages/'+post.pictureName" alt="post picture" >
                 </div>
     
     
                 <div v-if="currentLoggedUser.username == post.usernameCreator">
-                    <button v-on:click="deletePost(post)"> Delete post </button>
+                    <button class="btn" v-on:click="deletePost(post)"> Delete post </button>
+                </div>
+                <div v-else-if="currentLoggedUser.role == 'ADMIN'">
+                        <button class="btn" v-on:click="deletePostByAdmin" >delete post</button>
                 </div>
              </div>
         </div>
@@ -51,8 +54,11 @@ Vue.component("post-full-view", {
                     <textarea v-model="comment.content" v-on:change="handleCommentChange(comment)" :readonly="currentLoggedUser.username !== comment.usernameCreator" class="commentContent"></textarea>
                 </div>
                 
-                <div class="datePart"> 
-                    <p style="color: #757576"> Date: </p>
+                <div v-if="!comment.edited" class="datePart"> 
+                    <p style="color: #757576"> date: {{comment.publishedDate | dateFormat('DD.MM.YYYY')}} </p>
+                </div>
+                <div v-else class="datePart"> 
+                    <p style="color: #757576"> edit date: {{comment.editDate | dateFormat('DD.MM.YYYY')}} </p>
                 </div>
 	         
 	         
@@ -111,6 +117,11 @@ Vue.component("post-full-view", {
 		init : function() {
 			console.log("DA?");
 		}, 
+        deletePostByAdmin:function(){
+            console.log("delete post?");
+            console.log(this.post.id);
+            this.$router.push("/reason-post-delete?postId="+this.post.id);
+        },
 		addComment:function(){
             if(this.newComment == '')
                 return;
@@ -179,5 +190,12 @@ Vue.component("post-full-view", {
             this.postComments = response.data;
             console.log(response.data);
         });
-    }
+    },
+    filters: {
+    	dateFormat: function (value, format) {
+			convertedValue = new Date(value);
+    		var parsed = moment(convertedValue);
+    		return parsed.format(format);
+    	}
+   	}
 });

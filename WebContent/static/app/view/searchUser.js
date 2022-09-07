@@ -8,7 +8,8 @@ Vue.component("search-user", {
 			  searchParams:{name:"", lastName:"", startDate:"", endDate:""},
 			  sortParam:"",
 			  orderBy:{asc:false},
-			  isAsceding:false
+			  isAsceding:false,
+			  currentLoggedUser:null
 		    }
 	},
 	template: ` 
@@ -112,8 +113,16 @@ Vue.component("search-user", {
 							</b>
 					
 							<p> Birth date {{u.birthDate | dateFormat('DD.MM.YYYY')}} </p>
+						
 							
 						</div>
+						<div v-if="currentLoggedUser">
+							<div v-if="currentLoggedUser.role == 'ADMIN'"style="margin-left: 10px;">
+								<button v-if="!u.blocked" v-on:click="blockUser(u)" class="btn" style="width:120px ;height:40px">block user</button>
+								<button v-else v-on:click="unblockUser(u)" class="btn" style="width:120px ;height:40px">unblock user</button>
+							</div>
+						</div>
+						
 					</div>
 				</div>		  
 				</div>
@@ -131,6 +140,18 @@ Vue.component("search-user", {
 		init : function() {
 			this.users = {};
 			
+		},
+		blockUser:function(user){
+			user.blocked = true;
+			axios.put("/users", JSON.stringify(user)).then(result => {
+				
+			});
+		},
+		unblockUser:function(user){
+			user.blocked = false;
+			axios.put("/users", JSON.stringify(user)).then(result => {
+				
+			});
 		},
 
 		clickedArrow:function(){
@@ -198,6 +219,12 @@ Vue.component("search-user", {
 			console.log("DA??");
         	  
           });
+
+		  axios.get('/currentUser').then(response => {
+			if(response.data != null){
+                this.currentLoggedUser = response.data;
+			}
+		} )
         
     },
 	filters: {
