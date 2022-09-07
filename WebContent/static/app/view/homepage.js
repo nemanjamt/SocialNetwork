@@ -171,11 +171,18 @@ Vue.component("home-page", {
 			axios.post('/login', {"username":this.credentials.username, "password":this.credentials.password})
 			.then(response => { 
 				document.getElementById("loginErrorMessage").style.visibility = "hidden";
-				// this.$router.push('/');
 				this.$router.go(0);
 				
 			})
 			.catch(function (error) {
+				console.log(error.response.data);
+				// console.log()
+				if(error.response.data == 'blocked'){
+					console.log("HEH");
+					document.getElementById("loginErrorMessage").innerHTML = "You are blocked. Can not login"
+				}else{
+					document.getElementById("loginErrorMessage").innerHTML = "Wrong username/password"
+				}
 				document.getElementById("loginErrorMessage").style.visibility = "visible";
 				// $("#errorMessage").css("visibility", "visible");
 			  });

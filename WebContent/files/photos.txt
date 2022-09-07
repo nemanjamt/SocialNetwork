@@ -3,6 +3,8 @@
 3;112.png;jovana;Odlucih da dodam sliku. Pa da vidimo kako ce to da izgleda;true;1661883096784
 4;114.png;jovana;slika koja ce biti izbrisana;true;1661951171474
 5;119.png;jovana;nova slika;true;1661978642653
-6;122.png;sadsad;;false;1662320567138
-7;123.png;sadsad;;false;1662320581574
-8;124.png;sadsad;fsddsf;false;1662320597110
+6;125.png;marko2;neki tekst uz sliku;false;1662500744529
+7;127.png;jovana;dodajem novu sliku;false;1662559277653
+8;128.png;jovana;;false;1662559357756
+9;129.png;jovana;;false;1662559445918
+10;130.png;jovana;;false;1662559506284

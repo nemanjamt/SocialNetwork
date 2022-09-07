@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
+import java.util.stream.Collectors;
 
 import beans.Gender;
 import beans.Role;
@@ -74,7 +75,7 @@ private Map<String, User> users = new HashMap<>();
 		List<User> result = new ArrayList<User>();
 		
 		for(User u: users.values()) {
-			if(u.getName().toLowerCase().contains(params.getName()) && u.getLastName().toLowerCase().contains(params.getLastName()) && u.getBirthDate() >= params.getStartBirthDate() && u.getBirthDate() <= params.getEndBirthDate()) {
+			if(u.getRole() != Role.ADMIN && u.getName().toLowerCase().contains(params.getName()) && u.getLastName().toLowerCase().contains(params.getLastName()) && u.getBirthDate() >= params.getStartBirthDate() && u.getBirthDate() <= params.getEndBirthDate()) {
 				result.add(u);
 				System.out.println("======");
 				System.out.println(u.getBirthDate() );
@@ -127,7 +128,7 @@ private Map<String, User> users = new HashMap<>();
 	
 	
 	public Collection<User> findAll() {
-		return users.values();
+		return users.values().stream().filter(u -> u.getRole() != Role.ADMIN).collect(Collectors.toCollection(ArrayList::new));
 	}
 	
 	public List<User> getMutualFriends(String firstUser, String secondUser){

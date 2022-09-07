@@ -18,18 +18,29 @@ Vue.component("create-photo", {
                 <td> 
                     <input type="file" id="poster" name="poster" v-on:change="addPhoto(photo)" hidden> 
                     <label for="poster" class="uploadPhoto"> <b> Choose photo </b> </label>
+                    <p v-if="this.photo">photo choosed</p>
+                    <p v-else>no photo choosed</p>
+
                 </td>
             </tr>
             <tr>
                 <td>
                     <input type="button" value="Add photo" v-on:click="createPost()" class="btn"/>
                 </td>
+                <td>
+                    <p id="errMess" style="color:red"></p>
+                </td>
+                 <td>
+                    <p id="succMess" style="color:blue"></p>
+                </td>
             </tr>
         </table>
     </div>
     
     <div class="split right">
-        <input type="text" placeholder="Photo text.." v-model="text" class="inputDescription">
+
+        <input type="text" placeholder="photo text" v-on:change="textChange" v-model="text" class="inputDescription">
+
     </div>
 
 
@@ -41,9 +52,13 @@ Vue.component("create-photo", {
 		init : function() {		
 			
 		},
+        textChange:function(){
+            document.getElementById("succMess").innerHTML = "";
+        },
         addPhoto:function(){
-
-
+            console.log("SULO");
+            document.getElementById("errMess").innerHTML = "";
+            document.getElementById("succMess").innerHTML = "";
             let input = document.querySelector('input#poster');
 			let file = input.files[0];
 			let reader = new FileReader();
@@ -62,11 +77,15 @@ Vue.component("create-photo", {
                 
 			});
             
+            
         },
         createPost:function(){
             if(this.photo == null){
                 console.log("mora postojati text");
+                document.getElementById("errMess").innerHTML = "photo must be choosed";
                 return;
+            }else{
+                document.getElementById("errMess").innerHTML = "";
             }
             
             
@@ -78,6 +97,7 @@ Vue.component("create-photo", {
             }
             
             axios.post("/photo", JSON.stringify(obj)).then(result => {
+                document.getElementById("succMess").innerHTML = "photo successful added";
                 this.$router.go(0);
             });
         }

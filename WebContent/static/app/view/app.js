@@ -15,6 +15,8 @@ const AllRequestsView = {template:'<requests-view></requests-view>'}
 const MutualFriends = {template:'<mutual-friends></mutual-friends>'}
 const MyFriends = {template:'<my-friends></my-friends>'}
 const Chat = {template:'<chat></chat>'}
+const ReasonPhotoDelete = {template:'<reason-photo-delete></reason-photo-delete>'}
+const ReasonPostDelete =  {template:'<reason-post-delete></reason-post-delete>'}
 const router = new VueRouter({
 	  mode: 'hash',
 	  routes: [
@@ -33,7 +35,9 @@ const router = new VueRouter({
 		{path:'/all-requests', component: AllRequestsView},
 		{path:"/mutual-friends", component:MutualFriends},
 		{path:"/my-friends", component:MyFriends},
-		{path:"/chat", component:Chat}
+		{path:"/chat", component:Chat},
+		{path:"/reason-photo-delete", component:ReasonPhotoDelete},
+		{path:"/reason-post-delete", component:ReasonPostDelete}
 	  ]
 });
 

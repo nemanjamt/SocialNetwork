@@ -94,7 +94,10 @@ public class SocialMediaMain {
 			if (u == null) {
 				response.status(401);
 				return "Bad credentials";
-			} else {
+			} else if(u.isBlocked()) {
+				response.status(401);
+				return "blocked";
+			}else {
 				request.session().attribute("currentUser", u);
 			}
 			return "successful login";
@@ -457,7 +460,7 @@ public class SocialMediaMain {
 				response.status(400);
 				return "Bad request - post with specified id does not exist";
 			}
-			if (!postDAO.findOnePost(id).getUsernameCreator().equals(u.getUsername())) {
+			if (!postDAO.findOnePost(id).getUsernameCreator().equals(u.getUsername()) && u.getRole() != Role.ADMIN) {
 				response.status(403);
 				return "forbidden - user not owner of post";
 			}
@@ -1165,7 +1168,7 @@ public class SocialMediaMain {
 				return "photo with specified id does not exist";
 			}
 			
-			if(!p.getUsernameCreate().equals(u.getUsername())) {
+			if(!p.getUsernameCreate().equals(u.getUsername()) && u.getRole() != Role.ADMIN) {
 				response.status(403);
 				return "Forbidden - user not owner of photo";
 			}
