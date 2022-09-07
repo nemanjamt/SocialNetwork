@@ -251,12 +251,21 @@ header ul li a:hover
 .fullViewText{
 
   padding:20px;
-  
+  overflow:scroll
 }
 
 
 .fullViewPhoto{
-  padding:85px;
+  width: 700px;
+  height: 620px;
+  margin:auto;
+
+}
+
+.fitImg{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .fullViewPhoto img{

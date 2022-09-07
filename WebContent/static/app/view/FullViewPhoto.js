@@ -22,13 +22,13 @@ Vue.component("photo-full-view", {
                         {{photo.text}}
                     </div>
                     <div class="fullViewPhoto">						 
-                        <img :src="'/userImages/'+photo.path" alt="post picture" >
+                        <img :src="'/userImages/'+photo.path" alt="post picture" class="fitImg">
                     </div>
 
 
                     <div v-if="currentLoggedUser.username == photo.usernameCreate" >
                         <button class="btn" v-on:click="deletePhoto(photo)" >delete photo</button>
-                        <button class="btn" v-on:click="setProfilePicture(photo)" >set as profile picture</button>
+                        <button class="btn" v-on:click="setProfilePicture(photo)" style="margin-top:-200px">set as profile picture</button>
                     </div>
                     <div v-else-if="currentLoggedUser.role == 'ADMIN'">
                         <button class="btn" v-on:click="deletePhotoByAdmin(photo)" >delete photo</button>
