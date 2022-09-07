@@ -25,7 +25,7 @@ Vue.component("create-photo", {
             </tr>
             <tr>
                 <td>
-                    <input type="button" value="add photo" v-on:click="createPost()" class="btn"/>
+                    <input type="button" value="Add photo" v-on:click="createPost()" class="btn"/>
                 </td>
                 <td>
                     <p id="errMess" style="color:red"></p>
@@ -38,7 +38,9 @@ Vue.component("create-photo", {
     </div>
     
     <div class="split right">
+
         <input type="text" placeholder="photo text" v-on:change="textChange" v-model="text" class="inputDescription">
+
     </div>
 
 

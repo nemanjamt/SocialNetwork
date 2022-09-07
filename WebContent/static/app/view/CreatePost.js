@@ -23,7 +23,7 @@ Vue.component("create-post", {
             
             <tr>
                 <td>
-                    <input type="button" value="add post" v-on:click="createPost()" class="btn"/>
+                    <input type="button" value="Add post" v-on:click="createPost()" class="btn"/>
                 </td>
                 <td>
                     <p id="errMess" style="color:red"></p>
@@ -36,7 +36,9 @@ Vue.component("create-post", {
     </div>
     
     <div class="split right">
+
         <input type="text" placeholder="post text" v-on:change="textChange" v-model="text" class="inputDescription">
+
     </div>
 
 

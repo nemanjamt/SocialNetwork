@@ -49,8 +49,15 @@ Vue.component("navbar", {
                 <div class="dropdown">
                     <img @click="openCreate()" src="/userImages/addIcon.png" class="dropbtn" style="width: 22px; height: 22px; padding-right: 20px">
                     <div id="createDropDown" class="dropdown-content">
-                        <a href="#/create-post">add post</a>
-                        <a href="#/create-photo">add photo</a>
+                        <a href="#/create-post"> 
+                            <img src="/userImages/postIcon.png" style="width: 16px; height: 16px; padding-right: 12px">
+                            Add post
+                        </a>
+                        <a href="#/create-photo"> 
+                            <img src="/userImages/addPhotoIcon.png" style="width: 16px; height: 16px; padding-right: 12px">
+                            Add photo
+                        </a>
+                        
                     </div>
                 </div>
 			</li>
@@ -63,11 +70,23 @@ Vue.component("navbar", {
 				<div class="dropdown">
 				  <img @click="openProfile()" src="/userImages/userIcon.png" class="dropbtn" style="width: 22px; height: 22px; padding-right: 20px">
 					  <div id="profileDropDown" class="dropdown-content">
-						<a v-on:click="viewOwnProfile()"> Profile </a>
-						<a href="#/edit-profile"> Edit Profile</a>
-						<a href="#/change-password"> Change Password </a>
+					  
+						<a v-on:click="viewOwnProfile()"> 
+						    <img src="/userImages/profileIcon.png" style="width: 16px; height: 16px; padding-right: 12px">
+						    Profile 
+						    </a>
+						    
+						<a href="#/edit-profile"> 
+						    <img src="/userImages/editProfileIcon.png" style="width: 16px; height: 16px; padding-right: 12px">
+						    Edit Profile
+						    </a>
+						    
+						<a href="#/change-password"> 
+						    <img src="/userImages/passwordIcon.png" style="width: 16px; height: 16px; padding-right: 12px">
+						    Change Password 
+                        </a>
 						<hr style="width: 95%">
-						<a v-on:click="logout()"> Logout </a>
+						<a v-on:click="logout()" style="margin-top: -10px"> Logout </a>
 					  </div>
 				</div>
 			</li>
