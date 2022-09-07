@@ -36,8 +36,8 @@ Vue.component("create-post", {
     </div>
     
     <div class="split right">
-
-        <input type="text" placeholder="post text" v-on:change="textChange" v-model="text" class="inputDescription">
+        <textarea placeholder="post text" v-on:change="textChange" v-model="text" class="inputDescription"></textarea>
+        
 
     </div>
 

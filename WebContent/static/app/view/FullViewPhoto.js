@@ -19,16 +19,24 @@ Vue.component("photo-full-view", {
                     
                     
                     <div v-if="photo.text != 'null'" class="fullViewText">
-                        {{photo.text}}
+                        <textarea :value="photo.text"></textarea>    
                     </div>
                     <div class="fullViewPhoto">						 
-                        <img :src="'/userImages/'+photo.path" alt="post picture" class="fitImg">
+                        <img :src="'/userImages/'+photo.path" alt="post picture" readonly>
                     </div>
-
-
-                    <div v-if="currentLoggedUser.username == photo.usernameCreate" >
-                        <button class="btn" v-on:click="deletePhoto(photo)" >delete photo</button>
-                        <button class="btn" v-on:click="setProfilePicture(photo)" style="margin-top:-200px">set as profile picture</button>
+                    <div v-if="currentLoggedUser.username == photo.usernameCreate" class="fullViewButtons">
+                        <table>
+                            <tr>
+                                <td>
+                                    <button class="btn" v-on:click="deletePhoto(photo)" >delete photo</button>
+                                </td>
+                                <td>
+                                    <button class="btn" v-on:click="setProfilePicture(photo)">set as profile picture</button>
+                                </td>
+                            </tr>
+                        </table>
+                        
+                        
                     </div>
                     <div v-else-if="currentLoggedUser.role == 'ADMIN'">
                         <button class="btn" v-on:click="deletePhotoByAdmin(photo)" >delete photo</button>
@@ -44,8 +52,18 @@ Vue.component("photo-full-view", {
 			
 		<div class="split right" style="margin-top: -850px;">
             <div class="sortUsersBlock addComment">
-                <textarea placeholder="Add a comment..." class="inputComment" v-model="newComment" ></textarea>
-                <button v-on:click="addComment()" class="btn">Dodaj komentar</button>
+                <table>
+                    <tr>
+                        <td>
+                            <textarea placeholder="Add a comment..." class="inputComment" v-model="newComment" ></textarea>
+                        </td>
+                        <td>
+                            <button v-on:click="addComment()" class="btn">Dodaj komentar</button>
+                        </td>
+                    </tr>
+                </table>
+                
+                
             </div>
             <div class="showUsersBlock" style="margin-top: 65px;">
                 <div v-for="comment in this.photoComments" class="commentBlock">

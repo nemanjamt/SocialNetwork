@@ -112,7 +112,8 @@ Vue.component("view-profile", {
 							</div>
 							
 							<div class="postTxt">
-								{{post.postText}}
+								<textarea :value="post.postText" readonly></textarea>
+								
 							</div>
 							
 							<hr>
@@ -145,7 +146,7 @@ Vue.component("view-profile", {
 									<img src="/userImages/resize.png" style="float: right; width: 16px; height: 16px">
 								</div>
 								<div v-if="photo.text != 'null'" class="postTxt">
-									{{photo.text}}
+									<textarea :value="photo.text" readonly></textarea>
 								</div>
 								<div>
 									<div class="postPic">						 
@@ -198,7 +199,7 @@ Vue.component("view-profile", {
 								</div>
 								
 								<div class="postTxt">
-									{{post.postText}}
+									<textarea :value="post.postText" readonly></textarea>
 								</div>
 								
 								<hr>
@@ -231,7 +232,7 @@ Vue.component("view-profile", {
 										<img src="/userImages/resize.png" style="float: right; width: 16px; height: 16px">
 									</div>
 									<div v-if="photo.text != 'null'" class="postTxt">
-										{{photo.text}}
+										<textarea :value="photo.text" readonly></textarea>
 									</div>
 									<div>
 										<div class="postPic">						 

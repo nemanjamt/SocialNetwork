@@ -17,7 +17,7 @@ Vue.component("post-full-view", {
 
             <div>
                 <div  class="fullViewText">
-                    {{post.postText}}
+                    <textarea :value="post.postText" readonly></textarea>
                 </div>
                 <div v-if="post.pictureName != 'null' && post.pictureName != undefined" class="fullViewPhoto">						 
                     <img :src="'/userImages/'+post.pictureName" alt="post picture" >
@@ -25,7 +25,7 @@ Vue.component("post-full-view", {
     
     
                 <div v-if="currentLoggedUser.username == post.usernameCreator">
-                    <button class="btn" v-on:click="deletePost(post)"  class="friendshipBtn removeBtn"> Delete post </button>
+                    <button class="btn" v-on:click="deletePost(post)"  class="btn"> Delete post </button>
                 </div>
                 <div v-else-if="currentLoggedUser.role == 'ADMIN'">
                         <button class="btn" v-on:click="deletePostByAdmin" >delete post</button>
@@ -41,8 +41,18 @@ Vue.component("post-full-view", {
 	<div class="split right" style="margin-top: -850px;">
 	    
 	    <div class="sortUsersBlock addComment"> 
-	        <textarea v-model="newComment" class="inputComment" placeholder="Add a comment..."> </textarea>
-            <button v-on:click="addComment()" class="btn"> Post </button>
+            <table>
+                <tr>
+                    <td>
+                        <textarea v-model="newComment" class="inputComment" placeholder="Add a comment..."> </textarea>
+                    </td>
+                    <td>
+                        <button v-on:click="addComment()" class="btn"> Post </button>
+                    </td>
+                </tr>
+            </table>
+	        
+           
 	    </div>
 	    
 	    <div class="showUsersBlock" style="margin-top: 65px;"> 
