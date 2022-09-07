@@ -20,3 +20,4 @@
 20;1;jovana;ajde czv!!!;1662413866091;null;false;true
 21;1;jovana;najnoviji komentar;1662414147268;null;false;true
 22;15;jovana;komentarr;1662554808097;1662554814431;true;true
+23;14;marko2;komentar;1662585800658;null;false;false

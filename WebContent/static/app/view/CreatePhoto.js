@@ -38,8 +38,7 @@ Vue.component("create-photo", {
     </div>
     
     <div class="split right">
-
-        <input type="text" placeholder="photo text" v-on:change="textChange" v-model="text" class="inputDescription">
+        <textarea placeholder="photo text" v-on:change="textChange" v-model="text" class="inputDescription"></textarea>
 
     </div>
 
