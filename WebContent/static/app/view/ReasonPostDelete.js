@@ -13,8 +13,28 @@ Vue.component("reason-post-delete", {
 		
 	<div v-if="post && currentLoggedUser" class="searchAllUsersBlock">
         <div class="reason">
-            <textarea v-model="reason"></textarea><br>
-            <button v-on:click="deletePostByAdmin">delete</button>
+            <table>
+                <tr>
+                    <td>
+                        <textarea placeholder="input reason for delete" v-on:change="reasonChange" v-model="reason"></textarea><br>
+                    </td>
+                    <td>
+                        <button v-on:click="deletePostByAdmin" class="btn">delete</button>
+                    </td>
+                </tr>
+                <tr colspan="2">
+                    <p id="errMess" style="color:red; text-align:center">
+                    
+                    </p>
+                </tr>
+                <tr colspan="2">
+                    <p id="succMess" style="color:blue; text-align:center">
+                   
+                    </p>
+                </tr>
+            </table>
+            
+            
 		</div>
 	
 	</div>  
@@ -26,11 +46,18 @@ Vue.component("reason-post-delete", {
 		init : function() {
 			console.log("DA?");
 		}, 
+        reasonChange:function(){
+            document.getElementById("errMess").innerHTML = "";
+        },
 		
         deletePostByAdmin:function(){
-            console.log("BRISANJE BY ADMIN");
-            console.log(this.reason);
-            console.log(this.post);
+            if(this.reason == ""){
+                document.getElementById("errMess").innerHTML = "reason must not be empty";
+                return;
+            }else{
+                document.getElementById("errMess").innerHTML = "";
+                document.getElementById("errMess").innerHTML = "successful deleted";
+            }
             axios.delete("/posts/"+this.post.id).then(response =>{
                 this.$router.push('/view-profile?user='+this.post.usernameCreator);
             });
