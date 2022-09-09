@@ -21,3 +21,9 @@
 21;1;jovana;najnoviji komentar;1662414147268;null;false;true
 22;15;jovana;komentarr;1662554808097;1662554814431;true;true
 23;14;marko2;komentar;1662585800658;null;false;false
+24;18;marko2;komentar :);1662734263239;null;false;false
+25;19;nina_nina;ostavljam komentar iako nismo prijatelji;1662734465777;null;false;false
+26;19;admin;komentar od strane admina :);1662734818745;1662734824657;true;true
+27;19;admin;ukoliko ne izbrises, bices blokirana;1662734839860;null;false;false
+28;20;admin;kom;1662734904372;null;false;false
+29;20;jovana;asd;1662742964884;null;false;false

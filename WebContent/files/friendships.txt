@@ -1,4 +1,4 @@
 1;petar;nina_nina;false
-2;jovana;marko2;false
 3;nina_nina;jovana3;false
 4;petar;jovana;false
+5;marko2;jovana;false
