@@ -66,21 +66,30 @@ Vue.component("photo-full-view", {
                 
             </div>
             <div class="showUsersBlock" style="margin-top: 65px;">
-                <div v-for="comment in this.photoComments" class="commentBlock">
+                <div v-for="comment in this.photoComments" class="commentBlock" >
+                    <div class="profilePic">
+                        <img :src="'/userImages/'+comment.user.profilePicture " alt="profile picture" width="20" height="20" style="border-radius:50%">
+                        <b style="font-size: 12px">
+                            <a :href="'#/view-profile?user='+comment.user.username"> {{comment.user.name}} {{comment.user.lastName}} </a>
+                        </b>
+                    </div>
+                    
+                    
                     <div class="commentBtns">
-                        <img v-if="currentLoggedUser.username == comment.usernameCreator" v-on:click="deleteComment(comment)" src="/userImages/deleteIcon.png" style="width: 24px; height: 24px; float: right;">
-                        <img v-if="currentLoggedUser.username == comment.usernameCreator" v-on:click="saveChanges(comment)" :disabled="!comment.isEdited" src="/userImages/saveIcon.png" style="width: 24px; height: 24px; margin-right: 24px;  float: right">
+                        <img v-if="currentLoggedUser.username == comment.comment.usernameCreator" v-on:click="deleteComment(comment.comment)" src="/userImages/deleteIcon.png" style="width: 24px; height: 24px; float: right;">
+                        <img v-if="currentLoggedUser.username == comment.comment.usernameCreator" v-on:click="saveChanges(comment.comment)" :disabled="!comment.comment.isEdited" src="/userImages/saveIcon.png" style="width: 24px; height: 24px; margin-right: 24px;  float: right">
                     </div>
                     <div class="commentPart">
-                        <textarea class="commentContent" v-model="comment.content" v-on:change="handleCommentChange(comment)" :readonly="currentLoggedUser.username !== comment.usernameCreator"></textarea>
+                        <textarea class="commentContent" v-model="comment.comment.content" v-on:change="handleCommentChange(comment.comment)" :readonly="currentLoggedUser.username !== comment.comment.usernameCreator"></textarea>
                     </div>
 
-                    <div v-if="!comment.edited" class="datePart"> 
-                        <p style="color: #757576"> date: {{comment.publishedDate | dateFormat('DD.MM.YYYY')}} </p>
+                    <div v-if="!comment.comment.edited" class="datePart"> 
+                        <p style="color: #757576"> date: {{comment.comment.publishedDate | dateFormat('DD.MM.YYYY')}} </p>
                     </div>
                     <div v-else class="datePart"> 
-                        <p style="color: #757576"> edit date: {{comment.editDate | dateFormat('DD.MM.YYYY')}} </p>
+                        <p style="color: #757576"> edit date: {{comment.comment.editDate | dateFormat('DD.MM.YYYY')}} </p>
                     </div>
+                    
 
                 </div>
             </div>
@@ -179,8 +188,20 @@ Vue.component("photo-full-view", {
            this.photo = response.data;
         });
         axios.get('/photoComments/findByPhoto?photoId='+photoId).then(response => {
-            this.photoComments = response.data;
+            let comments = response.data;
+            this.photoComments = [];
+            comments.forEach(comment =>{
+                let obj = {};
+                obj.comment = comment;
+                axios.get("/users/"+comment.usernameCreator).then(response =>{
+                    obj.user = response.data;
+                    this.photoComments.push(obj);
+                })
+                
+            })
+            // this.photoComments = response.data;
             console.log(response.data);
+            console.log(this.photoComments);
         });
     },
     filters: {
