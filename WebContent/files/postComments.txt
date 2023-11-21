@@ -1,0 +1,29 @@
+1;2;jovana;izmijenjeni komentar;1661955976847;1661955987478;true;true
+2;2;jovana;podrzite me;1661956017086;null;false;false
+3;11;jovana;novi komentar;1661956919343;1661956924885;true;false
+4;12;jovana;novi komentar :);1661979717830;1661979730293;true;true
+5;1;jovana2;regreretertreter. dfsdfs;1662335915438;1662335924981;true;false
+6;1;jovana2;werwerwer;1662336624499;null;false;false
+7;1;jovana2;rwerwer;1662336626783;null;false;false
+8;1;jovana2;werwerwre;1662336629720;null;false;false
+9;1;jovana2;wrerwerwe;1662336632236;null;false;false
+10;1;jovana2;er;1662336634082;null;false;false
+11;1;jovana;moj komentar;1662413197550;null;false;true
+12;1;jovana;najnoviji komentar;1662413215449;null;false;true
+13;1;jovana;kom22;1662413231691;null;false;true
+14;1;jovana;krv se od nje ledi;1662413263482;null;false;true
+15;1;jovana;1337;1662413391811;null;false;true
+16;1;jovana;ratatatatatatata;1662413403874;null;false;true
+17;1;jovana;krajiska muzika;1662413763762;null;false;true
+18;1;jovana;155789;1662413772395;null;false;true
+19;1;jovana;zbogom kafano;1662413793579;null;false;true
+20;1;jovana;ajde czv!!!;1662413866091;null;false;true
+21;1;jovana;najnoviji komentar;1662414147268;null;false;true
+22;15;jovana;komentarr;1662554808097;1662554814431;true;true
+23;14;marko2;komentar;1662585800658;null;false;false
+24;18;marko2;komentar :);1662734263239;null;false;false
+25;19;nina_nina;ostavljam komentar iako nismo prijatelji;1662734465777;null;false;false
+26;19;admin;komentar od strane admina :);1662734818745;1662734824657;true;true
+27;19;admin;ukoliko ne izbrises, bices blokirana;1662734839860;null;false;false
+28;20;admin;kom;1662734904372;null;false;false
+29;20;jovana;asd;1662742964884;null;false;false

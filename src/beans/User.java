@@ -11,25 +11,21 @@ public class User {
 	private String email;
 	private String name;
 	private String lastName;
-	private LocalDate birthDate;
+	private Long birthDate;
 	private Gender gender;
 	private Role role;
 	private String profilePicture;
 	private boolean privateAccount;
 	private boolean blocked;
-	List<String> friends;
-//	private List<FriendshipRequest> friendshipRequests;
-//	private List<User> friends;
-//	private List<Post> posts;
-//	private List<Message> messages;
+
 	
 	
 	public User() {
 		super();
-		friends = new ArrayList<String>();
+
 	}
 	
-	public User(String username, String password, String email, String name, String lastName, LocalDate birthDate,
+	public User(String username, String password, String email, String name, String lastName, long birthDate,
 			Gender gender, Role role, String profilePicture, boolean privateAccount, boolean blocked) {
 		this();
 		this.username = username;
@@ -46,18 +42,6 @@ public class User {
 	}
 	
 	
-	
-	
-	
-
-	public List<String> getFriends() {
-		return friends;
-	}
-
-	public void setFriends(List<String> friends) {
-		this.friends = friends;
-	}
-
 	public boolean isBlocked() {
 		return blocked;
 	}
@@ -96,12 +80,15 @@ public class User {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public LocalDate getBirthDate() {
+	
+	public Long getBirthDate() {
 		return birthDate;
 	}
-	public void setBirthDate(LocalDate birthDate) {
+
+	public void setBirthDate(long birthDate) {
 		this.birthDate = birthDate;
 	}
+
 	public Gender getGender() {
 		return gender;
 	}

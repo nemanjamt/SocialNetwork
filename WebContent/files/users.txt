@@ -1,0 +1,14 @@
+mika2023;mika123321;milutinovic.stefan2003@gmail.com;Mika;Mikic;default.jpg;884736000000;ORDINARY;MALE;false;false
+sadsad;sadsad;s@gmail.com;sad;sad;default.jpg;-61484745600000;ORDINARY;FEMALE;true;false
+jovana2;jovana123;jole333@gmail.com;Jovana;Jankovic;120.png;835747200000;ORDINARY;FEMALE;false;false
+admin;admin;admin@gmail.com;Siit;Adminovic;admin-logo.jpg;909446400000;ADMIN;MALE;false;false
+petar;petar123;pero333@gmail.com;Petar;Peric;petar-1.jpg;947289600000;ORDINARY;MALE;false;false
+nikolica;nikola123;nikola@gmail.com;Nikola;Nikolic;default.jpg;1660608000000;ORDINARY;MALE;false;false
+marko444;marko123;marko@gmail.com;Markovic;marko;default.jpg;1659398400000;ORDINARY;MALE;false;false
+ognjen2022;ognjen;ognjen@gmail.com;Ognjen;Mitosevic;139.png;960854400000;ORDINARY;MALE;false;false
+petar2023;petar123321;petar@gmail.com;Petar;Petrovic;default.jpg;918000000000;ORDINARY;MALE;false;false
+jovana;jovana123;jole333@gmail.com;Jovana;Jovanovic;119.png;909446400000;ORDINARY;FEMALE;false;false
+jovana3;jovana123;jole333@gmail.com;Jovana;Jovanovic;default.jpg;963014400000;ORDINARY;FEMALE;false;false
+nina_nina;sadsad;t@gmail.com;Nikolina;Trivunic;default.jpg;936057600000;ORDINARY;FEMALE;false;false
+marko2;marko123;asd@asd.com;Marko;Markovic;default.jpg;1660521600000;ORDINARY;MALE;false;true
+ninann;sadsad;t@gmail.com;nina;nina;default.jpg;1566518400000;ORDINARY;FEMALE;false;false

@@ -1,0 +1,21 @@
+1;1665180000000;petar;czv.jpg;ja navijam za crvenu zvezdu;false
+2;1660082400000;petar;null;Danas sam odlucio da smrsam. Trenutna kilaza mi je 84kg.;false
+3;1660082400000;petar;null;Ipak sam se predomislio. Gdje ima najbbolja poslasticarnica?IZBRISAN POST;true
+4;1660082400000;petar;null;Mijenjam text laganoo;true
+5;1660082400000;petar;null;Ipak sam se predomislio, ne zelim da smrsam. Gdje ima najbolja poslasticarnica?;false
+6;1661881900238;jovana;110.png;navijam za crvenu zvezdu veceras!!!;true
+7;1661881911175;jovana;null;danas je lijep i suncan dan :);true
+8;1661881974311;jovana;null;hoce li neko na fudbal?;true
+9;1661881991415;jovana;null;hoce li neko na kosarku?;true
+10;1661882036399;jovana;null;neki novi post;true
+11;1661882739791;jovana;111.png;Odlucila sam da dodam sliku;true
+12;1661978571464;jovana;118.png;Dodajem novi post;true
+13;1662320500462;sadsad;121.png;sdfdfs;false
+14;1662507595467;marko2;null;najnoviji post;false
+15;1662554337147;jovana;null;post tekst;true
+16;1662557029533;jovana;null;asd;true
+17;1662558612549;jovana;null;a;true
+18;1662559579877;jovana;null;d;true
+19;1662564315408;jovana;131.png;neki tekst;true
+20;1662570571436;jovana;132.png;lav;false
+21;1662734372792;jovana;141.png;testiramo objavljivanje posta;false

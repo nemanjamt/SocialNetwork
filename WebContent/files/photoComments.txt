@@ -1,0 +1,20 @@
+1;2;jovana;promijenii;2022-08-13T21:57:37.130190300;2022-08-13T21:59:21.326674900;true;true
+2;2;jovana;neki komentar;2022-08-31T12:46:14.482382800;null;false;true
+3;2;jovana;dodavanje novog komentara;2022-08-31T13:18:14.114676600;null;false;true
+4;2;petar;PETROV KOMENTAR JE DA VOLI OVO JAKO!;2022-08-31T13:21:23.334308900;null;false;false
+5;2;jovana;komentar da da;2022-08-31T13:28:21.719104500;null;false;true
+6;2;jovana;drago mi je da ti se svidja petre;2022-08-31T13:28:45.589687100;null;false;true
+7;2;jovana;neki novi komentar sa izmjenom da mhm;2022-08-31T13:31:23.374223700;2022-08-31T13:53:53.734610700;true;true
+8;2;jovana;a;2022-08-31T13:37:00.829516800;null;false;true
+9;2;jovana;a;2022-08-31T13:37:02.222238700;null;false;true
+10;2;jovana;a;2022-08-31T13:37:03.526185700;null;false;true
+11;2;jovana;a;2022-08-31T13:37:04.974009400;null;false;true
+12;2;jovana;a;2022-08-31T13:37:06.454788200;null;false;true
+13;2;jovana;drago mi je da ti se svidja;2022-08-31T13:54:17.935539600;null;false;false
+14;3;jovana;neki komentar;2022-08-31T14:45:30.143205300;null;false;true
+15;7;jovana;komentar;2022-09-07T14:38:39.377432800;null;false;false
+16;7;jovana;aa;2022-09-07T18:30:05.586943100;2022-09-07T18:32:17.903184900;true;false
+17;6;marko2;a;2022-09-07T23:33:36.423309800;null;false;true
+18;6;marko2;komentarr;2022-09-07T23:34:54.122242400;null;false;false
+19;13;marko2;najnoviji komentarrr;2022-09-09T16:37:04.426201;2022-09-09T16:37:10.680195700;true;true
+20;6;jovana;aa;2022-09-09T18:45:56.212811800;2022-09-09T18:48:03.802299200;true;false
