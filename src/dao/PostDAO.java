@@ -29,31 +29,31 @@ public class PostDAO {
 	
 	private Map<Long, Post> posts;
 	private Map<String, List<Post>> usersPost;
-	public PostDAO() {
-		
-	
+	private static PostDAO dao;
+	private PostDAO() {
 		posts = new HashMap<>();
 		usersPost = new HashMap<String, List<Post>>();
-		
 	}
 	
-	public PostDAO(String path) {
+	private PostDAO(String path) {
 		this();
 		loadPosts(path);
-		System.out.println(posts);
 	}
 	
+	public static PostDAO getInstance(String path) {
+		if(dao == null) {
+			dao = new PostDAO(path);
+		}
+		return dao;
+	}
 
-	
 	public void loadPosts(String contextPath) {
 		
 		BufferedReader in = null;
 		BufferedReader in2 = null;
 		try {
 			File file = new File(contextPath + "/posts.txt");
-//			File file2 = new File(contextPath + "/photos.txt");
 			in = new BufferedReader(new FileReader(file));
-//			in2 = new BufferedReader(new FileReader(file2));
 			String line;
 			StringTokenizer st;
 			while ((line = in.readLine()) != null) {
@@ -61,7 +61,6 @@ public class PostDAO {
 				if (line.equals("") || line.indexOf('#') == 0)
 					continue;
 				st = new StringTokenizer(line, ";");
-				//t.getId() + ";" + t.getUsernameCreator() + ";" + t.getContext() +";"+ t.isDeleted();
 				while (st.hasMoreTokens()) {
 					Long id = Long.parseLong(st.nextToken().trim());
 					Long date = Long.parseLong(st.nextToken().trim());
@@ -70,8 +69,6 @@ public class PostDAO {
 					String text = st.nextToken().trim();
 					
 					boolean isDeleted = Boolean.parseBoolean(st.nextToken().trim());
-
-//					Post(String usernameCreator, Long id, boolean deleted, String name, String postText)
 					Post p = new Post(usernameCreator,id,isDeleted,imageName, text, date);
 					posts.put(id, p);
 					if(usersPost.containsKey(p.getUsernameCreator())) {
@@ -80,14 +77,10 @@ public class PostDAO {
 						usersPost.put(p.getUsernameCreator(), new ArrayList<Post>());
 						usersPost.get(p.getUsernameCreator()).add(p);
 					}
-					System.out.println(p);
-					
 				}
 				
 			}
-			
 
-			
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
@@ -143,7 +136,6 @@ public void savePosts(String contextPath) {
 		Post p = new Post();
 		p.setDate(req.getDate());
 		if(req.getImagePath() != null) {
-			System.out.println(req.getImagePath());
 			byte[] imgBytes = Base64.decode(req.getImagePath());
 			Long name = 100L;
 			File f = new File("WebContent/static/userImages//" + 100 + ".png");

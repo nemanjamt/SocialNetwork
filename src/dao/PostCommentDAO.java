@@ -21,14 +21,22 @@ public class PostCommentDAO {
 
 
 	private Map<Long, PostComment> postComments;
-	public PostCommentDAO() {
+	private static PostCommentDAO dao;
+	private PostCommentDAO() {
 		postComments = new HashMap<Long, PostComment>();
 	}
 	
-	public PostCommentDAO(String contextPath) {
+	private PostCommentDAO(String contextPath) {
 		this();
 		loadComments(contextPath);
 		
+	}
+	
+	public static PostCommentDAO getInstance(String contextPath) {
+		if(dao == null) {
+			dao = new PostCommentDAO(contextPath);
+		}
+		return dao;
 	}
 	
 	public PostComment findOne(Long id) {

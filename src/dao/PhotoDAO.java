@@ -26,17 +26,23 @@ public class PhotoDAO {
 
 	private Map<Long, Photo> photos;
 	private String contextPath;
-	public PhotoDAO() {
+	private static PhotoDAO dao;
+	private PhotoDAO() {
 		this.photos = new HashMap<>();
 	}
 	
-	public PhotoDAO(String contextPath) {
+	private PhotoDAO(String contextPath) {
 		this();
 		this.contextPath = contextPath;
 		loadPhotos(contextPath);
-		System.out.println(photos);
 	}
 	
+	public static PhotoDAO getInstance(String contextPath) {
+		if(dao == null) {
+			dao = new PhotoDAO(contextPath);
+		}
+		return dao;
+	}
 	
 	public void addPhoto(Photo p) {
 		photos.put(p.getId(), p);
@@ -133,13 +139,9 @@ public class PhotoDAO {
 					String text = st.nextToken().trim();
 					boolean deleted = Boolean.parseBoolean(st.nextToken().trim());
 					Long date = Long.parseLong(st.nextToken().trim());
-					
 					Photo p = new Photo(id,path,username,deleted,date,text);
 					photos.put(p.getId(), p);
 
-					
-					System.out.println(p);
-					
 				}
 				
 			}

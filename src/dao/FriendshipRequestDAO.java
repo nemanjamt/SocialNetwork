@@ -23,17 +23,24 @@ public class FriendshipRequestDAO {
 	private Map<Long, FriendshipRequest> friendshipsRequests;
 	private FriendshipDAO friendshipDAO;
 	private String contextPath;
-	public FriendshipRequestDAO() {
+	private static FriendshipRequestDAO dao;
+	private FriendshipRequestDAO() {
 		
 		friendshipsRequests = new HashMap<Long, FriendshipRequest>();
 	}
 	
-	public FriendshipRequestDAO(String contextPath, FriendshipDAO dao) {
+	private FriendshipRequestDAO(String contextPath, FriendshipDAO dao) {
 		this();
 		loadRequests(contextPath);
 		this.friendshipDAO = dao;
 		this.contextPath = contextPath;
 	
+	}
+	public static FriendshipRequestDAO getInstance(String contextPath, FriendshipDAO friendshipDAO) {
+		if(dao == null) {
+			dao = new FriendshipRequestDAO(contextPath, friendshipDAO);
+		}
+		return dao;
 	}
 	
 	public FriendshipRequest findOne(Long id) {
@@ -91,7 +98,6 @@ public class FriendshipRequestDAO {
 				if (line.equals("") || line.indexOf('#') == 0)
 					continue;
 				st = new StringTokenizer(line, ";");
-//				String s = f.getId() + ";" + f.getSender() + ";" + f.getReceiver() + ";" + f.getDate() + ";" + f.getState();
 
 				while (st.hasMoreTokens()) {
 					
@@ -103,7 +109,6 @@ public class FriendshipRequestDAO {
 					FriendshipRequest req = new FriendshipRequest(state, date, sender, receiver);
 					req.setId(id);
 					friendshipsRequests.put(id, req);
-					System.out.println(req);
 				}
 				
 			}
@@ -131,7 +136,6 @@ public class FriendshipRequestDAO {
 		//brise se iz liste zahtjeva
 		if(req.getState() != FriendshipRequestState.WAITING)
 			friendshipsRequests.remove(id);
-		System.out.println("PA POSTOJI LI?? " + friendshipsRequests.get(id));
 		saveRequests(this.contextPath);
 		
 		
@@ -141,10 +145,6 @@ public class FriendshipRequestDAO {
 		try {
 			File file = new File(contextPath + "/friendshiprequests.txt");
 			out = new BufferedWriter(new FileWriter(file));
-
-			
-
-			
 			for(FriendshipRequest f: friendshipsRequests.values()) {
 				out.write(createLine(f));
 				out.newLine();
@@ -165,7 +165,6 @@ public class FriendshipRequestDAO {
 	
 	public List<FriendshipRequest> findByUser(String username){
 		List<FriendshipRequest> req = new ArrayList<FriendshipRequest>();
-		
 		friendshipsRequests.values().stream().filter(f -> f.getReceiver().equals(username)).forEach(f -> req.add(f));
 		return req;
 	}

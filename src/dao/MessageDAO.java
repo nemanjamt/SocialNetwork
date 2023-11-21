@@ -44,10 +44,8 @@ public class MessageDAO {
 	}
 	
 	public void add(Message m) {
-		System.out.println("PRIJE DODAVANJA je velicina "+messages.size());
 		m.setId((long) messages.size());
 		this.messages.put(m.getId(), m);
-		System.out.println("NAKON DODAVANJA je velicina "+messages.size());
 		saveMessages(this.contextPath);
 	}
 	

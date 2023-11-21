@@ -15,11 +15,7 @@ public class SearchUserParam {
 		this.startBirthDate=-1;
 		this.endBirthDate=1231231231231231231l;
 	}
-	
-	
-	
-	
-	
+
 	public SearchUserParam(String name, String lastName, long startBirthDate, long endBirthDate) {
 		super();
 		this.name = name;
@@ -27,9 +23,6 @@ public class SearchUserParam {
 		this.startBirthDate = startBirthDate;
 		this.endBirthDate = endBirthDate;
 	}
-
-
-
 
 
 	public String getName() {

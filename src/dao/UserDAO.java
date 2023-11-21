@@ -33,19 +33,29 @@ public class UserDAO {
 private Map<String, User> users = new HashMap<>();
 	private String contextPath;
 	private FriendshipDAO friendshipDAO;
-	public UserDAO() {
+	private static UserDAO dao;
+	private  UserDAO() {
 		this("./WebContent/files");
 	}
 	
-	public UserDAO(String contextPath) {
+	private UserDAO(String contextPath) {
 		this.contextPath = contextPath;
 		loadUsers(contextPath);
 	}
 	
-	public UserDAO(String contextPath, FriendshipDAO friendshipDAO) {
+	public static UserDAO getInstance(String contextPath, FriendshipDAO friendshipDAO) {
+		if(dao == null) {
+			dao = new UserDAO(contextPath, friendshipDAO);
+		}
+		return dao;
+		
+	}
+	
+	private UserDAO(String contextPath, FriendshipDAO friendshipDAO) {
 		this.contextPath = contextPath;
-		loadUsers(contextPath);
 		this.friendshipDAO = friendshipDAO;
+		loadUsers(contextPath);
+		
 	}
 	
 	/**
@@ -66,7 +76,6 @@ private Map<String, User> users = new HashMap<>();
 	}
 	
 	public User findById(String id) {
-		System.out.println(id);
 		return users.get(id);
 	}
 	
@@ -77,19 +86,10 @@ private Map<String, User> users = new HashMap<>();
 		for(User u: users.values()) {
 			if(u.getRole() != Role.ADMIN && u.getName().toLowerCase().contains(params.getName()) && u.getLastName().toLowerCase().contains(params.getLastName()) && u.getBirthDate() >= params.getStartBirthDate() && u.getBirthDate() <= params.getEndBirthDate()) {
 				result.add(u);
-				System.out.println("======");
-				System.out.println(u.getBirthDate() );
-				System.out.println( params.getStartBirthDate());
-				System.out.println( params.getEndBirthDate());
-			}
-				
+			}	
 		}
-		
-		
 		return result;
 	}
-	
-	
 	
 	public List<User> sortUser(List<User> users, List<String> sortParams, String orderBy){
 		for(String param: sortParams) {
@@ -139,7 +139,6 @@ private Map<String, User> users = new HashMap<>();
 				mutualFriends.add(u);
 			}
 		}
-		System.out.println("MUTUAL FRIENDS "+mutualFriends);
 		return mutualFriends;
 	}
 	
@@ -156,9 +155,6 @@ private Map<String, User> users = new HashMap<>();
 		saveUsers(this.contextPath);
 		return true;
 	}
-	
-
-	
 	
 	public boolean updateUser(User u) {
 		User user = users.get(u.getUsername());
@@ -215,7 +211,6 @@ private Map<String, User> users = new HashMap<>();
 					boolean isBlocked = Boolean.parseBoolean(st.nextToken().trim());
 					boolean isPrivate = Boolean.parseBoolean(st.nextToken().trim());
 					User u = new User(username, password, mail, name, lastName, date, gender, role, profilePicture, isPrivate, isBlocked);
-					System.out.println("USEER "+u);
 					users.put(username, u);
 				}
 

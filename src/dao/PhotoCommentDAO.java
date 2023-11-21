@@ -20,14 +20,22 @@ public class PhotoCommentDAO {
 
 	private Map<Long, PhotoComment> photoComments;
 	private String contextPath;
-	public PhotoCommentDAO() {
+	private static PhotoCommentDAO dao;
+	private PhotoCommentDAO() {
 		this.photoComments = new HashMap<>();
 	}
 	
-	public PhotoCommentDAO(String contextPath) {
+	private PhotoCommentDAO(String contextPath) {
 		this();
 		this.contextPath = contextPath;
 		loadPhotoComment(contextPath);
+	}
+	
+	public static PhotoCommentDAO getInstance(String contextPath) {
+		if(dao == null) {
+			dao = new PhotoCommentDAO(contextPath);
+		}
+		return dao;
 	}
 	
 	public PhotoComment findOne(Long id) {
@@ -81,7 +89,6 @@ public class PhotoCommentDAO {
 	
 	public boolean deleteComment(Long id) {
 		PhotoComment comment = photoComments.get(id);
-		System.out.println(comment);
 		if(comment == null) return false;
 		if(comment.isDeleted()) return false;
 		comment.setDeleted(true);
@@ -104,7 +111,6 @@ public class PhotoCommentDAO {
 
 
 				while (st.hasMoreTokens()) {
-					System.out.println("PROSLOOOOO");
 					Long id = Long.parseLong(st.nextToken().trim());
 					Long photoId = Long.parseLong(st.nextToken().trim());
 					String user = st.nextToken().trim();
@@ -116,7 +122,6 @@ public class PhotoCommentDAO {
 					boolean deleted = Boolean.parseBoolean(st.nextToken().trim());
 
 					PhotoComment c = new PhotoComment(content, edt, edited, dt,id,  user, deleted, photoId);
-					System.out.println(c);
 					photoComments.put(c.getId(), c);
 				}
 				
